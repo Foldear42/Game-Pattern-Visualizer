@@ -1,0 +1,18 @@
+#ifndef STATE_HPP
+#define STATE_HPP
+
+enum class State
+{
+    MENU_STATE,
+    COMMAND_P_STATE,
+    FLYWEIGHT_P_STATE,
+    OBSERVER_P_STATE,
+    PROTOTYPE_P_STATE,
+    SINGLETON_P_STATE,
+    STATE_P_STATE,
+    STATE_YES,
+    STATE_NO,
+    STATE_UNDO
+};
+
+#endif
