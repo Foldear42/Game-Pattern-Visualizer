@@ -29,3 +29,10 @@ target_link_libraries(Game-Pattern-Visualizer PRIVATE
     SFML::Window
     SFML::System
 )
+
+add_custom_command(TARGET Game-Pattern-Visualizer POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${PROJECT_SOURCE_DIR}/Resources
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Resources
+)
+
