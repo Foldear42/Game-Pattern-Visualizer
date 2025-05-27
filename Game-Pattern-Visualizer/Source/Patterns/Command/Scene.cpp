@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-05-26 16:28:44
+ * @ Modified time: 2025-05-27 11:55:55
  * @ Description: Implementation of the Scene class
  */
 
@@ -12,17 +12,18 @@ namespace GPV
 
 Scene::Scene() : font(font) {}
 
-Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font)
-    : m_sceneSprite(resourceManager.get(TextureID::scene)), m_stickmanSprite(resourceManager.get(TextureID::stickman)), font(font)
+Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font, DialogMap &dialogMap)
+    : m_sceneSprite(resourceManager.get(TextureID::scene))
+    , m_stickmanSprite(resourceManager.get(TextureID::stickman))
+    , font(font)
+    , m_dialogMap(dialogMap)
 {
-    std::vector<sf::String> listOfText = {"Make your first choice", "Your choice has been made :)"};
-    this->m_dialogBox = std::make_unique<Components::DialogBox>(listOfText, this->font);
+    this->m_dialogBox = std::make_unique<Components::DialogBox>(this->m_dialogMap[{0, ChoiceState::None}], this->font);
     sf::FloatRect bounds = this->m_stickmanSprite->getLocalBounds();
     this->m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
     bounds = this->m_sceneSprite->getLocalBounds();
     this->m_sceneSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
     this->m_dialogBox->setOrigin({this->m_dialogBox->getSizeRectangle().x / 2.f, this->m_dialogBox->getSizeRectangle().y / 2.f});
-    this->m_steps = {};
 }
 
 void Scene::update(Application &application, sf::Time delta)
@@ -33,6 +34,8 @@ void Scene::update(Application &application, sf::Time delta)
     if (this->m_dialogBox)
     {
         this->m_dialogBox->update(delta);
+        // If the animation of the all the text is over
+        // we wait for the user to click a button
     }
 }
 

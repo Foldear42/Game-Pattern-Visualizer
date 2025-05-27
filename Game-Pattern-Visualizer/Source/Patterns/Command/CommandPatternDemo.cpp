@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-05-26 16:21:18
+ * @ Modified time: 2025-05-27 11:56:56
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -14,8 +14,10 @@ CommandPatternDemo::CommandPatternDemo()
 {
     // Load resources before creating an instance of scene
     loadResources();
-    this->m_scene = std::make_unique<Scene>(m_resourceManager, this->m_font);
-
+    this->m_dialogMap[{0, ChoiceState::None}] = {"This is a test", "This seems to work"};
+    this->m_dialogMap[{0, ChoiceState::Yes}] = {"You choose YES :)"};
+    this->m_dialogMap[{0, ChoiceState::No}] = {"You choose NO :("};
+    this->m_scene = std::make_unique<Scene>(m_resourceManager, this->m_font, this->m_dialogMap);
     // Yes button
     sf::Vector2f buttonSize = {100.f, 50.f};
     this->m_yesButton = Components::Button(buttonSize, "YES", this->m_font, sf::Color::Red, State::STATE_YES);

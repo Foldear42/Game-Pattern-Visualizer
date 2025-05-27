@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogBox.hpp
- * @ Modified time: 2025-05-26 16:27:20
+ * @ Modified time: 2025-05-27 15:09:10
  * @ Description: DialogBox Component
  */
 
@@ -21,9 +21,12 @@ class DialogBox : public sf::Drawable, public sf::Transformable
     sf::RectangleShape m_box;
     sf::Text m_currentText;
     sf::Time m_elapsedTime;
+    bool m_isTypewriterAnimationFinished = false;
+    int m_currentTextIndex = 0;
+    int m_charIndex = 0;
     const sf::Font &font;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
-    void animatingMachineType(sf::String s, sf::Time delta);
+    bool typewriterAnimation(sf::String s, sf::Time delta);
 
   public:
     DialogBox();

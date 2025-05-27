@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo
- * @ Modified time: 2025-05-26 10:02:21
+ * @ Modified time: 2025-05-27 11:44:33
  * @ Description: State of the application for the command pattern demo
  */
 
@@ -10,10 +10,10 @@
 
 #include "Application/Application.hpp"
 #include "Components/Button/Button.hpp"
+#include "DialogTypes.hpp"
 #include "Interfaces/ApplicationState.hpp"
 #include "MakeChoiceCommand.hpp"
 #include "Manager/ResourceManager.hpp"
-#include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <iostream>
 #include <memory>
@@ -31,6 +31,7 @@ class CommandPatternDemo : public ApplicationState
     std::unique_ptr<Scene> m_scene;
     std::stack<std::unique_ptr<MakeChoiceCommand>> m_commandHistory;
     ResourceManager<sf::Texture, TextureID> m_resourceManager;
+    std::map<std::pair<int, ChoiceState>, std::vector<sf::String>> m_dialogMap;
 
   public:
     CommandPatternDemo();

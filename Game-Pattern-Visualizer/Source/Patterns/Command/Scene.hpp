@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.hpp
- * @ Modified time: 2025-05-26 15:55:27
+ * @ Modified time: 2025-05-27 11:55:44
  * @ Description: This file handles the scene in which the consequences of the player's actions will be seen
  */
 
@@ -9,8 +9,8 @@
 #define SCENE_HPP
 
 #include "Application/Application.hpp"
-#include "ChoiceState.hpp"
 #include "Components/DialogBox/DialogBox.hpp"
+#include "DialogTypes.hpp"
 #include "Manager/ResourceManager.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -22,12 +22,11 @@ namespace GPV
 
 class Scene : public sf::Drawable
 {
-    std::vector<sf::String> m_listText;
+    DialogMap m_dialogMap;
     sf::Texture m_sceneTexture;
     std::optional<sf::Sprite> m_sceneSprite;
     sf::Texture m_stickmanTexture;
     std::optional<sf::Sprite> m_stickmanSprite;
-    std::vector<int> m_steps;
     std::unique_ptr<Components::DialogBox> m_dialogBox;
     ChoiceState m_currentChoiceState;
     const sf::Font &font;
@@ -36,7 +35,7 @@ class Scene : public sf::Drawable
 
   public:
     Scene();
-    Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font);
+    Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font, DialogMap &dialogMap);
     void update(Application &application, sf::Time delta);
     void selectChoice(ChoiceState choiceState);
     void selectStep(int step);

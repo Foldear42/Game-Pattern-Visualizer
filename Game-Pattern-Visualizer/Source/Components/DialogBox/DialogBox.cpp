@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogBox.cpp
- * @ Modified time: 2025-05-26 16:27:47
+ * @ Modified time: 2025-05-27 15:22:05
  * @ Description: Implementation of the DialogBox class
  */
 
@@ -21,30 +21,40 @@ DialogBox::DialogBox(std::vector<sf::String> listText, const sf::Font &font)
     this->m_currentText.setCharacterSize(24);
 }
 
-void DialogBox::animatingMachineType(sf::String s, sf::Time delta)
+bool DialogBox::typewriterAnimation(sf::String s, sf::Time delta)
 {
-    m_elapsedTime += delta;
-
-    // std::cout << m_elapsedTime.asMilliseconds() << std::endl;
-    if (m_elapsedTime >= std::chrono::milliseconds(50))
+    bool isFinished = false;
+    if (s.getSize() >= this->m_charIndex)
     {
-
-        m_elapsedTime = sf::Time::Zero;
+        m_elapsedTime += delta;
+        if (m_elapsedTime >= std::chrono::milliseconds(50))
+        {
+            ++m_charIndex;
+            this->m_currentText.setString(s.substring(0, this->m_charIndex));
+            m_elapsedTime = sf::Time::Zero;
+        }
     }
+    else
+    {
+        isFinished = true;
+    }
+    return isFinished;
 }
 
 void DialogBox::update(sf::Time delta)
 {
-    for (sf::String &s : this->m_listText)
+    bool isFinished = typewriterAnimation(this->m_listText[this->m_currentTextIndex], delta);
+    int lengthListText = this->m_listText.size();
+    if (isFinished && (this->m_currentTextIndex < (lengthListText - 1)))
     {
-        animatingMachineType(s, delta);
+        this->m_charIndex = 0;
+        this->m_currentTextIndex++;
     }
 }
 
 void DialogBox::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
-    // target.clear();
     target.draw(this->m_box, states);
     target.draw(this->m_currentText, states);
 }

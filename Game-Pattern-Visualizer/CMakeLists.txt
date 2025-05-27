@@ -35,4 +35,3 @@ add_custom_command(TARGET Game-Pattern-Visualizer POST_BUILD
     ${PROJECT_SOURCE_DIR}/Resources
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Resources
 )
-
