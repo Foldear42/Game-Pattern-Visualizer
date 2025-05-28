@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-05-27 11:56:56
+ * @ Modified time: 2025-05-28 09:03:00
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -14,9 +14,9 @@ CommandPatternDemo::CommandPatternDemo()
 {
     // Load resources before creating an instance of scene
     loadResources();
-    this->m_dialogMap[{0, ChoiceState::None}] = {"This is a test", "This seems to work"};
-    this->m_dialogMap[{0, ChoiceState::Yes}] = {"You choose YES :)"};
-    this->m_dialogMap[{0, ChoiceState::No}] = {"You choose NO :("};
+    this->m_dialogMap[{1, ChoiceState::None}] = {"This is a test", "This seems to work"};
+    this->m_dialogMap[{1, ChoiceState::Yes}] = {"You choose YES :)"};
+    this->m_dialogMap[{1, ChoiceState::No}] = {"You choose NO :("};
     this->m_scene = std::make_unique<Scene>(m_resourceManager, this->m_font, this->m_dialogMap);
     // Yes button
     sf::Vector2f buttonSize = {100.f, 50.f};
@@ -52,6 +52,18 @@ void CommandPatternDemo::handleEvent(Application &application, const std::option
         // Keep a trace of the pointer Command onto the stack
         m_commandHistory.push(std::move(command));
     }
+
+    this->m_noButton.getButtonStatus(application.getWindow(), event);
+    if (this->m_noButton.isPressed)
+    {
+        // Create a new command
+        std::unique_ptr<MakeChoiceCommand> command;
+        command = std::make_unique<MakeChoiceCommand>(*this->m_scene, ChoiceState::No);
+        command->execute();
+        // Keep a trace of the pointer Command onto the stack
+        m_commandHistory.push(std::move(command));
+    }
+
     this->m_undoButton.getButtonStatus(application.getWindow(), event);
     if (this->m_undoButton.isPressed)
     {

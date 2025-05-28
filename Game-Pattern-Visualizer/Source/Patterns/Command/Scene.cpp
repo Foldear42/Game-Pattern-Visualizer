@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-05-27 11:55:55
+ * @ Modified time: 2025-05-28 09:10:16
  * @ Description: Implementation of the Scene class
  */
 
@@ -18,7 +18,7 @@ Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, con
     , font(font)
     , m_dialogMap(dialogMap)
 {
-    this->m_dialogBox = std::make_unique<Components::DialogBox>(this->m_dialogMap[{0, ChoiceState::None}], this->font);
+    this->m_dialogBox = std::make_unique<Components::DialogBox>(this->m_dialogMap[{1, ChoiceState::None}], this->font);
     sf::FloatRect bounds = this->m_stickmanSprite->getLocalBounds();
     this->m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
     bounds = this->m_sceneSprite->getLocalBounds();
@@ -34,8 +34,7 @@ void Scene::update(Application &application, sf::Time delta)
     if (this->m_dialogBox)
     {
         this->m_dialogBox->update(delta);
-        // If the animation of the all the text is over
-        // we wait for the user to click a button
+        this->m_dialogBox->setListText(this->m_dialogMap[{this->m_currentStep, this->m_currentChoiceState}]);
     }
 }
 
@@ -47,6 +46,11 @@ void Scene::selectStep(int step)
 void Scene::selectChoice(ChoiceState choiceState)
 {
     this->m_currentChoiceState = choiceState;
+}
+
+void Scene::resetScene()
+{
+    this->m_dialogBox->resetIndexes();
 }
 
 void Scene::draw(sf::RenderTarget &target, sf::RenderStates states) const

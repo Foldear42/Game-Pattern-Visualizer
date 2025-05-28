@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MakeChoiceCommand.hpp
- * @ Modified time: 2025-05-26 15:11:25
+ * @ Modified time: 2025-05-28 09:10:26
  * @ Description: Command to handle the player's choice
  */
 
@@ -24,6 +24,7 @@ class MakeChoiceCommand : public Command
     MakeChoiceCommand(Scene &scene, ChoiceState Choice) : scene(scene), currentChoice(Choice) {}
     virtual void execute()
     {
+        scene.resetScene();
         // Keep track of the previous values
         this->previousStep = currentStep;
         this->previousChoice = currentChoice;

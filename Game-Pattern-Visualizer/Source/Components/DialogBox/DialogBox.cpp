@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogBox.cpp
- * @ Modified time: 2025-05-27 15:22:05
+ * @ Modified time: 2025-05-28 09:14:01
  * @ Description: Implementation of the DialogBox class
  */
 
@@ -44,11 +44,17 @@ bool DialogBox::typewriterAnimation(sf::String s, sf::Time delta)
 void DialogBox::update(sf::Time delta)
 {
     bool isFinished = typewriterAnimation(this->m_listText[this->m_currentTextIndex], delta);
-    int lengthListText = this->m_listText.size();
-    if (isFinished && (this->m_currentTextIndex < (lengthListText - 1)))
+    this->m_lengthListText = this->m_listText.size();
+    // We continue until there are no strings lefy to animate
+    if (isFinished && (this->m_currentTextIndex < (this->m_lengthListText - 1)))
     {
         this->m_charIndex = 0;
         this->m_currentTextIndex++;
+    }
+    // When all the strings are animated we reset indexes
+    if (this->m_currentTextIndex == this->m_lengthListText)
+    {
+        this->resetIndexes();
     }
 }
 
@@ -62,6 +68,17 @@ void DialogBox::draw(sf::RenderTarget &target, sf::RenderStates states) const
 sf::Vector2f DialogBox::getSizeRectangle() const
 {
     return this->m_box.getSize();
+}
+
+void DialogBox::setListText(const std::vector<sf::String> listText)
+{
+    this->m_listText = listText;
+}
+
+void DialogBox::resetIndexes()
+{
+    this->m_charIndex = 0;
+    this->m_currentTextIndex = 0;
 }
 
 } // namespace GPV::Components

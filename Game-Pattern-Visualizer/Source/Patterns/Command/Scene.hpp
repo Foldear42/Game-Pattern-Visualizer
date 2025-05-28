@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.hpp
- * @ Modified time: 2025-05-27 11:55:44
+ * @ Modified time: 2025-05-28 09:09:40
  * @ Description: This file handles the scene in which the consequences of the player's actions will be seen
  */
 
@@ -28,9 +28,9 @@ class Scene : public sf::Drawable
     sf::Texture m_stickmanTexture;
     std::optional<sf::Sprite> m_stickmanSprite;
     std::unique_ptr<Components::DialogBox> m_dialogBox;
-    ChoiceState m_currentChoiceState;
+    ChoiceState m_currentChoiceState = ChoiceState::None;
     const sf::Font &font;
-    int m_currentStep = 0;
+    int m_currentStep = 1;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
@@ -39,6 +39,7 @@ class Scene : public sf::Drawable
     void update(Application &application, sf::Time delta);
     void selectChoice(ChoiceState choiceState);
     void selectStep(int step);
+    void resetScene();
     bool isAnimating = false;
 };
 

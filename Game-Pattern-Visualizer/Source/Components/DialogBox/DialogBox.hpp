@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogBox.hpp
- * @ Modified time: 2025-05-27 15:09:10
+ * @ Modified time: 2025-05-28 09:07:47
  * @ Description: DialogBox Component
  */
 
@@ -24,6 +24,7 @@ class DialogBox : public sf::Drawable, public sf::Transformable
     bool m_isTypewriterAnimationFinished = false;
     int m_currentTextIndex = 0;
     int m_charIndex = 0;
+    int m_lengthListText = 0;
     const sf::Font &font;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     bool typewriterAnimation(sf::String s, sf::Time delta);
@@ -33,6 +34,8 @@ class DialogBox : public sf::Drawable, public sf::Transformable
     DialogBox(std::vector<sf::String> listText, const sf::Font &font);
     void update(sf::Time delta);
     sf::Vector2f getSizeRectangle() const;
+    void setListText(const std::vector<sf::String> listText);
+    void resetIndexes();
 };
 
 } // namespace GPV::Components
