@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-05-28 09:03:00
+ * @ Modified time: 2025-05-29 13:28:51
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -36,8 +36,8 @@ CommandPatternDemo::CommandPatternDemo()
 void CommandPatternDemo::loadResources()
 {
     this->m_font.openFromFile("Resources/Fonts/ARIAL.ttf");
-    m_resourceManager.load(TextureID::scene, "Resources/Images/Rails_1.png");
     m_resourceManager.load(TextureID::stickman, "Resources/Images/Stickman.png");
+    m_resourceManager.load(TextureID::sceneAnimation, "Resources/Images/Rails_small.png");
 }
 
 void CommandPatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event)
@@ -82,7 +82,7 @@ void CommandPatternDemo::handleEvent(Application &application, const std::option
 void CommandPatternDemo::update(Application &application, sf::Time delta)
 {
     float spacing = 20.f;
-    this->m_yesButton.setPosition({(application.getWindow().getSize().x / 2), 800.f});
+    this->m_yesButton.setPosition({(application.getWindow().getSize().x / 2.f), 800.f});
     this->m_noButton.setPosition({(m_yesButton.getPosition().x + m_yesButton.getSizeRectangle().x + spacing), 800.f});
     this->m_undoButton.setPosition({(m_noButton.getPosition().x + m_noButton.getSizeRectangle().x + spacing), 800.f});
     if (this->m_scene)

@@ -4,7 +4,8 @@
 enum class TextureID
 {
     stickman,
-    scene
+    scene,
+    sceneAnimation
 };
 
 #endif
