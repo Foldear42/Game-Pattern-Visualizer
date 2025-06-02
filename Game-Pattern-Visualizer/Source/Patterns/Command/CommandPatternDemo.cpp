@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-05-29 13:28:51
+ * @ Modified time: 2025-06-02 08:50:25
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -37,7 +37,7 @@ void CommandPatternDemo::loadResources()
 {
     this->m_font.openFromFile("Resources/Fonts/ARIAL.ttf");
     m_resourceManager.load(TextureID::stickman, "Resources/Images/Stickman.png");
-    m_resourceManager.load(TextureID::sceneAnimation, "Resources/Images/Rails_small.png");
+    m_resourceManager.load(TextureID::sceneAnimation, "Resources/Images/tram.png");
 }
 
 void CommandPatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event)

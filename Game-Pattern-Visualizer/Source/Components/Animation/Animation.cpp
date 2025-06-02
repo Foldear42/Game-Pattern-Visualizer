@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.cpp
- * @ Modified time: 2025-05-29 13:30:47
+ * @ Modified time: 2025-06-02 09:08:39
  * @ Description:
  */
 
@@ -10,7 +10,7 @@
 namespace GPV::Components
 {
 
-Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, int row)
+Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, float zoomFactor)
     : m_sprite(sprite)
     , m_numFrames(framesX * framesY)
     , m_frameTime(frameTime)
@@ -18,12 +18,13 @@ Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY,
     , m_elaspedTime(sf::Time::Zero)
     , m_currentFrameIndex(0)
     , m_active(true)
+    , m_zoomFactorVector(zoomFactor, zoomFactor)
 {
-    auto frameWidth = m_sprite->getTexture().getSize().x / framesX;
-    auto frameHeight = m_sprite->getTexture().getSize().y / framesY;
-    for (size_t y = 0; y < framesY; y++)
+    int frameWidth = m_sprite->getTexture().getSize().x / framesX;
+    int frameHeight = m_sprite->getTexture().getSize().y / framesY;
+    for (int y = 0; y < framesY; y++)
     {
-        for (size_t x = 0; x < framesX; x++)
+        for (int x = 0; x < framesX; x++)
         {
             sf::IntRect frameDimension = sf::IntRect({x * frameWidth, y * frameHeight}, {frameWidth, frameHeight});
             this->m_sourceRectangles.emplace_back(frameDimension);
@@ -33,6 +34,10 @@ Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY,
     if (!m_sourceRectangles.empty())
     {
         m_sprite->setTextureRect(m_sourceRectangles[0]);
+        m_sprite->setScale(m_zoomFactorVector);
+        float originX = static_cast<float>(m_sourceRectangles[0].size.x) / 2.f;
+        float originY = static_cast<float>(m_sourceRectangles[0].size.y) / 2.f;
+        m_sprite->setOrigin(sf::Vector2f(originX, originY));
     }
 }
 
@@ -54,6 +59,7 @@ void Animation::update(sf::Time delta)
 
 void Animation::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
+    states.transform *= getTransform();
     target.draw(*this->m_sprite, states);
 }
 

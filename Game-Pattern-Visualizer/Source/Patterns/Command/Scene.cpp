@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-05-29 13:32:27
+ * @ Modified time: 2025-06-02 09:07:36
  * @ Description: Implementation of the Scene class
  */
 
@@ -15,22 +15,20 @@ Scene::Scene() : font(font) {}
 Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font, DialogMap &dialogMap)
     : m_stickmanSprite(resourceManager.get(TextureID::stickman))
     , m_sceneSpriteAnimation(resourceManager.get(TextureID::sceneAnimation))
-    , m_sceneAnimation(std::in_place, m_sceneSpriteAnimation, 9, 7, sf::seconds(0.1f))
+    , m_sceneAnimation(std::in_place, m_sceneSpriteAnimation, 9, 7, sf::seconds(0.1f), 4.f)
     , font(font)
     , m_dialogMap(dialogMap)
 {
     this->m_dialogBox = std::make_unique<Components::DialogBox>(this->m_dialogMap[{1, ChoiceState::None}], this->font);
     sf::FloatRect bounds = this->m_stickmanSprite->getLocalBounds();
     this->m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
-    // bounds = this->m_sceneSpriteAnimation->getLocalBounds();
-    // this->m_sceneSpriteAnimation->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
     this->m_dialogBox->setOrigin({this->m_dialogBox->getSizeRectangle().x / 2.f, this->m_dialogBox->getSizeRectangle().y / 2.f});
 }
 
 void Scene::update(Application &application, sf::Time delta)
 {
     this->m_stickmanSprite->setPosition({application.getWindow().getSize().x / 2.f, 100.f});
-    this->m_sceneSpriteAnimation->setPosition({application.getWindow().getSize().x / 2.f, 300.f});
+    this->m_sceneAnimation->setPosition({application.getWindow().getSize().x / 2.f, 300.f});
     this->m_dialogBox->setPosition({application.getWindow().getSize().x / 2.f, 600.f});
     if (this->m_dialogBox)
     {

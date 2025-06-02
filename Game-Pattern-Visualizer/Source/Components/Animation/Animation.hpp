@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.hpp
- * @ Modified time: 2025-05-29 13:28:14
+ * @ Modified time: 2025-06-02 09:08:24
  * @ Description: Component to animate an image
  */
 
@@ -14,20 +14,21 @@
 namespace GPV::Components
 {
 
-class Animation : public sf::Drawable
+class Animation : public sf::Drawable, public sf::Transformable
 {
     const int m_numFrames;
     const sf::Time m_frameTime;
+    sf::Time m_frameTimeLeft;
     std::optional<sf::Sprite> m_sprite;
     sf::Time m_elaspedTime;
-    std::vector<sf::IntRect> m_sourceRectangles;
-    sf::Time m_frameTimeLeft;
     int m_currentFrameIndex;
     bool m_active = true;
+    sf::Vector2f m_zoomFactorVector;
+    std::vector<sf::IntRect> m_sourceRectangles;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
-    Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, int row = 1);
+    Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, float zoomFactor);
     void update(sf::Time delta);
     void start();
     void stop();
