@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-06-02 09:07:36
+ * @ Modified time: 2025-06-02 11:33:26
  * @ Description: Implementation of the Scene class
  */
 
@@ -23,6 +23,7 @@ Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, con
     sf::FloatRect bounds = this->m_stickmanSprite->getLocalBounds();
     this->m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
     this->m_dialogBox->setOrigin({this->m_dialogBox->getSizeRectangle().x / 2.f, this->m_dialogBox->getSizeRectangle().y / 2.f});
+    m_sceneAnimation->stop();
 }
 
 void Scene::update(Application &application, sf::Time delta)
@@ -51,6 +52,12 @@ void Scene::selectChoice(ChoiceState choiceState)
 void Scene::resetScene()
 {
     this->m_dialogBox->resetIndexes();
+    m_sceneAnimation->reset();
+}
+
+void Scene::startAnimation()
+{
+    m_sceneAnimation->start();
 }
 
 void Scene::draw(sf::RenderTarget &target, sf::RenderStates states) const

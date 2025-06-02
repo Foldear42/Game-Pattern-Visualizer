@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.cpp
- * @ Modified time: 2025-06-02 09:08:39
+ * @ Modified time: 2025-06-02 15:32:05
  * @ Description:
  */
 
@@ -54,6 +54,11 @@ void Animation::update(sf::Time delta)
         m_currentFrameIndex = (m_currentFrameIndex + 1) % m_numFrames;
         m_sprite->setTextureRect(m_sourceRectangles[m_currentFrameIndex]);
         m_frameTimeLeft += m_frameTime;
+    }
+    // Stop the animation when it reaches the last frame
+    if ((m_numFrames - 1) == m_currentFrameIndex)
+    {
+        this->stop();
     }
 }
 

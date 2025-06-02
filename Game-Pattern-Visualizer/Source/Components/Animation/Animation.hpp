@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.hpp
- * @ Modified time: 2025-06-02 09:08:24
+ * @ Modified time: 2025-06-02 15:20:58
  * @ Description: Component to animate an image
  */
 
@@ -9,6 +9,7 @@
 #define ANIMATION_HPP
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <vector>
 
 namespace GPV::Components

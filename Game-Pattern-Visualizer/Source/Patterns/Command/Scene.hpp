@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.hpp
- * @ Modified time: 2025-05-29 18:14:58
+ * @ Modified time: 2025-06-02 11:23:01
  * @ Description: This file handles the scene in which the consequences of the player's actions will be seen
  */
 
@@ -40,6 +40,7 @@ class Scene : public sf::Drawable
     void selectChoice(ChoiceState choiceState);
     void selectStep(int step);
     void resetScene();
+    void startAnimation();
     bool isAnimating = false;
 };
 
