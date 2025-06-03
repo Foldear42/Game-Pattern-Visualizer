@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-06-02 11:33:26
+ * @ Modified time: 2025-06-03 10:50:59
  * @ Description: Implementation of the Scene class
  */
 
@@ -23,7 +23,8 @@ Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, con
     sf::FloatRect bounds = this->m_stickmanSprite->getLocalBounds();
     this->m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
     this->m_dialogBox->setOrigin({this->m_dialogBox->getSizeRectangle().x / 2.f, this->m_dialogBox->getSizeRectangle().y / 2.f});
-    m_sceneAnimation->stop();
+    this->stopAnimation();
+    m_dialogBox->startTypewriterAnimation();
 }
 
 void Scene::update(Application &application, sf::Time delta)
@@ -37,6 +38,10 @@ void Scene::update(Application &application, sf::Time delta)
         this->m_dialogBox->setListText(this->m_dialogMap[{this->m_currentStep, this->m_currentChoiceState}]);
     }
     this->m_sceneAnimation->update(delta);
+    if (m_sceneAnimation->isFinished)
+    {
+        this->stopAnimation();
+    }
 }
 
 void Scene::selectStep(int step)
@@ -58,6 +63,13 @@ void Scene::resetScene()
 void Scene::startAnimation()
 {
     m_sceneAnimation->start();
+    isAnimating = true;
+}
+
+void Scene::stopAnimation()
+{
+    m_sceneAnimation->stop();
+    isAnimating = false;
 }
 
 void Scene::draw(sf::RenderTarget &target, sf::RenderStates states) const

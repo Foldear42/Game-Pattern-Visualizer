@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogBox.cpp
- * @ Modified time: 2025-05-28 09:14:01
+ * @ Modified time: 2025-06-03 09:48:22
  * @ Description: Implementation of the DialogBox class
  */
 
@@ -43,6 +43,11 @@ bool DialogBox::typewriterAnimation(sf::String s, sf::Time delta)
 
 void DialogBox::update(sf::Time delta)
 {
+    if (!m_typewriterActive)
+    {
+        return;
+    }
+
     bool isFinished = typewriterAnimation(this->m_listText[this->m_currentTextIndex], delta);
     this->m_lengthListText = this->m_listText.size();
     // We continue until there are no strings lefy to animate
@@ -79,6 +84,16 @@ void DialogBox::resetIndexes()
 {
     this->m_charIndex = 0;
     this->m_currentTextIndex = 0;
+}
+
+void DialogBox::startTypewriterAnimation()
+{
+    m_typewriterActive = true;
+}
+
+void DialogBox::stopTypewriterAnimation()
+{
+    m_typewriterActive = false;
 }
 
 } // namespace GPV::Components

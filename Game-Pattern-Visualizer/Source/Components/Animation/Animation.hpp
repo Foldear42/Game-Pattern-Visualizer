@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.hpp
- * @ Modified time: 2025-06-02 15:20:58
+ * @ Modified time: 2025-06-03 10:39:36
  * @ Description: Component to animate an image
  */
 
@@ -23,7 +23,7 @@ class Animation : public sf::Drawable, public sf::Transformable
     std::optional<sf::Sprite> m_sprite;
     sf::Time m_elaspedTime;
     int m_currentFrameIndex;
-    bool m_active = true;
+    bool m_active;
     sf::Vector2f m_zoomFactorVector;
     std::vector<sf::IntRect> m_sourceRectangles;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
@@ -34,6 +34,7 @@ class Animation : public sf::Drawable, public sf::Transformable
     void start();
     void stop();
     void reset();
+    bool isFinished = false;
 };
 
 } // namespace GPV::Components

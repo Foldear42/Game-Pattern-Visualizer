@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-06-02 08:50:25
+ * @ Modified time: 2025-06-03 10:36:07
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -85,9 +85,22 @@ void CommandPatternDemo::update(Application &application, sf::Time delta)
     this->m_yesButton.setPosition({(application.getWindow().getSize().x / 2.f), 800.f});
     this->m_noButton.setPosition({(m_yesButton.getPosition().x + m_yesButton.getSizeRectangle().x + spacing), 800.f});
     this->m_undoButton.setPosition({(m_noButton.getPosition().x + m_noButton.getSizeRectangle().x + spacing), 800.f});
+
+    m_yesButton.update(delta);
+    m_noButton.update(delta);
+    m_undoButton.update(delta);
+
     if (this->m_scene)
     {
         this->m_scene->update(application, delta);
+        if (m_scene->isAnimating)
+        {
+            m_yesButton.deactivate();
+        }
+        else
+        {
+            m_yesButton.activate();
+        }
     }
 }
 

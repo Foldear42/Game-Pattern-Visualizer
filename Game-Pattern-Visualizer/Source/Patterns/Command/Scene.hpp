@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.hpp
- * @ Modified time: 2025-06-02 11:23:01
+ * @ Modified time: 2025-06-03 10:24:45
  * @ Description: This file handles the scene in which the consequences of the player's actions will be seen
  */
 
@@ -41,6 +41,7 @@ class Scene : public sf::Drawable
     void selectStep(int step);
     void resetScene();
     void startAnimation();
+    void stopAnimation();
     bool isAnimating = false;
 };
 

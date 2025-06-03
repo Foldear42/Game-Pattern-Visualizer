@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.cpp
- * @ Modified time: 2025-05-26 10:47:36
+ * @ Modified time: 2025-06-03 10:30:18
  * @ Description: Implementation for the main menu
  */
 
@@ -52,7 +52,13 @@ void MenuState::handleEvent(Application &application, const std::optional<sf::Ev
     }
 }
 
-void MenuState::update(Application &application, sf::Time delta) {}
+void MenuState::update(Application &application, sf::Time delta)
+{
+    for (Components::Button &b : m_buttons)
+    {
+        b.update(delta);
+    }
+}
 
 void MenuState::dispatchButtons(const sf::RenderWindow &window)
 {

@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.cpp
- * @ Modified time: 2025-06-02 15:32:05
+ * @ Modified time: 2025-06-03 10:39:52
  * @ Description:
  */
 
@@ -19,6 +19,7 @@ Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY,
     , m_currentFrameIndex(0)
     , m_active(true)
     , m_zoomFactorVector(zoomFactor, zoomFactor)
+    , isFinished(false)
 {
     int frameWidth = m_sprite->getTexture().getSize().x / framesX;
     int frameHeight = m_sprite->getTexture().getSize().y / framesY;
@@ -58,7 +59,7 @@ void Animation::update(sf::Time delta)
     // Stop the animation when it reaches the last frame
     if ((m_numFrames - 1) == m_currentFrameIndex)
     {
-        this->stop();
+        isFinished = true;
     }
 }
 
