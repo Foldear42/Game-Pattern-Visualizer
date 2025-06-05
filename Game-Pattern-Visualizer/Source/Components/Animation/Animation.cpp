@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.cpp
- * @ Modified time: 2025-06-05 09:38:31
+ * @ Modified time: 2025-06-05 10:10:44
  * @ Description:
  */
 
@@ -83,6 +83,7 @@ void Animation::reset()
 {
     m_currentFrameIndex = 0;
     m_frameTimeLeft = m_frameTime;
+    isFinished = false;
 }
 
 } // namespace GPV::Components

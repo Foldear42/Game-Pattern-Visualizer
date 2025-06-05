@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-06-05 10:05:51
+ * @ Modified time: 2025-06-05 10:14:15
  * @ Description: Implementation of the Scene class
  */
 
@@ -18,13 +18,14 @@ Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, con
     , m_sceneAnimation(std::in_place, m_sceneSpriteAnimation, 9, 7, sf::seconds(0.1f), 4.f)
     , font(font)
     , m_dialogMap(dialogMap)
+    , m_currentStep(1)
 {
     m_dialogBox = std::make_unique<Components::DialogBox>(m_dialogMap[{1, ChoiceState::None}], font);
     sf::FloatRect bounds = m_stickmanSprite->getLocalBounds();
     m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
     m_dialogBox->setOrigin({m_dialogBox->getSizeRectangle().x / 2.f, m_dialogBox->getSizeRectangle().y / 2.f});
-    stopAnimation();
     m_dialogBox->startTypewriterAnimation();
+    stopAnimation();
 }
 
 void Scene::update(Application &application, sf::Time delta)

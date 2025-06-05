@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-06-05 10:02:05
+ * @ Modified time: 2025-06-05 10:12:00
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -96,10 +96,14 @@ void CommandPatternDemo::update(Application &application, sf::Time delta)
         if (m_scene->isAnimating)
         {
             m_yesButton.deactivate();
+            m_noButton.deactivate();
+            m_undoButton.deactivate();
         }
         else
         {
             m_yesButton.activate();
+            m_noButton.activate();
+            m_undoButton.activate();
         }
     }
 }

@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.hpp
- * @ Modified time: 2025-06-03 10:24:45
+ * @ Modified time: 2025-06-05 10:13:33
  * @ Description: This file handles the scene in which the consequences of the player's actions will be seen
  */
 
@@ -30,7 +30,7 @@ class Scene : public sf::Drawable
     std::unique_ptr<Components::DialogBox> m_dialogBox;
     ChoiceState m_currentChoiceState = ChoiceState::None;
     std::optional<Components::Animation> m_sceneAnimation;
-    int m_currentStep = 1;
+    int m_currentStep;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
