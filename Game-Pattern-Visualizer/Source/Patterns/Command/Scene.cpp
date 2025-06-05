@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-06-03 10:50:59
+ * @ Modified time: 2025-06-05 10:05:51
  * @ Description: Implementation of the Scene class
  */
 
@@ -19,44 +19,44 @@ Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, con
     , font(font)
     , m_dialogMap(dialogMap)
 {
-    this->m_dialogBox = std::make_unique<Components::DialogBox>(this->m_dialogMap[{1, ChoiceState::None}], this->font);
-    sf::FloatRect bounds = this->m_stickmanSprite->getLocalBounds();
-    this->m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
-    this->m_dialogBox->setOrigin({this->m_dialogBox->getSizeRectangle().x / 2.f, this->m_dialogBox->getSizeRectangle().y / 2.f});
-    this->stopAnimation();
+    m_dialogBox = std::make_unique<Components::DialogBox>(m_dialogMap[{1, ChoiceState::None}], font);
+    sf::FloatRect bounds = m_stickmanSprite->getLocalBounds();
+    m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
+    m_dialogBox->setOrigin({m_dialogBox->getSizeRectangle().x / 2.f, m_dialogBox->getSizeRectangle().y / 2.f});
+    stopAnimation();
     m_dialogBox->startTypewriterAnimation();
 }
 
 void Scene::update(Application &application, sf::Time delta)
 {
-    this->m_stickmanSprite->setPosition({application.getWindow().getSize().x / 2.f, 100.f});
-    this->m_sceneAnimation->setPosition({application.getWindow().getSize().x / 2.f, 300.f});
-    this->m_dialogBox->setPosition({application.getWindow().getSize().x / 2.f, 600.f});
-    if (this->m_dialogBox)
+    m_stickmanSprite->setPosition({application.getWindow().getSize().x / 2.f, 100.f});
+    m_sceneAnimation->setPosition({application.getWindow().getSize().x / 2.f, 300.f});
+    m_dialogBox->setPosition({application.getWindow().getSize().x / 2.f, 600.f});
+    if (m_dialogBox)
     {
-        this->m_dialogBox->update(delta);
-        this->m_dialogBox->setListText(this->m_dialogMap[{this->m_currentStep, this->m_currentChoiceState}]);
+        m_dialogBox->update(delta);
+        m_dialogBox->setListText(m_dialogMap[{m_currentStep, m_currentChoiceState}]);
     }
-    this->m_sceneAnimation->update(delta);
+    m_sceneAnimation->update(delta);
     if (m_sceneAnimation->isFinished)
     {
-        this->stopAnimation();
+        stopAnimation();
     }
 }
 
 void Scene::selectStep(int step)
 {
-    this->m_currentStep = step;
+    m_currentStep = step;
 }
 
 void Scene::selectChoice(ChoiceState choiceState)
 {
-    this->m_currentChoiceState = choiceState;
+    m_currentChoiceState = choiceState;
 }
 
 void Scene::resetScene()
 {
-    this->m_dialogBox->resetIndexes();
+    m_dialogBox->resetIndexes();
     m_sceneAnimation->reset();
 }
 
@@ -74,17 +74,17 @@ void Scene::stopAnimation()
 
 void Scene::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    if (this->m_sceneAnimation)
+    if (m_sceneAnimation)
     {
-        target.draw(*this->m_sceneAnimation, states);
+        target.draw(*m_sceneAnimation, states);
     }
-    if (this->m_dialogBox)
+    if (m_dialogBox)
     {
-        target.draw(*this->m_dialogBox, states);
+        target.draw(*m_dialogBox, states);
     }
-    if (this->m_stickmanSprite)
+    if (m_stickmanSprite)
     {
-        target.draw(*this->m_stickmanSprite, states);
+        target.draw(*m_stickmanSprite, states);
     }
 }
 

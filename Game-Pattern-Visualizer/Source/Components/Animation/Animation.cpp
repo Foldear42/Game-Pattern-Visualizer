@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.cpp
- * @ Modified time: 2025-06-03 10:39:52
+ * @ Modified time: 2025-06-05 09:38:31
  * @ Description:
  */
 
@@ -28,7 +28,7 @@ Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY,
         for (int x = 0; x < framesX; x++)
         {
             sf::IntRect frameDimension = sf::IntRect({x * frameWidth, y * frameHeight}, {frameWidth, frameHeight});
-            this->m_sourceRectangles.emplace_back(frameDimension);
+            m_sourceRectangles.emplace_back(frameDimension);
         }
     }
 
@@ -66,23 +66,23 @@ void Animation::update(sf::Time delta)
 void Animation::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
-    target.draw(*this->m_sprite, states);
+    target.draw(*m_sprite, states);
 }
 
 void Animation::start()
 {
-    this->m_active = true;
+    m_active = true;
 }
 
 void Animation::stop()
 {
-    this->m_active = false;
+    m_active = false;
 }
 
 void Animation::reset()
 {
-    this->m_currentFrameIndex = 0;
-    this->m_frameTimeLeft = m_frameTime;
+    m_currentFrameIndex = 0;
+    m_frameTimeLeft = m_frameTime;
 }
 
 } // namespace GPV::Components

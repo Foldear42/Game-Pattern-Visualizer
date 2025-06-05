@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MakeChoiceCommand.hpp
- * @ Modified time: 2025-06-02 11:36:03
+ * @ Modified time: 2025-06-05 10:02:22
  * @ Description: Command to handle the player's choice
  */
 
@@ -25,8 +25,8 @@ class MakeChoiceCommand : public Command
     virtual void execute()
     {
         // Keep track of the previous values
-        this->previousStep = currentStep;
-        this->previousChoice = currentChoice;
+        previousStep = currentStep;
+        previousChoice = currentChoice;
         // Select choice (this will trigger the animation and following text)
         scene.selectChoice(currentChoice);
         // Select step (after the end of the animation the next step should be selected)
