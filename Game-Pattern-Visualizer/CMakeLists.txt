@@ -13,6 +13,9 @@ FetchContent_Declare(SFML
 )
 FetchContent_MakeAvailable(SFML)
 
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz)
+FetchContent_MakeAvailable(json)
+
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     Source/*.cpp
 )
@@ -28,6 +31,7 @@ target_link_libraries(Game-Pattern-Visualizer PRIVATE
     SFML::Graphics
     SFML::Window
     SFML::System
+    nlohmann_json::nlohmann_json
 )
 
 add_custom_command(TARGET Game-Pattern-Visualizer POST_BUILD
