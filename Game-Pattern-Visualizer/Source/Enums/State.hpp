@@ -12,7 +12,8 @@ enum class State
     STATE_P_STATE,
     STATE_YES,
     STATE_NO,
-    STATE_UNDO
+    STATE_UNDO,
+    STATE_NEXTSTEP
 };
 
 #endif

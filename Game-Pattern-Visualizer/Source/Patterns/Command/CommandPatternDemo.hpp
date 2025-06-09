@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo
- * @ Modified time: 2025-05-27 11:44:33
+ * @ Modified time: 2025-06-09 09:34:48
  * @ Description: State of the application for the command pattern demo
  */
 
@@ -28,6 +28,7 @@ class CommandPatternDemo : public ApplicationState
     Components::Button m_yesButton;
     Components::Button m_noButton;
     Components::Button m_undoButton;
+    Components::Button m_nextStepButton;
     std::unique_ptr<Scene> m_scene;
     std::stack<std::unique_ptr<MakeChoiceCommand>> m_commandHistory;
     ResourceManager<sf::Texture, TextureID> m_resourceManager;
