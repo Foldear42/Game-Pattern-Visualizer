@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogBox.cpp
- * @ Modified time: 2025-06-05 09:53:32
+ * @ Modified time: 2025-06-27 08:43:57
  * @ Description: Implementation of the DialogBox class
  */
 
@@ -12,7 +12,7 @@ namespace GPV::Components
 
 DialogBox::DialogBox() : font(font), m_currentText(font), m_elapsedTime(std::chrono::milliseconds(0)) {}
 
-DialogBox::DialogBox(std::vector<sf::String> listText, const sf::Font &font)
+DialogBox::DialogBox(std::vector<std::string> listText, const sf::Font &font)
     : m_listText(listText), font(font), m_currentText(font), m_elapsedTime(std::chrono::milliseconds(0))
 {
     m_box.setSize({1000.f, 150.f});
@@ -21,16 +21,16 @@ DialogBox::DialogBox(std::vector<sf::String> listText, const sf::Font &font)
     m_currentText.setCharacterSize(24);
 }
 
-bool DialogBox::typewriterAnimation(sf::String s, sf::Time delta)
+bool DialogBox::typewriterAnimation(std::string s, sf::Time delta)
 {
     bool isFinished = false;
-    if (s.getSize() >= m_charIndex)
+    if (s.size() >= m_charIndex)
     {
         m_elapsedTime += delta;
         if (m_elapsedTime >= std::chrono::milliseconds(50))
         {
             ++m_charIndex;
-            m_currentText.setString(s.substring(0, m_charIndex));
+            m_currentText.setString(s.substr(0, m_charIndex));
             m_elapsedTime = sf::Time::Zero;
         }
     }
@@ -48,18 +48,22 @@ void DialogBox::update(sf::Time delta)
         return;
     }
 
-    bool isFinished = typewriterAnimation(m_listText[m_currentTextIndex], delta);
-    m_lengthListText = m_listText.size();
-    // We continue until there are no strings lefy to animate
-    if (isFinished && (m_currentTextIndex < (m_lengthListText - 1)))
+    if (!m_listText[m_currentTextIndex].empty())
     {
-        m_charIndex = 0;
-        m_currentTextIndex++;
-    }
-    // When all the strings are animated we reset indexes
-    if (m_currentTextIndex == m_lengthListText)
-    {
-        resetIndexes();
+
+        bool isFinished = typewriterAnimation(m_listText[m_currentTextIndex], delta);
+        m_lengthListText = m_listText.size();
+        // We continue until there are no strings left to animate
+        if (isFinished && (m_currentTextIndex < (m_lengthListText - 1)))
+        {
+            m_charIndex = 0;
+            m_currentTextIndex++;
+        }
+        // When all the strings are animated we reset indexes
+        if (m_currentTextIndex == m_lengthListText)
+        {
+            resetIndexes();
+        }
     }
 }
 
@@ -75,7 +79,7 @@ sf::Vector2f DialogBox::getSizeRectangle() const
     return m_box.getSize();
 }
 
-void DialogBox::setListText(const std::vector<sf::String> listText)
+void DialogBox::setListText(const std::vector<std::string> listText)
 {
     m_listText = listText;
 }

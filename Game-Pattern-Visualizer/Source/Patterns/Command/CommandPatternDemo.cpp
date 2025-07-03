@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-06-09 10:26:07
+ * @ Modified time: 2025-06-16 09:57:53
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -14,11 +14,21 @@ CommandPatternDemo::CommandPatternDemo()
 {
     // Load resources before creating an instance of scene
     loadResources();
-    m_dialogMap[{1, ChoiceState::None}] = {"This is a test", "This seems to work"};
-    m_dialogMap[{1, ChoiceState::Yes}] = {"You choose YES :)"};
-    m_dialogMap[{1, ChoiceState::No}] = {"You choose NO :("};
-    m_dialogMap[{2, ChoiceState::None}] = {"Welcome to step 2"};
-    m_scene = std::make_unique<Scene>(m_resourceManager, m_font, m_dialogMap);
+    // Create the dialog tree object
+    std::ifstream file("Resources/dialogTree.json");
+    if (!file)
+    {
+        throw std::runtime_error("error file not found");
+    }
+    nlohmann::json j;
+    file >> j;
+    for (auto &[key, value] : j.items())
+    {
+        int step = std::stoi(key);
+        m_dialogTree[step] = value.get<std::vector<Choice>>();
+    }
+
+    m_scene = std::make_unique<Scene>(m_resourceManager, m_font, m_dialogTree);
     // Yes button
     sf::Vector2f buttonSize = {100.f, 50.f};
     m_yesButton = Components::Button(buttonSize, "YES", m_font, sf::Color::Red, State::STATE_YES);

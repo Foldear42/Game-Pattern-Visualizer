@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-06-05 11:24:06
+ * @ Modified time: 2025-06-30 11:03:43
  * @ Description: Implementation of the Scene class
  */
 
@@ -12,15 +12,17 @@ namespace GPV
 
 Scene::Scene() : font(font) {}
 
-Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font, DialogMap &dialogMap)
+Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font, DialogTree &dialogTree)
     : m_stickmanSprite(resourceManager.get(TextureID::stickman))
-    , m_sceneSpriteAnimation(resourceManager.get(TextureID::sceneAnimation))
-    , m_sceneAnimation(std::in_place, m_sceneSpriteAnimation, 9, 7, sf::seconds(0.1f), 4.f)
+    , m_sceneAnimationSprite(resourceManager.get(TextureID::sceneAnimation))
+    , m_sceneAnimation(std::in_place, m_sceneAnimationSprite, 9, 7, sf::seconds(0.1f), 4.f)
     , font(font)
-    , m_dialogMap(dialogMap)
+    , m_dialogTree(dialogTree)
     , m_currentStep(1)
+    , m_currentChoiceState(ChoiceState::None)
 {
-    m_dialogBox = std::make_unique<Components::DialogBox>(m_dialogMap[{1, ChoiceState::None}], font);
+    m_dialogBox =
+        std::make_unique<Components::DialogBox>(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState), font);
     sf::FloatRect bounds = m_stickmanSprite->getLocalBounds();
     m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
     m_dialogBox->setOrigin({m_dialogBox->getSizeRectangle().x / 2.f, m_dialogBox->getSizeRectangle().y / 2.f});
@@ -36,7 +38,7 @@ void Scene::update(Application &application, sf::Time delta)
     if (m_dialogBox)
     {
         m_dialogBox->update(delta);
-        m_dialogBox->setListText(m_dialogMap[{m_currentStep, m_currentChoiceState}]);
+        m_dialogBox->setListText(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState));
     }
     m_sceneAnimation->update(delta);
     if (m_sceneAnimation->isFinished)

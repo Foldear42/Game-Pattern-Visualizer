@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo
- * @ Modified time: 2025-06-09 09:34:48
+ * @ Modified time: 2025-06-11 10:13:41
  * @ Description: State of the application for the command pattern demo
  */
 
@@ -15,6 +15,7 @@
 #include "MakeChoiceCommand.hpp"
 #include "Manager/ResourceManager.hpp"
 #include <SFML/Graphics/Rect.hpp>
+#include <fstream>
 #include <iostream>
 #include <memory>
 #include <stack>
@@ -33,6 +34,7 @@ class CommandPatternDemo : public ApplicationState
     std::stack<std::unique_ptr<MakeChoiceCommand>> m_commandHistory;
     ResourceManager<sf::Texture, TextureID> m_resourceManager;
     std::map<std::pair<int, ChoiceState>, std::vector<sf::String>> m_dialogMap;
+    DialogTree m_dialogTree;
 
   public:
     CommandPatternDemo();
