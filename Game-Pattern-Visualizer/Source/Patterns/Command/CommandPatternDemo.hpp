@@ -30,7 +30,7 @@ class CommandPatternDemo : public ApplicationState
     Components::Button m_noButton;
     Components::Button m_undoButton;
     Components::Button m_nextStepButton;
-    std::unique_ptr<Scene> m_scene;
+    std::unique_ptr<SceneCommandPattern> m_scene;
     std::stack<std::unique_ptr<MakeChoiceCommand>> m_commandHistory;
     ResourceManager<sf::Texture, TextureID> m_resourceManager;
     std::map<std::pair<int, ChoiceState>, std::vector<sf::String>> m_dialogMap;

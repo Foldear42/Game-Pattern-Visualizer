@@ -1,18 +1,19 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-06-30 11:03:43
+ * @ Modified time: 2025-07-03 15:04:11
  * @ Description: Implementation of the Scene class
  */
 
-#include "Scene.hpp"
+#include "SceneCommandPattern.hpp"
 
 namespace GPV
 {
 
-Scene::Scene() : font(font) {}
+SceneCommandPattern::SceneCommandPattern() : font(font) {}
 
-Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font, DialogTree &dialogTree)
+SceneCommandPattern::SceneCommandPattern(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font,
+                                         DialogTree &dialogTree)
     : m_stickmanSprite(resourceManager.get(TextureID::stickman))
     , m_sceneAnimationSprite(resourceManager.get(TextureID::sceneAnimation))
     , m_sceneAnimation(std::in_place, m_sceneAnimationSprite, 9, 7, sf::seconds(0.1f), 4.f)
@@ -30,7 +31,7 @@ Scene::Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, con
     stopAnimation();
 }
 
-void Scene::update(Application &application, sf::Time delta)
+void SceneCommandPattern::update(Application &application, sf::Time delta)
 {
     m_stickmanSprite->setPosition({application.getWindow().getSize().x / 2.f, 100.f});
     m_sceneAnimation->setPosition({application.getWindow().getSize().x / 2.f, 300.f});
@@ -47,35 +48,35 @@ void Scene::update(Application &application, sf::Time delta)
     }
 }
 
-void Scene::selectStep(int step)
+void SceneCommandPattern::selectStep(int step)
 {
     m_currentStep = step;
 }
 
-void Scene::selectChoice(ChoiceState choiceState)
+void SceneCommandPattern::selectChoice(ChoiceState choiceState)
 {
     m_currentChoiceState = choiceState;
 }
 
-void Scene::resetScene()
+void SceneCommandPattern::resetScene()
 {
     m_dialogBox->resetIndexes();
     m_sceneAnimation->reset();
 }
 
-void Scene::startAnimation()
+void SceneCommandPattern::startAnimation()
 {
     m_sceneAnimation->start();
     isAnimating = true;
 }
 
-void Scene::stopAnimation()
+void SceneCommandPattern::stopAnimation()
 {
     m_sceneAnimation->stop();
     isAnimating = false;
 }
 
-void Scene::draw(sf::RenderTarget &target, sf::RenderStates states) const
+void SceneCommandPattern::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     if (m_sceneAnimation)
     {

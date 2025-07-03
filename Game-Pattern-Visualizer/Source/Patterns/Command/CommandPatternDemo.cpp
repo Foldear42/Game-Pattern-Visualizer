@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-06-16 09:57:53
+ * @ Modified time: 2025-07-03 15:05:46
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -28,7 +28,7 @@ CommandPatternDemo::CommandPatternDemo()
         m_dialogTree[step] = value.get<std::vector<Choice>>();
     }
 
-    m_scene = std::make_unique<Scene>(m_resourceManager, m_font, m_dialogTree);
+    m_scene = std::make_unique<SceneCommandPattern>(m_resourceManager, m_font, m_dialogTree);
     // Yes button
     sf::Vector2f buttonSize = {100.f, 50.f};
     m_yesButton = Components::Button(buttonSize, "YES", m_font, sf::Color::Red, State::STATE_YES);

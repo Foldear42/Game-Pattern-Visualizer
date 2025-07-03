@@ -1,12 +1,12 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.hpp
- * @ Modified time: 2025-06-27 09:32:01
+ * @ Modified time: 2025-07-03 15:02:42
  * @ Description: This file handles the scene in which the consequences of the player's actions will be seen
  */
 
-#ifndef SCENE_HPP
-#define SCENE_HPP
+#ifndef SCENE_COMMAND_PATTERN_HPP
+#define SCENE_COMMAND_PATTERN_HPP
 
 #include "Application/Application.hpp"
 #include "Components/Animation/Animation.hpp"
@@ -21,7 +21,7 @@
 namespace GPV
 {
 
-class Scene : public sf::Drawable
+class SceneCommandPattern : public sf::Drawable
 {
     const sf::Font &font;
     DialogTree m_dialogTree;
@@ -32,8 +32,9 @@ class Scene : public sf::Drawable
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
-    Scene();
-    Scene(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font, DialogTree &dialogTree);
+    SceneCommandPattern();
+    SceneCommandPattern(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font,
+                        DialogTree &dialogTree);
     void update(Application &application, sf::Time delta);
     void selectChoice(ChoiceState choiceState);
     void selectStep(int step);
