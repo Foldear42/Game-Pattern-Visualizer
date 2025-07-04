@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.hpp
- * @ Modified time: 2025-07-03 15:02:42
+ * @ Modified time: 2025-07-04 14:35:45
  * @ Description: This file handles the scene in which the consequences of the player's actions will be seen
  */
 
@@ -12,6 +12,7 @@
 #include "Components/Animation/Animation.hpp"
 #include "Components/DialogBox/DialogBox.hpp"
 #include "DialogTypes.hpp"
+#include "Interfaces/Scene.hpp"
 #include "Manager/ResourceManager.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -21,7 +22,7 @@
 namespace GPV
 {
 
-class SceneCommandPattern : public sf::Drawable
+class SceneCommandPattern : public Scene
 {
     const sf::Font &font;
     DialogTree m_dialogTree;
@@ -35,7 +36,7 @@ class SceneCommandPattern : public sf::Drawable
     SceneCommandPattern();
     SceneCommandPattern(const ResourceManager<sf::Texture, TextureID> &resourceManager, const sf::Font &font,
                         DialogTree &dialogTree);
-    void update(Application &application, sf::Time delta);
+    void update(Application &application, sf::Time delta) override;
     void selectChoice(ChoiceState choiceState);
     void selectStep(int step);
     void resetScene();
