@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.hpp
- * @ Modified time: 2025-07-03 13:37:24
+ * @ Modified time: 2025-07-07 14:34:48
  * @ Description: Main menu for navigation
  */
 
@@ -14,6 +14,7 @@
 #include "Patterns/Command/CommandPatternDemo.hpp"
 #include "Patterns/Flyweight/FlyweightPatternDemo.hpp"
 #include <SFML/Graphics.hpp>
+#include <array>
 #include <iostream>
 #include <memory>
 
@@ -22,7 +23,7 @@ namespace GPV
 
 class MenuState : public ApplicationState
 {
-    std::vector<Components::Button> m_buttons;
+    std::array<Components::Button, 6> m_buttons;
     sf::Font m_font;
 
   public:
@@ -31,8 +32,6 @@ class MenuState : public ApplicationState
     virtual void update(Application &application, sf::Time delta) override;
     virtual void render(sf::RenderWindow &window) override;
     void dispatchButtons(const sf::RenderWindow &window);
-    void push(const Components::Button &button);
-    void pop();
 };
 
 } // namespace GPV

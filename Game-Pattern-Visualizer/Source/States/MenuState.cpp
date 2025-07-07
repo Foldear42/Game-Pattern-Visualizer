@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.cpp
- * @ Modified time: 2025-07-06 10:23:38
+ * @ Modified time: 2025-07-07 14:34:50
  * @ Description: Implementation for the main menu
  */
 
@@ -14,19 +14,13 @@ MenuState::MenuState()
 {
     sf::Vector2f buttonSize = {500.f, 50.f};
     m_font.openFromFile("Resources/Fonts/ARIAL.ttf");
-    Components::Button buttonPatternCommand(buttonSize, "Pattern Command", m_font, sf::Color::Red, State::COMMAND_P_STATE);
-    Components::Button buttonPatternFlyweight(buttonSize, "Pattern Flyweight", m_font, sf::Color::Red, State::FLYWEIGHT_P_STATE);
-    Components::Button buttonPatternObserver(buttonSize, "Pattern Observer", m_font, sf::Color::Red, State::OBSERVER_P_STATE);
-    Components::Button buttonPatternPrototype(buttonSize, "Pattern Prototype", m_font, sf::Color::Red, State::PROTOTYPE_P_STATE);
-    Components::Button buttonPatternSingleton(buttonSize, "Pattern Singleton", m_font, sf::Color::Red, State::SINGLETON_P_STATE);
-    Components::Button buttonPatternState(buttonSize, "Pattern State", m_font, sf::Color::Red, State::STATE_P_STATE);
-
-    push(buttonPatternCommand);
-    push(buttonPatternFlyweight);
-    push(buttonPatternObserver);
-    push(buttonPatternPrototype);
-    push(buttonPatternSingleton);
-    push(buttonPatternState);
+    // Add all the buttons to the array
+    m_buttons[0] = Components::Button(buttonSize, "Pattern Command", m_font, sf::Color::Red, State::COMMAND_P_STATE);
+    m_buttons[1] = Components::Button(buttonSize, "Pattern Flyweight", m_font, sf::Color::Red, State::FLYWEIGHT_P_STATE);
+    m_buttons[2] = Components::Button(buttonSize, "Pattern Observer", m_font, sf::Color::Red, State::OBSERVER_P_STATE);
+    m_buttons[3] = Components::Button(buttonSize, "Pattern Prototype", m_font, sf::Color::Red, State::PROTOTYPE_P_STATE);
+    m_buttons[4] = Components::Button(buttonSize, "Pattern Singleton", m_font, sf::Color::Red, State::SINGLETON_P_STATE);
+    m_buttons[5] = Components::Button(buttonSize, "Pattern State", m_font, sf::Color::Red, State::STATE_P_STATE);
 }
 
 void MenuState::handleEvent(Application &application, const std::optional<sf::Event> &event)
@@ -80,11 +74,6 @@ void MenuState::render(sf::RenderWindow &window)
     {
         window.draw(b);
     }
-}
-
-void MenuState::push(const Components::Button &button)
-{
-    m_buttons.push_back(button);
 }
 
 } // namespace GPV
