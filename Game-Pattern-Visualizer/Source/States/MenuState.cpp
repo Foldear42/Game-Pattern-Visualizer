@@ -1,13 +1,11 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.cpp
- * @ Modified time: 2025-06-05 10:06:41
+ * @ Modified time: 2025-07-06 10:23:38
  * @ Description: Implementation for the main menu
  */
 
 #include "MenuState.hpp"
-#include "Application/Application.hpp"
-#include "Patterns/Command/CommandPatternDemo.hpp"
 
 namespace GPV
 {
@@ -44,7 +42,8 @@ void MenuState::handleEvent(Application &application, const std::optional<sf::Ev
             case State::COMMAND_P_STATE:
                 application.changeState(std::make_unique<CommandPatternDemo>());
                 break;
-
+            case State::FLYWEIGHT_P_STATE:
+                application.changeState(std::make_unique<FlyweightPatternDemo>());
             default:
                 break;
             }

@@ -1,15 +1,18 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.hpp
- * @ Modified time: 2025-05-26 09:57:51
+ * @ Modified time: 2025-07-03 13:37:24
  * @ Description: Main menu for navigation
  */
 
 #ifndef MENU_STATE_HPP
 #define MENU_STATE_HPP
 
+#include "Application/Application.hpp"
 #include "Components/Button/Button.hpp"
 #include "Interfaces/ApplicationState.hpp"
+#include "Patterns/Command/CommandPatternDemo.hpp"
+#include "Patterns/Flyweight/FlyweightPatternDemo.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
