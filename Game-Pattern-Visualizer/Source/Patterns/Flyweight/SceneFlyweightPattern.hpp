@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: SceneFlyweightPattern.hpp
- * @ Modified time: 2025-07-04 14:38:01
+ * @ Modified time: 2025-07-06 10:31:31
  * @ Description:
  */
 
@@ -15,9 +15,11 @@ namespace GPV
 {
 class SceneFlyweightPattern : public Scene
 {
+    sf::RectangleShape m_rectShape;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
+    SceneFlyweightPattern();
     void update(Application &application, sf::Time delta) override;
 };
 } // namespace GPV
