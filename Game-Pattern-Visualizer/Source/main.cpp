@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: main.cpp
- * @ Modified time: 2025-05-22 14:35:36
+ * @ Modified time: 2025-07-09 17:22:26
  * @ Description: Main file
  */
 
@@ -19,7 +19,9 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode({SCREEN_RESOLUTION_WIDTH, SCREEN_RESOLUTION_HEIGHT}), APPLICATION_NAME,
                             sf::Style::Default);
-    GPV::Application application(std::make_unique<GPV::MenuState>(), window);
+    GPV::Application application(window);
 
     application.run();
+
+    return 0;
 }

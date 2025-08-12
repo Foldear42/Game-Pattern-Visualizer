@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogBox.hpp
- * @ Modified time: 2025-06-27 08:32:10
+ * @ Modified time: 2025-07-09 20:41:47
  * @ Description: DialogBox Component
  */
 
@@ -31,7 +31,6 @@ class DialogBox : public sf::Drawable, public sf::Transformable
     bool typewriterAnimation(std::string s, sf::Time delta);
 
   public:
-    DialogBox();
     DialogBox(std::vector<std::string> listText, const sf::Font &font);
     void update(sf::Time delta);
     sf::Vector2f getSizeRectangle() const;

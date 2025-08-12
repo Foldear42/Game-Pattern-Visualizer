@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogBox.cpp
- * @ Modified time: 2025-06-27 08:43:57
+ * @ Modified time: 2025-07-09 20:42:47
  * @ Description: Implementation of the DialogBox class
  */
 
@@ -9,8 +9,6 @@
 
 namespace GPV::Components
 {
-
-DialogBox::DialogBox() : font(font), m_currentText(font), m_elapsedTime(std::chrono::milliseconds(0)) {}
 
 DialogBox::DialogBox(std::vector<std::string> listText, const sf::Font &font)
     : m_listText(listText), font(font), m_currentText(font), m_elapsedTime(std::chrono::milliseconds(0))

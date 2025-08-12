@@ -1,11 +1,16 @@
 #ifndef TEXTURE_ID_HPP
 #define TEXTURE_ID_HPP
 
+namespace GPV
+{
+
 enum class TextureID
 {
+    None,
     stickman,
-    scene,
-    sceneAnimation
+    sceneAnimationNo1,
+    sceneAnimationYes1
 };
 
+}
 #endif

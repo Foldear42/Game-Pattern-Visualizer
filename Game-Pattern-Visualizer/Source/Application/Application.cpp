@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Application.cpp
- * @ Modified time: 2025-07-04 23:07:41
+ * @ Modified time: 2025-07-09 18:25:53
  * @ Description: Main application implementation
  */
 
@@ -11,16 +11,16 @@
 namespace GPV
 {
 
-Application::Application(std::unique_ptr<ApplicationState> initialState, sf::RenderWindow &window) : renderWindow(window)
-{
-    state_ = std::move(initialState);
-}
+Application::Application(sf::RenderWindow &window) : renderWindow(window), m_context(m_textureManager, m_fontManager) {}
 
 void Application::run()
 {
     sf::Clock clock;
     this->renderWindow.setPosition({0, 0});
-    //  Game loop
+    loadAllResources();
+    // Create the first state
+    p_state = std::move(std::make_unique<MenuState>(m_context));
+    // Game loop
     while (renderWindow.isOpen())
     {
         sf::Time delta = clock.restart();
@@ -45,24 +45,32 @@ void Application::run()
 
 void Application::handleEvent(const std::optional<sf::Event> &event)
 {
-    state_->handleEvent(*this, event);
+    p_state->handleEvent(*this, event);
 }
 
 void Application::changeState(std::unique_ptr<ApplicationState> state)
 {
-    state_ = std::move(state);
+    p_state = std::move(state);
 }
 
 void Application::update(sf::Time delta)
 {
-    state_->update(*this, delta);
+    p_state->update(*this, delta);
 }
 
 void Application::render(sf::RenderWindow &window)
 {
     renderWindow.clear();
-    state_->render(window);
+    p_state->render(window);
     renderWindow.display();
+}
+
+void Application::loadAllResources()
+{
+    m_fontManager.load(FontID::Arial, "Resources/Fonts/ARIAL.TTF");
+    m_textureManager.load(TextureID::stickman, "Resources/Images/Stickman.png");
+    m_textureManager.load(TextureID::sceneAnimationYes1, "Resources/Images/Animation_Yes_1.png");
+    m_textureManager.load(TextureID::sceneAnimationNo1, "Resources/Images/Animation_No_1.png");
 }
 
 const sf::RenderWindow &Application::getWindow() const

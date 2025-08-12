@@ -1,14 +1,17 @@
 /**
  * @ Author: Foldear
  * @ Filename: Appliction.hpp
- * @ Modified time: 2025-05-26 09:55:24
+ * @ Modified time: 2025-07-09 16:46:23
  * @ Description: Main application header
  */
 
 #ifndef APPLICATION_HPP
 #define APPLICATION_HPP
 
+#include "Enums/FontID.hpp"
+#include "Enums/TextureID.hpp"
 #include "Interfaces/ApplicationState.hpp"
+#include "Manager/ResourceManager.hpp"
 #include <memory>
 
 namespace GPV
@@ -16,16 +19,21 @@ namespace GPV
 
 class Application
 {
-    std::unique_ptr<ApplicationState> state_;
+    std::unique_ptr<ApplicationState> p_state;
     sf::RenderWindow &renderWindow;
+    TextureManager m_textureManager;
+    FontManager m_fontManager;
+    Context m_context;
+    sf::Font testFont;
 
   public:
-    Application(std::unique_ptr<ApplicationState> initialState, sf::RenderWindow &window);
+    Application(sf::RenderWindow &window);
     void run();
     void handleEvent(const std::optional<sf::Event> &event);
     void changeState(std::unique_ptr<ApplicationState> state);
     void update(sf::Time delta);
     void render(sf::RenderWindow &window);
+    void loadAllResources();
     const sf::RenderWindow &getWindow() const;
 };
 

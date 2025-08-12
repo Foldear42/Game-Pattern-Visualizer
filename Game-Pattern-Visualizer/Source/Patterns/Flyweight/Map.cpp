@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Map.cpp
- * @ Modified time: 2025-07-06 11:10:50
+ * @ Modified time: 2025-07-07 15:27:13
  * @ Description:
  */
 
@@ -12,7 +12,11 @@
 
 namespace GPV
 {
-
+Map::Map()
+{
+    // Generate map
+}
+void Map::draw(sf::RenderTarget &target, sf::RenderStates states) const {}
 } // namespace GPV
 
 #endif

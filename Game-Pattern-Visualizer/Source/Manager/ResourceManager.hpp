@@ -1,14 +1,13 @@
 /**
  * @ Author: Foldear
  * @ Filename: ResourceManager.hpp
- * @ Modified time: 2025-05-26 15:12:57
+ * @ Modified time: 2025-07-09 16:45:42
  * @ Description: Abstraction to handle resources (sprites, font...)
  */
 
 #ifndef RESOURCE_MANAGER_HPP
 #define RESOURCE_MANAGER_HPP
 
-#include "Enums/TextureID.hpp"
 #include <SFML/Graphics.hpp>
 #include <cassert>
 #include <iostream>
@@ -30,6 +29,9 @@ class ResourceManager
     Resource &get(Identifier id);
     const Resource &get(Identifier id) const;
 };
+
+using TextureManager = ResourceManager<sf::Texture, TextureID>;
+using FontManager = ResourceManager<sf::Font, FontID>;
 
 } // namespace GPV
 #include "ResourceManager.inl"

@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.hpp
- * @ Modified time: 2025-06-03 10:39:36
+ * @ Modified time: 2025-07-08 17:02:03
  * @ Description: Component to animate an image
  */
 
@@ -31,6 +31,7 @@ class Animation : public sf::Drawable, public sf::Transformable
   public:
     Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, float zoomFactor);
     void update(sf::Time delta);
+    void setAnimationSprite(const std::optional<sf::Sprite> &sprite);
     void start();
     void stop();
     void reset();

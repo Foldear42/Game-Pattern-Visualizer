@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: SceneFlyweightPattern.hpp
- * @ Modified time: 2025-07-06 10:31:31
+ * @ Modified time: 2025-07-09 14:16:48
  * @ Description:
  */
 
@@ -10,6 +10,7 @@
 
 #include "Application/Application.hpp"
 #include "Interfaces/Scene.hpp"
+#include <iostream>
 
 namespace GPV
 {

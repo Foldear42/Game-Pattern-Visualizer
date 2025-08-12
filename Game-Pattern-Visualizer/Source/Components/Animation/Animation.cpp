@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.cpp
- * @ Modified time: 2025-06-05 10:10:44
+ * @ Modified time: 2025-07-08 17:04:29
  * @ Description:
  */
 
@@ -67,6 +67,11 @@ void Animation::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
     target.draw(*m_sprite, states);
+}
+
+void Animation::setAnimationSprite(const std::optional<sf::Sprite> &sprite)
+{
+    m_sprite = sprite;
 }
 
 void Animation::start()

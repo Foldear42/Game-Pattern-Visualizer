@@ -1,12 +1,13 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogTypes.hpp
- * @ Modified time: 2025-06-30 11:07:30
+ * @ Modified time: 2025-07-08 17:34:02
  * @ Description:
  */
 
 #pragma once
 
+#include "Enums/TextureID.hpp"
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <nlohmann/json.hpp>
@@ -56,6 +57,25 @@ inline std::vector<std::string> getListDialogByState(const DialogTree &tree, int
         }
     }
     return retList;
+}
+
+inline TextureID getAnimationSpriteIDByState(const DialogTree &tree, int step, ChoiceState state)
+{
+    TextureID animationSpriteID = TextureID::None;
+    auto it = tree.find(step);
+
+    if (it != tree.end())
+    {
+        auto choiceIt =
+            std::find_if(it->second.begin(), it->second.end(), [state](const Choice &c) { return c.choiceState == state; });
+
+        if (choiceIt != it->second.end())
+        {
+            animationSpriteID = TextureID::None;
+        }
+    }
+
+    return animationSpriteID;
 }
 
 } // namespace GPV

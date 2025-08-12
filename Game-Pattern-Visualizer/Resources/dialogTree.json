@@ -7,12 +7,12 @@
     },
     {
       "choiceState": "Yes",
-      "spritePath": "url_to_sprite_yes_1",
+      "spritePath": "Animation_Yes_1.png",
       "dialog": ["You chose yes at step 1."]
     },
     {
       "choiceState": "No",
-      "spritePath": "url_to_sprite_no_1",
+      "spritePath": "Animation_No_1.png",
       "dialog": ["You chose no at step 1."]
     }
   ],

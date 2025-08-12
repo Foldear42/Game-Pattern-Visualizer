@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-07-03 15:05:46
+ * @ Modified time: 2025-07-09 20:53:43
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -10,10 +10,8 @@
 namespace GPV
 {
 
-CommandPatternDemo::CommandPatternDemo()
+CommandPatternDemo::CommandPatternDemo(const Context &context) : ApplicationState(context)
 {
-    // Load resources before creating an instance of scene
-    loadResources();
     // Create the dialog tree object
     std::ifstream file("Resources/dialogTree.json");
     if (!file)
@@ -27,30 +25,23 @@ CommandPatternDemo::CommandPatternDemo()
         int step = std::stoi(key);
         m_dialogTree[step] = value.get<std::vector<Choice>>();
     }
-
-    m_scene = std::make_unique<SceneCommandPattern>(m_resourceManager, m_font, m_dialogTree);
+    sf::Font &arialFont = context.fontManager.get(FontID::Arial);
+    m_scene = std::make_unique<SceneCommandPattern>(context.textureManager, arialFont, m_dialogTree);
     // Yes button
     sf::Vector2f buttonSize = {100.f, 50.f};
-    m_yesButton = Components::Button(buttonSize, "YES", m_font, sf::Color::Red, State::STATE_YES);
+    m_yesButton = Components::Button(buttonSize, "YES", arialFont, sf::Color::Red, State::STATE_YES);
     m_yesButton.setOrigin({m_yesButton.getSizeRectangle().x / 2, m_yesButton.getSizeRectangle().y / 2});
     // No button
-    m_noButton = Components::Button(buttonSize, "NO", m_font, sf::Color::Blue, State::STATE_NO);
+    m_noButton = Components::Button(buttonSize, "NO", arialFont, sf::Color::Blue, State::STATE_NO);
     m_noButton.setOrigin({m_noButton.getSizeRectangle().x / 2, m_noButton.getSizeRectangle().y / 2});
     // Undo Button
-    m_undoButton = Components::Button(buttonSize, "UNDO", m_font, sf::Color::Cyan, State::STATE_UNDO);
+    m_undoButton = Components::Button(buttonSize, "UNDO", arialFont, sf::Color::Cyan, State::STATE_UNDO);
     m_undoButton.setOrigin({m_undoButton.getSizeRectangle().x / 2, m_undoButton.getSizeRectangle().y / 2});
     // Create the first MakeChoiceCommand and push it onto the stack
-    m_nextStepButton = Components::Button(buttonSize, "NEXT STEP", m_font, sf ::Color::Cyan, State::STATE_NEXTSTEP);
+    m_nextStepButton = Components::Button(buttonSize, "NEXT STEP", arialFont, sf ::Color::Cyan, State::STATE_NEXTSTEP);
     m_nextStepButton.setOrigin({m_nextStepButton.getSizeRectangle().x / 2, m_nextStepButton.getSizeRectangle().y / 2});
     std::unique_ptr<MakeChoiceCommand> command = std::make_unique<MakeChoiceCommand>(*m_scene, ChoiceState::None, 1);
     m_commandHistory.push(std::move(command));
-}
-
-void CommandPatternDemo::loadResources()
-{
-    m_font.openFromFile("Resources/Fonts/ARIAL.ttf");
-    m_resourceManager.load(TextureID::stickman, "Resources/Images/Stickman.png");
-    m_resourceManager.load(TextureID::sceneAnimation, "Resources/Images/tram.png");
 }
 
 void CommandPatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event)

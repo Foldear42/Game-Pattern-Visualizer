@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.hpp
- * @ Modified time: 2025-07-07 14:34:48
+ * @ Modified time: 2025-07-09 16:52:38
  * @ Description: Main menu for navigation
  */
 
@@ -27,7 +27,7 @@ class MenuState : public ApplicationState
     sf::Font m_font;
 
   public:
-    MenuState();
+    explicit MenuState(const Context &context);
     virtual void handleEvent(Application &application, const std::optional<sf::Event> &event) override;
     virtual void update(Application &application, sf::Time delta) override;
     virtual void render(sf::RenderWindow &window) override;
