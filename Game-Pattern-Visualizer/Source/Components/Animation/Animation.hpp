@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.hpp
- * @ Modified time: 2025-07-08 17:02:03
+ * @ Modified time: 2025-09-14 14:08:04
  * @ Description: Component to animate an image
  */
 
@@ -19,6 +19,7 @@ class Animation : public sf::Drawable, public sf::Transformable
 {
     const int m_numFrames;
     const sf::Time m_frameTime;
+    int m_frameX, m_frameY;
     sf::Time m_frameTimeLeft;
     std::optional<sf::Sprite> m_sprite;
     sf::Time m_elaspedTime;
@@ -27,11 +28,12 @@ class Animation : public sf::Drawable, public sf::Transformable
     sf::Vector2f m_zoomFactorVector;
     std::vector<sf::IntRect> m_sourceRectangles;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    void init();
 
   public:
     Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, float zoomFactor);
     void update(sf::Time delta);
-    void setAnimationSprite(const std::optional<sf::Sprite> &sprite);
+    void setAnimationSprite(std::optional<sf::Sprite> &sprite);
     void start();
     void stop();
     void reset();

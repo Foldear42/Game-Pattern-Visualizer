@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-07-09 20:53:43
+ * @ Modified time: 2025-09-08 19:19:27
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -49,6 +49,7 @@ void CommandPatternDemo::handleEvent(Application &application, const std::option
     m_yesButton.getButtonStatus(application.getWindow(), event);
     if (m_yesButton.isPressed)
     {
+        m_scene->changeSpriteAnimation(ChoiceState::Yes);
         m_scene->startAnimation();
         // Create a new command
         std::unique_ptr<MakeChoiceCommand> command;
@@ -61,6 +62,7 @@ void CommandPatternDemo::handleEvent(Application &application, const std::option
     m_noButton.getButtonStatus(application.getWindow(), event);
     if (m_noButton.isPressed)
     {
+        m_scene->changeSpriteAnimation(ChoiceState::No);
         m_scene->startAnimation();
         // Create a new command
         std::unique_ptr<MakeChoiceCommand> command;

@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-07-09 20:45:00
+ * @ Modified time: 2025-09-14 14:08:15
  * @ Description: Implementation of the Scene class
  */
 
@@ -11,21 +11,24 @@ namespace GPV
 {
 
 SceneCommandPattern::SceneCommandPattern()
-    : font(font), m_dialogBox(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState), font)
+    : textureManager(textureManager)
+    , m_sceneAnimation(m_sceneAnimationSprite, 9, 7, sf::seconds(0.1f), 4.f)
+    , font(font)
+    , m_dialogBox(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState), font)
 {
 }
 
-SceneCommandPattern::SceneCommandPattern(const TextureManager &resourceManager, const sf::Font &font, DialogTree &dialogTree)
-    : m_stickmanSprite(resourceManager.get(TextureID::stickman))
-    , m_sceneAnimationSprite(resourceManager.get(TextureID::sceneAnimationNo1))
-    , m_sceneAnimation(std::in_place, m_sceneAnimationSprite, 9, 7, sf::seconds(0.1f), 4.f)
+SceneCommandPattern::SceneCommandPattern(const TextureManager &textureManager, const sf::Font &font, DialogTree &dialogTree)
+    : textureManager(textureManager)
+    , m_stickmanSprite(textureManager.get(TextureID::stickman))
+    , m_sceneAnimationSprite(textureManager.get(TextureID::sceneAnimationNo1))
+    , m_sceneAnimation(m_sceneAnimationSprite, 9, 7, sf::seconds(0.1f), 4.f)
     , font(font)
     , m_dialogTree(dialogTree)
     , m_currentStep(1)
     , m_currentChoiceState(ChoiceState::None)
     , m_dialogBox(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState), font)
 {
-
     m_dialogBox.setListText(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState));
     sf::FloatRect bounds = m_stickmanSprite->getLocalBounds();
     m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
@@ -37,14 +40,14 @@ SceneCommandPattern::SceneCommandPattern(const TextureManager &resourceManager, 
 void SceneCommandPattern::update(Application &application, sf::Time delta)
 {
     m_stickmanSprite->setPosition({application.getWindow().getSize().x / 2.f, 100.f});
-    m_sceneAnimation->setPosition({application.getWindow().getSize().x / 2.f, 300.f});
+    m_sceneAnimation.setPosition({application.getWindow().getSize().x / 2.f, 300.f});
     m_dialogBox.setPosition({application.getWindow().getSize().x / 2.f, 600.f});
 
     m_dialogBox.update(delta);
     m_dialogBox.setListText(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState));
 
-    m_sceneAnimation->update(delta);
-    if (m_sceneAnimation->isFinished)
+    m_sceneAnimation.update(delta);
+    if (m_sceneAnimation.isFinished)
     {
         stopAnimation();
     }
@@ -63,28 +66,24 @@ void SceneCommandPattern::selectChoice(ChoiceState choiceState)
 void SceneCommandPattern::resetScene()
 {
     m_dialogBox.resetIndexes();
-    m_sceneAnimation->reset();
+    m_sceneAnimation.reset();
 }
 
 void SceneCommandPattern::startAnimation()
 {
-    m_sceneAnimation->start();
+    m_sceneAnimation.start();
     isAnimating = true;
 }
 
 void SceneCommandPattern::stopAnimation()
 {
-    m_sceneAnimation->stop();
+    m_sceneAnimation.stop();
     isAnimating = false;
 }
 
 void SceneCommandPattern::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    if (m_sceneAnimation)
-    {
-        target.draw(*m_sceneAnimation, states);
-    }
-
+    target.draw(m_sceneAnimation, states);
     target.draw(m_dialogBox, states);
 
     if (m_stickmanSprite)
@@ -93,4 +92,11 @@ void SceneCommandPattern::draw(sf::RenderTarget &target, sf::RenderStates states
     }
 }
 
+void SceneCommandPattern::changeSpriteAnimation(ChoiceState choiceState)
+{
+    TextureID currentTextureID = getAnimationSpriteIDByState(m_dialogTree, m_currentStep, choiceState);
+    m_sceneAnimationSprite->setTexture(textureManager.get(currentTextureID));
+    // Set new animation
+    m_sceneAnimation.setAnimationSprite(m_sceneAnimationSprite);
+}
 } // namespace GPV

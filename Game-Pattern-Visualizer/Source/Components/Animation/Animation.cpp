@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Animation.cpp
- * @ Modified time: 2025-07-08 17:04:29
+ * @ Modified time: 2025-09-14 14:08:10
  * @ Description:
  */
 
@@ -12,6 +12,8 @@ namespace GPV::Components
 
 Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, float zoomFactor)
     : m_sprite(sprite)
+    , m_frameX(framesX)
+    , m_frameY(framesY)
     , m_numFrames(framesX * framesY)
     , m_frameTime(frameTime)
     , m_frameTimeLeft(frameTime)
@@ -21,17 +23,26 @@ Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY,
     , m_zoomFactorVector(zoomFactor, zoomFactor)
     , isFinished(false)
 {
-    int frameWidth = m_sprite->getTexture().getSize().x / framesX;
-    int frameHeight = m_sprite->getTexture().getSize().y / framesY;
-    for (int y = 0; y < framesY; y++)
+    init();
+}
+
+void Animation::init()
+{
+    int frameWidth = m_sprite->getTexture().getSize().x / m_frameX;
+    int frameHeight = m_sprite->getTexture().getSize().y / m_frameY;
+
+    if (!m_sourceRectangles.empty())
     {
-        for (int x = 0; x < framesX; x++)
+    }
+
+    for (int y = 0; y < m_frameY; y++)
+    {
+        for (int x = 0; x < m_frameX; x++)
         {
             sf::IntRect frameDimension = sf::IntRect({x * frameWidth, y * frameHeight}, {frameWidth, frameHeight});
             m_sourceRectangles.emplace_back(frameDimension);
         }
     }
-
     if (!m_sourceRectangles.empty())
     {
         m_sprite->setTextureRect(m_sourceRectangles[0]);
@@ -69,9 +80,10 @@ void Animation::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(*m_sprite, states);
 }
 
-void Animation::setAnimationSprite(const std::optional<sf::Sprite> &sprite)
+void Animation::setAnimationSprite(std::optional<sf::Sprite> &sprite)
 {
     m_sprite = sprite;
+    init();
 }
 
 void Animation::start()

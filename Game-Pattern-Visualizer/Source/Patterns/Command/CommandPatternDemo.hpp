@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo
- * @ Modified time: 2025-07-09 16:54:44
+ * @ Modified time: 2025-08-12 14:10:28
  * @ Description: State of the application for the command pattern demo
  */
 

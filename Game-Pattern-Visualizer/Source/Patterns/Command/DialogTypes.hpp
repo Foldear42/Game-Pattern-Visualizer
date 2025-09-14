@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: DialogTypes.hpp
- * @ Modified time: 2025-07-08 17:34:02
+ * @ Modified time: 2025-09-08 19:12:59
  * @ Description:
  */
 
@@ -59,9 +59,19 @@ inline std::vector<std::string> getListDialogByState(const DialogTree &tree, int
     return retList;
 }
 
+inline TextureID stringToTextureID(const std::string str)
+{
+    if (str == "Animation_Yes_1.png")
+        return TextureID::sceneAnimationYes1;
+    else if (str == "Animation_No_1.png")
+        return TextureID::sceneAnimationNo1;
+    else
+        return TextureID::sceneAnimationNo1;
+}
+
 inline TextureID getAnimationSpriteIDByState(const DialogTree &tree, int step, ChoiceState state)
 {
-    TextureID animationSpriteID = TextureID::None;
+    TextureID animationSpriteID;
     auto it = tree.find(step);
 
     if (it != tree.end())
@@ -71,7 +81,8 @@ inline TextureID getAnimationSpriteIDByState(const DialogTree &tree, int step, C
 
         if (choiceIt != it->second.end())
         {
-            animationSpriteID = TextureID::None;
+            animationSpriteID = stringToTextureID(choiceIt->spritePath);
+            std::cout << choiceIt->spritePath << std::endl;
         }
     }
 
