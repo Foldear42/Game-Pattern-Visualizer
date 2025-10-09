@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: FlyweightPatternDemo.cpp
- * @ Modified time: 2025-07-09 17:31:10
+ * @ Modified time: 2025-10-09 09:52:31
  * @ Description:
  */
 
@@ -9,7 +9,10 @@
 
 namespace GPV
 {
-FlyweightPatternDemo::FlyweightPatternDemo(const Context &context) : ApplicationState(context) {}
+FlyweightPatternDemo::FlyweightPatternDemo(const Context &context)
+    : ApplicationState(context), m_sceneFlyweightPattern(context.textureManager)
+{
+}
 void FlyweightPatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event) {}
 void FlyweightPatternDemo::update(Application &application, sf::Time delta) {}
 void FlyweightPatternDemo::render(sf::RenderWindow &window)

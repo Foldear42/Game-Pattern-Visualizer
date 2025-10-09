@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: SceneFlyweightPattern.cpp
- * @ Modified time: 2025-07-07 15:26:41
+ * @ Modified time: 2025-10-09 18:12:19
  * @ Description:
  */
 
@@ -9,14 +9,48 @@
 
 namespace GPV
 {
-SceneFlyweightPattern::SceneFlyweightPattern()
+SceneFlyweightPattern::SceneFlyweightPattern(const TextureManager &textureManager)
+    : textureManager(textureManager)
+    , m_waterTerrain(textureManager.get(TextureID::waterterrain))
+    , m_grassTerrain(textureManager.get(TextureID::grassterrain))
+    , m_dirtTerrain(textureManager.get(TextureID::dirtterrain))
 {
-    m_rectShape.setSize({5.f, 5.f});
-    std::cout << sizeof(sf::RectangleShape) << std::endl;
+    generateMap();
 }
 void SceneFlyweightPattern::update(Application &application, sf::Time delta) {}
 void SceneFlyweightPattern::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    target.draw(m_rectShape, states);
+    for (int x = 0; x < ROWS; x++)
+    {
+        for (int y = 0; y < COLS; y++)
+        {
+            m_map[x][y]->SetPosition(sf::Vector2f(x * 16, y * 16));
+            target.draw(*m_map[x][y], states);
+        }
+    }
 }
+
+void SceneFlyweightPattern::generateMap()
+{
+    for (int x = 0; x < ROWS; x++)
+    {
+        for (int y = 0; y < COLS; y++)
+        {
+            if ((rand() % 10) == 0)
+            {
+                m_map[x][y] = &m_dirtTerrain;
+            }
+            else
+            {
+                m_map[x][y] = &m_grassTerrain;
+            }
+        }
+    }
+    int x = rand() % COLS;
+    for (int y = 0; y < ROWS; y++)
+    {
+        m_map[x][y] = &m_waterTerrain;
+    }
+}
+
 } // namespace GPV

@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: SceneFlyweightPattern.hpp
- * @ Modified time: 2025-07-09 14:16:48
+ * @ Modified time: 2025-10-09 16:08:48
  * @ Description:
  */
 
@@ -10,17 +10,26 @@
 
 #include "Application/Application.hpp"
 #include "Interfaces/Scene.hpp"
+#include "Terrain.hpp"
 #include <iostream>
 
 namespace GPV
 {
 class SceneFlyweightPattern : public Scene
 {
-    sf::RectangleShape m_rectShape;
+    static constexpr std::size_t COLS = 100;
+    static constexpr std::size_t ROWS = 100;
+    const TextureManager &textureManager;
+    // sf::RectangleShape m_rectShape;
+    Terrain m_waterTerrain;
+    Terrain m_grassTerrain;
+    Terrain m_dirtTerrain;
+    Terrain *m_map[COLS][ROWS];
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    void generateMap();
 
   public:
-    SceneFlyweightPattern();
+    SceneFlyweightPattern(const TextureManager &textureManager);
     void update(Application &application, sf::Time delta) override;
 };
 } // namespace GPV

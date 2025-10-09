@@ -9,7 +9,10 @@ enum class TextureID
     None,
     stickman,
     sceneAnimationNo1,
-    sceneAnimationYes1
+    sceneAnimationYes1,
+    waterterrain,
+    grassterrain,
+    dirtterrain
 };
 
 }
