@@ -12,7 +12,8 @@ enum class TextureID
     sceneAnimationYes1,
     waterterrain,
     grassterrain,
-    dirtterrain
+    dirtterrain,
+    dummy
 };
 
 }

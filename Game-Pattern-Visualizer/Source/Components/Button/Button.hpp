@@ -1,13 +1,14 @@
 /**
  * @ Author: Foldear
  * @ Filename: Button.hpp
- * @ Modified time: 2025-06-03 10:10:14
+ * @ Modified time: 2025-10-15 10:49:45
  * @ Description: Button Component
  */
 
 #ifndef BUTTON_HPP
 #define BUTTON_HPP
 
+#include "Application/Application.hpp"
 #include "Enums/State.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -17,6 +18,8 @@ namespace GPV::Components
 
 class Button : public sf::Drawable, public sf::Transformable
 {
+    const TextureManager &textureManager;
+    sf::Sprite m_sprite;
     sf::Vector2f m_sizeRectangle;
     sf::String m_textContent;
     sf::Color m_color;
@@ -28,8 +31,8 @@ class Button : public sf::Drawable, public sf::Transformable
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
-    Button();
-    Button(sf::Vector2f sizeRectangle, sf::String textContent, const sf::Font &font, sf::Color color, State stateType);
+    Button(sf::Vector2f sizeRectangle, sf::String textContent, const TextureManager &textureManager, TextureID textureID,
+           const sf::Font &font, sf::Color color, State stateType);
     void getButtonStatus(const sf::RenderWindow &window, const std::optional<sf::Event> &e);
     void update(sf::Time delta);
     void setColor(sf::Color color);

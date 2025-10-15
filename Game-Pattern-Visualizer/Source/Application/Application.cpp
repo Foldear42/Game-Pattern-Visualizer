@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Application.cpp
- * @ Modified time: 2025-10-09 16:10:12
+ * @ Modified time: 2025-10-15 12:03:30
  * @ Description: Main application implementation
  */
 
@@ -67,6 +67,7 @@ void Application::render(sf::RenderWindow &window)
 
 void Application::loadAllResources()
 {
+
     m_fontManager.load(FontID::Arial, "Resources/Fonts/ARIAL.TTF");
     // Command demo
     m_textureManager.load(TextureID::stickman, "Resources/Images/Stickman.png");
@@ -76,6 +77,8 @@ void Application::loadAllResources()
     m_textureManager.load(TextureID::waterterrain, "Resources/Images/tiles/waterterrain.png");
     m_textureManager.load(TextureID::grassterrain, "Resources/Images/tiles/grassterrain.png");
     m_textureManager.load(TextureID::dirtterrain, "Resources/Images/tiles/dirtterrain.png");
+
+    m_textureManager.load(TextureID::dummy, "Resources/Images/dummy.png");
 }
 
 const sf::RenderWindow &Application::getWindow() const

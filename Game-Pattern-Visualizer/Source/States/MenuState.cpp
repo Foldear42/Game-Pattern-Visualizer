@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.cpp
- * @ Modified time: 2025-07-09 20:56:06
+ * @ Modified time: 2025-10-15 12:00:54
  * @ Description: Implementation for the main menu
  */
 
@@ -10,18 +10,24 @@
 namespace GPV
 {
 
-MenuState::MenuState(const Context &context) : ApplicationState(context)
+MenuState::MenuState(const Context &context)
+    : ApplicationState(context)
+    , m_buttons{{
+          Components::Button({500.f, 50.f}, "Pattern Command", context.textureManager, TextureID::dummy,
+                             context.fontManager.get(FontID::Arial), sf::Color::Red, State::COMMAND_P_STATE),
+
+          Components::Button({500.f, 50.f}, "Pattern Flyweight", context.textureManager, TextureID::dummy,
+                             context.fontManager.get(FontID::Arial), sf::Color::Red, State::FLYWEIGHT_P_STATE),
+          Components::Button({500.f, 50.f}, "Pattern Observer", context.textureManager, TextureID::dummy,
+                             context.fontManager.get(FontID::Arial), sf::Color::Red, State::OBSERVER_P_STATE),
+          Components::Button({500.f, 50.f}, "Pattern Prototype", context.textureManager, TextureID::dummy,
+                             context.fontManager.get(FontID::Arial), sf::Color::Red, State::PROTOTYPE_P_STATE),
+          Components::Button({500.f, 50.f}, "Pattern Singleton", context.textureManager, TextureID::dummy,
+                             context.fontManager.get(FontID::Arial), sf::Color::Red, State::SINGLETON_P_STATE),
+          Components::Button({500.f, 50.f}, "Pattern State", context.textureManager, TextureID::dummy,
+                             context.fontManager.get(FontID::Arial), sf::Color::Red, State::STATE_P_STATE),
+      }}
 {
-    sf::Vector2f buttonSize = {500.f, 50.f};
-    sf::Font &arialFont = context.fontManager.get(FontID::Arial);
-    // Add all the buttons to the array
-    m_buttons[0] = Components::Button(buttonSize, "Pattern Command", context.fontManager.get(FontID::Arial), sf::Color::Red,
-                                      State::COMMAND_P_STATE);
-    m_buttons[1] = Components::Button(buttonSize, "Pattern Flyweight", arialFont, sf::Color::Red, State::FLYWEIGHT_P_STATE);
-    m_buttons[2] = Components::Button(buttonSize, "Pattern Observer", arialFont, sf::Color::Red, State::OBSERVER_P_STATE);
-    m_buttons[3] = Components::Button(buttonSize, "Pattern Prototype", arialFont, sf::Color::Red, State::PROTOTYPE_P_STATE);
-    m_buttons[4] = Components::Button(buttonSize, "Pattern Singleton", arialFont, sf::Color::Red, State::SINGLETON_P_STATE);
-    m_buttons[5] = Components::Button(buttonSize, "Pattern State", arialFont, sf::Color::Red, State::STATE_P_STATE);
 }
 
 void MenuState::handleEvent(Application &application, const std::optional<sf::Event> &event)
@@ -36,9 +42,10 @@ void MenuState::handleEvent(Application &application, const std::optional<sf::Ev
             {
             case State::COMMAND_P_STATE:
                 application.changeState(std::make_unique<CommandPatternDemo>(m_context));
-                break;
             case State::FLYWEIGHT_P_STATE:
                 application.changeState(std::make_unique<FlyweightPatternDemo>(m_context));
+            case State::OBSERVER_P_STATE:
+                application.changeState(std::make_unique<ObserverPatternDemo>(m_context));
             default:
                 break;
             }

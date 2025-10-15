@@ -1,12 +1,12 @@
 /**
  * @ Author: Foldear
  * @ Filename: SceneFlyweightPattern.hpp
- * @ Modified time: 2025-10-09 16:08:48
+ * @ Modified time: 2025-10-15 10:50:22
  * @ Description:
  */
 
-#ifndef SCENE_FLYWIEGHT_PATTERN_HPP
-#define SCENE_FLYWIEGHT_PATTERN_HPP
+#ifndef SCENE_FLYWEIGHT_PATTERN_HPP
+#define SCENE_FLYWEIGHT_PATTERN_HPP
 
 #include "Application/Application.hpp"
 #include "Interfaces/Scene.hpp"
