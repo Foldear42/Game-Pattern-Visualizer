@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.cpp
- * @ Modified time: 2025-10-15 12:00:54
+ * @ Modified time: 2025-10-16 11:04:39
  * @ Description: Implementation for the main menu
  */
 
@@ -13,18 +13,17 @@ namespace GPV
 MenuState::MenuState(const Context &context)
     : ApplicationState(context)
     , m_buttons{{
-          Components::Button({500.f, 50.f}, "Pattern Command", context.textureManager, TextureID::dummy,
+          Components::Button({500.f, 50.f}, "Pattern Command", context.textureManager.get(TextureID::dummy),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::COMMAND_P_STATE),
-
-          Components::Button({500.f, 50.f}, "Pattern Flyweight", context.textureManager, TextureID::dummy,
+          Components::Button({500.f, 50.f}, "Pattern Flyweight", context.textureManager.get(TextureID::dummy),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::FLYWEIGHT_P_STATE),
-          Components::Button({500.f, 50.f}, "Pattern Observer", context.textureManager, TextureID::dummy,
+          Components::Button({500.f, 50.f}, "Pattern Observer", context.textureManager.get(TextureID::dummy),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::OBSERVER_P_STATE),
-          Components::Button({500.f, 50.f}, "Pattern Prototype", context.textureManager, TextureID::dummy,
+          Components::Button({500.f, 50.f}, "Pattern Prototype", context.textureManager.get(TextureID::dummy),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::PROTOTYPE_P_STATE),
-          Components::Button({500.f, 50.f}, "Pattern Singleton", context.textureManager, TextureID::dummy,
+          Components::Button({500.f, 50.f}, "Pattern Singleton", context.textureManager.get(TextureID::dummy),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::SINGLETON_P_STATE),
-          Components::Button({500.f, 50.f}, "Pattern State", context.textureManager, TextureID::dummy,
+          Components::Button({500.f, 50.f}, "Pattern State", context.textureManager.get(TextureID::dummy),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::STATE_P_STATE),
       }}
 {
@@ -42,8 +41,10 @@ void MenuState::handleEvent(Application &application, const std::optional<sf::Ev
             {
             case State::COMMAND_P_STATE:
                 application.changeState(std::make_unique<CommandPatternDemo>(m_context));
+                break;
             case State::FLYWEIGHT_P_STATE:
                 application.changeState(std::make_unique<FlyweightPatternDemo>(m_context));
+                break;
             case State::OBSERVER_P_STATE:
                 application.changeState(std::make_unique<ObserverPatternDemo>(m_context));
             default:

@@ -1,6 +1,8 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
+namespace GPV
+{
 enum class State
 {
     MENU_STATE,
@@ -15,5 +17,5 @@ enum class State
     STATE_UNDO,
     STATE_NEXTSTEP
 };
-
+}
 #endif

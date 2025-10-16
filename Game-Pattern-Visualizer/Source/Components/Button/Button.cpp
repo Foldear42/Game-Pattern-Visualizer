@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Button.cpp
- * @ Modified time: 2025-10-15 10:46:08
+ * @ Modified time: 2025-10-16 10:51:20
  * @ Description: Implementation of the Button class
  */
 
@@ -10,17 +10,18 @@
 namespace GPV::Components
 {
 
-Button::Button(sf::Vector2f sizeRectangle, sf::String textContent, const TextureManager &textureManager, TextureID textureID,
-               const sf::Font &font, sf::Color color, State stateType)
+Button::Button(sf::Vector2f sizeRectangle, sf::String textContent, sf::Texture texture, const sf::Font &font, sf::Color color,
+               State stateType)
     : m_sizeRectangle(sizeRectangle)
     , textureManager(textureManager)
-    , m_sprite(textureManager.get(textureID))
+    , m_sprite(texture)
     , m_textContent(textContent)
     , m_color(color)
     , m_text(font)
     , stateType(stateType)
     , m_activated(true)
 {
+    // std::cout << "New button" << std::endl;
     m_rectangle.setSize({m_sizeRectangle});
     m_rectangle.setFillColor(m_color);
     m_text.setCharacterSize(20);

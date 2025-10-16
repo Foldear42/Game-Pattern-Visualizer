@@ -1,13 +1,14 @@
 /**
  * @ Author: Foldear
  * @ Filename: Clicker.hpp
- * @ Modified time: 2025-10-15 09:57:35
+ * @ Modified time: 2025-10-16 10:00:27
  * @ Description:
  */
 
 #ifndef CLICKER_HPP
 #define CLICKER_HPP
 
+#include "Subject.hpp"
 #include <SFML/Graphics.hpp>
 
 namespace GPV
@@ -15,6 +16,10 @@ namespace GPV
 
 class Clicker : sf::Drawable
 {
+    Subject m_subject;
+
+  public:
+    Clicker();
 };
 
 } // namespace GPV

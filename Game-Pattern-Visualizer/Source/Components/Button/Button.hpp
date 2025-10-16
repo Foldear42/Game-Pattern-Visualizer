@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Button.hpp
- * @ Modified time: 2025-10-15 10:49:45
+ * @ Modified time: 2025-10-16 10:50:57
  * @ Description: Button Component
  */
 
@@ -31,8 +31,8 @@ class Button : public sf::Drawable, public sf::Transformable
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
-    Button(sf::Vector2f sizeRectangle, sf::String textContent, const TextureManager &textureManager, TextureID textureID,
-           const sf::Font &font, sf::Color color, State stateType);
+    Button(sf::Vector2f sizeRectangle, sf::String textContent, sf::Texture texture, const sf::Font &font, sf::Color color,
+           State stateType);
     void getButtonStatus(const sf::RenderWindow &window, const std::optional<sf::Event> &e);
     void update(sf::Time delta);
     void setColor(sf::Color color);

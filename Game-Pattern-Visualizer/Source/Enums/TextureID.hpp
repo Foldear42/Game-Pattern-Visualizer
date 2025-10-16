@@ -13,7 +13,8 @@ enum class TextureID
     waterterrain,
     grassterrain,
     dirtterrain,
-    dummy
+    dummy,
+    dummy2
 };
 
 }

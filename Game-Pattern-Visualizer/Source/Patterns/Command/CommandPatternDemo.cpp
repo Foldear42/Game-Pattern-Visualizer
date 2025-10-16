@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-10-15 14:01:42
+ * @ Modified time: 2025-10-16 10:53:00
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -12,13 +12,13 @@ namespace GPV
 
 CommandPatternDemo::CommandPatternDemo(const Context &context)
     : ApplicationState(context)
-    , m_yesButton(Components::Button({100.f, 50.f}, "YES", context.textureManager, TextureID::dummy,
+    , m_yesButton(Components::Button({100.f, 50.f}, "YES", context.textureManager.get(TextureID::dummy),
                                      context.fontManager.get(FontID::Arial), sf::Color::Red, State::STATE_YES))
-    , m_noButton(Components::Button({100.f, 50.f}, "NO", context.textureManager, TextureID::dummy,
+    , m_noButton(Components::Button({100.f, 50.f}, "NO", context.textureManager.get(TextureID::dummy),
                                     context.fontManager.get(FontID::Arial), sf::Color::Blue, State::STATE_NO))
-    , m_undoButton(Components::Button({100.f, 50.f}, "NO", context.textureManager, TextureID::dummy,
+    , m_undoButton(Components::Button({100.f, 50.f}, "NO", context.textureManager.get(TextureID::dummy),
                                       context.fontManager.get(FontID::Arial), sf::Color::Blue, State::STATE_NO))
-    , m_nextStepButton(Components::Button({100.f, 50.f}, "NEXT STEP", context.textureManager, TextureID::dummy,
+    , m_nextStepButton(Components::Button({100.f, 50.f}, "NEXT STEP", context.textureManager.get(TextureID::dummy),
                                           context.fontManager.get(FontID::Arial), sf ::Color::Cyan, State::STATE_NEXTSTEP))
 
 {

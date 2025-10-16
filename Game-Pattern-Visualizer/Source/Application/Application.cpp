@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Application.cpp
- * @ Modified time: 2025-10-15 12:03:30
+ * @ Modified time: 2025-10-16 10:55:23
  * @ Description: Main application implementation
  */
 
@@ -79,6 +79,7 @@ void Application::loadAllResources()
     m_textureManager.load(TextureID::dirtterrain, "Resources/Images/tiles/dirtterrain.png");
 
     m_textureManager.load(TextureID::dummy, "Resources/Images/dummy.png");
+    m_textureManager.load(TextureID::dummy2, "Resources/Images/dummy2.png");
 }
 
 const sf::RenderWindow &Application::getWindow() const
