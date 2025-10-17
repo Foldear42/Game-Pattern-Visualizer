@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-10-16 10:53:00
+ * @ Modified time: 2025-10-17 11:30:14
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -12,13 +12,13 @@ namespace GPV
 
 CommandPatternDemo::CommandPatternDemo(const Context &context)
     : ApplicationState(context)
-    , m_yesButton(Components::Button({100.f, 50.f}, "YES", context.textureManager.get(TextureID::dummy),
+    , m_yesButton(Components::Button({0.5f, 0.5f}, "YES", context.textureManager.get(TextureID::wideButtonBackground),
                                      context.fontManager.get(FontID::Arial), sf::Color::Red, State::STATE_YES))
-    , m_noButton(Components::Button({100.f, 50.f}, "NO", context.textureManager.get(TextureID::dummy),
+    , m_noButton(Components::Button({0.5f, 0.5f}, "NO", context.textureManager.get(TextureID::wideButtonBackground),
                                     context.fontManager.get(FontID::Arial), sf::Color::Blue, State::STATE_NO))
-    , m_undoButton(Components::Button({100.f, 50.f}, "NO", context.textureManager.get(TextureID::dummy),
+    , m_undoButton(Components::Button({0.5f, 0.5f}, "NO", context.textureManager.get(TextureID::wideButtonBackground),
                                       context.fontManager.get(FontID::Arial), sf::Color::Blue, State::STATE_NO))
-    , m_nextStepButton(Components::Button({100.f, 50.f}, "NEXT STEP", context.textureManager.get(TextureID::dummy),
+    , m_nextStepButton(Components::Button({0.5f, 0.5f}, "NEXT STEP", context.textureManager.get(TextureID::wideButtonBackground),
                                           context.fontManager.get(FontID::Arial), sf ::Color::Cyan, State::STATE_NEXTSTEP))
 
 {
@@ -40,13 +40,13 @@ CommandPatternDemo::CommandPatternDemo(const Context &context)
     // Yes button
     sf::Vector2f buttonSize = {100.f, 50.f};
 
-    m_yesButton.setOrigin({m_yesButton.getSizeRectangle().x / 2, m_yesButton.getSizeRectangle().y / 2});
+    m_yesButton.setOrigin({m_yesButton.getSizeSprite().x / 2, m_yesButton.getSizeSprite().y / 2});
     // No button
-    m_noButton.setOrigin({m_noButton.getSizeRectangle().x / 2, m_noButton.getSizeRectangle().y / 2});
+    m_noButton.setOrigin({m_noButton.getSizeSprite().x / 2, m_noButton.getSizeSprite().y / 2});
     // Undo Button
-    m_undoButton.setOrigin({m_undoButton.getSizeRectangle().x / 2, m_undoButton.getSizeRectangle().y / 2});
+    m_undoButton.setOrigin({m_undoButton.getSizeSprite().x / 2, m_undoButton.getSizeSprite().y / 2});
     // Create the first MakeChoiceCommand and push it onto the stack
-    m_nextStepButton.setOrigin({m_nextStepButton.getSizeRectangle().x / 2, m_nextStepButton.getSizeRectangle().y / 2});
+    m_nextStepButton.setOrigin({m_nextStepButton.getSizeSprite().x / 2, m_nextStepButton.getSizeSprite().y / 2});
     std::unique_ptr<MakeChoiceCommand> command = std::make_unique<MakeChoiceCommand>(*m_scene, ChoiceState::None, 1);
     m_commandHistory.push(std::move(command));
 }
@@ -108,9 +108,9 @@ void CommandPatternDemo::update(Application &application, sf::Time delta)
 {
     float spacing = 20.f;
     m_yesButton.setPosition({(application.getWindow().getSize().x / 2.f), 800.f});
-    m_noButton.setPosition({(m_yesButton.getPosition().x + m_yesButton.getSizeRectangle().x + spacing), 800.f});
-    m_undoButton.setPosition({(m_noButton.getPosition().x + m_noButton.getSizeRectangle().x + spacing), 800.f});
-    m_nextStepButton.setPosition({(m_undoButton.getPosition().x + m_undoButton.getSizeRectangle().x + spacing), 800.f});
+    m_noButton.setPosition({(m_yesButton.getPosition().x + m_yesButton.getSizeSprite().x + spacing), 800.f});
+    m_undoButton.setPosition({(m_noButton.getPosition().x + m_noButton.getSizeSprite().x + spacing), 800.f});
+    m_nextStepButton.setPosition({(m_undoButton.getPosition().x + m_undoButton.getSizeSprite().x + spacing), 800.f});
 
     m_yesButton.update(delta);
     m_noButton.update(delta);

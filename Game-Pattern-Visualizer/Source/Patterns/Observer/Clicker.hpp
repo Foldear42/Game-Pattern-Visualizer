@@ -1,25 +1,32 @@
 /**
  * @ Author: Foldear
  * @ Filename: Clicker.hpp
- * @ Modified time: 2025-10-16 10:00:27
+ * @ Modified time: 2025-10-17 10:10:36
  * @ Description:
  */
 
 #ifndef CLICKER_HPP
 #define CLICKER_HPP
 
+#include "Components/Button/Button.hpp"
 #include "Subject.hpp"
 #include <SFML/Graphics.hpp>
 
 namespace GPV
 {
 
-class Clicker : sf::Drawable
+class Clicker : public sf::Drawable, public sf::Transformable
 {
-    Subject m_subject;
+    Subject m_clickSubject;
+    Components::Button m_button;
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
-    Clicker();
+    Clicker(const Context &context);
+    Subject &clickSubject()
+    {
+        return m_clickSubject;
+    }
 };
 
 } // namespace GPV

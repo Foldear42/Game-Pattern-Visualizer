@@ -14,7 +14,8 @@ enum class TextureID
     grassterrain,
     dirtterrain,
     dummy,
-    dummy2
+    cookie,
+    wideButtonBackground
 };
 
 }

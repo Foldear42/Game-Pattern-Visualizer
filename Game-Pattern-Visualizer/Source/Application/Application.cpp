@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Application.cpp
- * @ Modified time: 2025-10-16 10:55:23
+ * @ Modified time: 2025-10-17 11:19:58
  * @ Description: Main application implementation
  */
 
@@ -79,7 +79,8 @@ void Application::loadAllResources()
     m_textureManager.load(TextureID::dirtterrain, "Resources/Images/tiles/dirtterrain.png");
 
     m_textureManager.load(TextureID::dummy, "Resources/Images/dummy.png");
-    m_textureManager.load(TextureID::dummy2, "Resources/Images/dummy2.png");
+    m_textureManager.load(TextureID::cookie, "Resources/Images/clicker/cookie.png");
+    m_textureManager.load(TextureID::wideButtonBackground, "Resources/Images/UI/WideButtonBackground.png");
 }
 
 const sf::RenderWindow &Application::getWindow() const

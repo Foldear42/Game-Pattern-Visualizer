@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.cpp
- * @ Modified time: 2025-10-16 11:04:39
+ * @ Modified time: 2025-10-17 11:33:12
  * @ Description: Implementation for the main menu
  */
 
@@ -13,17 +13,17 @@ namespace GPV
 MenuState::MenuState(const Context &context)
     : ApplicationState(context)
     , m_buttons{{
-          Components::Button({500.f, 50.f}, "Pattern Command", context.textureManager.get(TextureID::dummy),
+          Components::Button({1.f, 1.f}, "Pattern Command", context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::COMMAND_P_STATE),
-          Components::Button({500.f, 50.f}, "Pattern Flyweight", context.textureManager.get(TextureID::dummy),
+          Components::Button({1.f, 1.f}, "Pattern Flyweight", context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::FLYWEIGHT_P_STATE),
-          Components::Button({500.f, 50.f}, "Pattern Observer", context.textureManager.get(TextureID::dummy),
+          Components::Button({1.f, 1.f}, "Pattern Observer", context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::OBSERVER_P_STATE),
-          Components::Button({500.f, 50.f}, "Pattern Prototype", context.textureManager.get(TextureID::dummy),
+          Components::Button({1.f, 1.f}, "Pattern Prototype", context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::PROTOTYPE_P_STATE),
-          Components::Button({500.f, 50.f}, "Pattern Singleton", context.textureManager.get(TextureID::dummy),
+          Components::Button({1.f, 1.f}, "Pattern Singleton", context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::SINGLETON_P_STATE),
-          Components::Button({500.f, 50.f}, "Pattern State", context.textureManager.get(TextureID::dummy),
+          Components::Button({1.f, 1.f}, "Pattern State", context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red, State::STATE_P_STATE),
       }}
 {
@@ -70,9 +70,9 @@ void MenuState::dispatchButtons(const sf::RenderWindow &window)
     float windowMiddleWitdh = windowSize.x / 2.f;
     for (Components::Button &b : m_buttons)
     {
-        b.setOrigin({b.getSizeRectangle().x / 2, b.getSizeRectangle().y / 2});
+        b.setOrigin({b.getSizeSprite().x / 2, b.getSizeSprite().y / 2});
         b.setPosition({windowMiddleWitdh, currentPosition.y});
-        currentPosition.y += b.getSizeRectangle().y + spacingSize;
+        currentPosition.y += b.getSizeSprite().y + spacingSize;
     }
 }
 

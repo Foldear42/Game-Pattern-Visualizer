@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Button.hpp
- * @ Modified time: 2025-10-16 10:50:57
+ * @ Modified time: 2025-10-17 11:04:04
  * @ Description: Button Component
  */
 
@@ -20,7 +20,7 @@ class Button : public sf::Drawable, public sf::Transformable
 {
     const TextureManager &textureManager;
     sf::Sprite m_sprite;
-    sf::Vector2f m_sizeRectangle;
+    sf::Vector2f m_spriteScale;
     sf::String m_textContent;
     sf::Color m_color;
     sf::RectangleShape m_rectangle;
@@ -31,13 +31,13 @@ class Button : public sf::Drawable, public sf::Transformable
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
-    Button(sf::Vector2f sizeRectangle, sf::String textContent, sf::Texture texture, const sf::Font &font, sf::Color color,
+    Button(sf::Vector2f spriteScale, sf::String textContent, sf::Texture &texture, const sf::Font &font, sf::Color color,
            State stateType);
     void getButtonStatus(const sf::RenderWindow &window, const std::optional<sf::Event> &e);
     void update(sf::Time delta);
     void setColor(sf::Color color);
     sf::Vector2f getPosition();
-    sf::Vector2f getSizeRectangle() const;
+    sf::Vector2u getSizeSprite() const;
     sf::String getTextContent();
     void activate();
     void deactivate();

@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: ObserverPatternDemo.cpp
- * @ Modified time: 2025-10-11 09:48:06
+ * @ Modified time: 2025-10-17 09:49:43
  * @ Description:
  */
 
@@ -9,10 +9,7 @@
 
 namespace GPV
 {
-ObserverPatternDemo::ObserverPatternDemo(const Context &context)
-    : ApplicationState(context), m_sceneObserverPattern(context.textureManager)
-{
-}
+ObserverPatternDemo::ObserverPatternDemo(const Context &context) : ApplicationState(context), m_sceneObserverPattern(context) {}
 void ObserverPatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event) {}
 void ObserverPatternDemo::update(Application &application, sf::Time delta) {}
 void ObserverPatternDemo::render(sf::RenderWindow &window)

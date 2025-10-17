@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: SceneObserverPattern.hpp
- * @ Modified time: 2025-10-15 09:33:52
+ * @ Modified time: 2025-10-17 09:50:53
  * @ Description:
  */
 
@@ -9,6 +9,7 @@
 #define SCENE_OBSERVER_PATTERN_HPP
 
 #include "Application/Application.hpp"
+#include "Clicker.hpp"
 #include "Interfaces/Scene.hpp"
 #include <iostream>
 
@@ -16,11 +17,11 @@ namespace GPV
 {
 class SceneObserverPattern : public Scene
 {
-    const TextureManager &textureManager;
+    Clicker m_clicker;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
-    SceneObserverPattern(const TextureManager &textureManager);
+    SceneObserverPattern(const Context &context);
     void update(Application &application, sf::Time delta) override;
 };
 } // namespace GPV

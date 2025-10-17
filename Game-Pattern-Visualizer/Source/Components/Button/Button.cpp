@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Button.cpp
- * @ Modified time: 2025-10-16 10:51:20
+ * @ Modified time: 2025-10-17 11:32:03
  * @ Description: Implementation of the Button class
  */
 
@@ -10,19 +10,18 @@
 namespace GPV::Components
 {
 
-Button::Button(sf::Vector2f sizeRectangle, sf::String textContent, sf::Texture texture, const sf::Font &font, sf::Color color,
+Button::Button(sf::Vector2f spriteScale, sf::String textContent, sf::Texture &texture, const sf::Font &font, sf::Color color,
                State stateType)
-    : m_sizeRectangle(sizeRectangle)
-    , textureManager(textureManager)
+    : textureManager(textureManager)
     , m_sprite(texture)
+    , m_spriteScale(spriteScale)
     , m_textContent(textContent)
     , m_color(color)
     , m_text(font)
     , stateType(stateType)
     , m_activated(true)
 {
-    // std::cout << "New button" << std::endl;
-    m_rectangle.setSize({m_sizeRectangle});
+    m_sprite.setScale(m_spriteScale);
     m_rectangle.setFillColor(m_color);
     m_text.setCharacterSize(20);
     m_text.setString(m_textContent);
@@ -55,7 +54,7 @@ void Button::getButtonStatus(const sf::RenderWindow &window, const std::optional
     // relative to the "world"
     sf::Vector2f mousePosView = window.mapPixelToCoords(mouseLocalPosition);
     // apply the transformation
-    sf::FloatRect bounds = getTransform().transformRect(this->m_rectangle.getGlobalBounds());
+    sf::FloatRect bounds = getTransform().transformRect(this->m_sprite.getGlobalBounds());
     isHover = false;
     isPressed = false;
     if (m_activated)
@@ -74,7 +73,8 @@ void Button::getButtonStatus(const sf::RenderWindow &window, const std::optional
 void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
-    target.draw(m_rectangle, states);
+    target.draw(m_sprite, states);
+    // target.draw(m_rectangle, states);
     target.draw(m_text, states);
 }
 
@@ -88,9 +88,9 @@ sf::String Button::getTextContent()
     return m_textContent;
 }
 
-sf::Vector2f Button::getSizeRectangle() const
+sf::Vector2u Button::getSizeSprite() const
 {
-    return m_sizeRectangle;
+    return m_sprite.getTexture().getSize();
 }
 
 void Button::activate()
