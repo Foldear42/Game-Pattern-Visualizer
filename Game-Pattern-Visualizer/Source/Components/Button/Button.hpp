@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Button.hpp
- * @ Modified time: 2025-10-17 11:04:04
+ * @ Modified time: 2025-10-20 09:10:20
  * @ Description: Button Component
  */
 
@@ -37,7 +37,7 @@ class Button : public sf::Drawable, public sf::Transformable
     void update(sf::Time delta);
     void setColor(sf::Color color);
     sf::Vector2f getPosition();
-    sf::Vector2u getSizeSprite() const;
+    sf::FloatRect getSizeSprite() const;
     sf::String getTextContent();
     void activate();
     void deactivate();

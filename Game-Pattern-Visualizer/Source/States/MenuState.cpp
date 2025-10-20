@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.cpp
- * @ Modified time: 2025-10-17 11:33:12
+ * @ Modified time: 2025-10-20 09:13:04
  * @ Description: Implementation for the main menu
  */
 
@@ -70,9 +70,9 @@ void MenuState::dispatchButtons(const sf::RenderWindow &window)
     float windowMiddleWitdh = windowSize.x / 2.f;
     for (Components::Button &b : m_buttons)
     {
-        b.setOrigin({b.getSizeSprite().x / 2, b.getSizeSprite().y / 2});
+        b.setOrigin(b.getSizeSprite().getCenter());
         b.setPosition({windowMiddleWitdh, currentPosition.y});
-        currentPosition.y += b.getSizeSprite().y + spacingSize;
+        currentPosition.y += b.getSizeSprite().size.y + spacingSize;
     }
 }
 

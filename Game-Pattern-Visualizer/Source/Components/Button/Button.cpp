@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Button.cpp
- * @ Modified time: 2025-10-17 11:32:03
+ * @ Modified time: 2025-10-20 09:10:05
  * @ Description: Implementation of the Button class
  */
 
@@ -88,9 +88,9 @@ sf::String Button::getTextContent()
     return m_textContent;
 }
 
-sf::Vector2u Button::getSizeSprite() const
+sf::FloatRect Button::getSizeSprite() const
 {
-    return m_sprite.getTexture().getSize();
+    return m_sprite.getGlobalBounds();
 }
 
 void Button::activate()
