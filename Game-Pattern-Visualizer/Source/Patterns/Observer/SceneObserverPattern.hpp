@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: SceneObserverPattern.hpp
- * @ Modified time: 2025-10-17 09:50:53
+ * @ Modified time: 2025-10-20 10:18:28
  * @ Description:
  */
 
@@ -11,6 +11,7 @@
 #include "Application/Application.hpp"
 #include "Clicker.hpp"
 #include "Interfaces/Scene.hpp"
+#include "ScoreBoard.hpp"
 #include <iostream>
 
 namespace GPV
@@ -18,6 +19,7 @@ namespace GPV
 class SceneObserverPattern : public Scene
 {
     Clicker m_clicker;
+    ScoreBoard m_scoreBoard;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
