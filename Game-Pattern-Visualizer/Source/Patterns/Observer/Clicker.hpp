@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Clicker.hpp
- * @ Modified time: 2025-10-20 11:10:39
+ * @ Modified time: 2025-10-21 09:22:01
  * @ Description:
  */
 
@@ -29,6 +29,7 @@ class Clicker : public sf::Drawable, public sf::Transformable
         return m_clickSubject;
     }
     void update(sf::Time delta);
+    void handleEvent(const sf::RenderWindow &window, const std::optional<sf::Event> &event);
 };
 
 } // namespace GPV

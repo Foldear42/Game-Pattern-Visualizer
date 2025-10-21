@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: TextBox.cpp
- * @ Modified time: 2025-10-20 10:10:00
+ * @ Modified time: 2025-10-21 10:28:18
  * @ Description: Implementation of the TextBox class
  */
 
@@ -10,13 +10,26 @@
 namespace GPV::Components
 {
 
-TextBox::TextBox(sf::Texture &texture, const sf::Font &font) : m_sprite(texture), font(font) {}
+TextBox::TextBox(sf::String textContent, sf::Texture &texture, const sf::Font &font)
+    : m_sprite(texture), font(font), m_textContent(textContent), m_graphicalText(font)
+{
+    m_graphicalText.setString(m_textContent);
+    m_graphicalText.setCharacterSize(20);
+    m_graphicalText.setFillColor(sf::Color::White);
+}
 
 void TextBox::update(sf::Time delta) {}
+
+void TextBox::updateString(sf::String newString)
+{
+    m_graphicalText.setString(newString);
+}
 
 void TextBox::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
+    target.draw(m_sprite, states);
+    target.draw(m_graphicalText, states);
 }
 
 sf::FloatRect TextBox::getSizeSprite() const

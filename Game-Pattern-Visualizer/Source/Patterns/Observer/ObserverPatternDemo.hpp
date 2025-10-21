@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: ObserverPatternDemo.hpp
- * @ Modified time: 2025-10-11 09:38:03
+ * @ Modified time: 2025-10-21 09:14:17
  * @ Description:
  */
 
@@ -9,7 +9,8 @@
 #define OBSERVER_PATTERN_DEMO_HPP
 
 #include "Application/Application.hpp"
-#include "SceneObserverPattern.hpp"
+#include "Clicker.hpp"
+#include "ScoreBoard.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
@@ -19,7 +20,8 @@ namespace GPV
 {
 class ObserverPatternDemo : public ApplicationState
 {
-    SceneObserverPattern m_sceneObserverPattern;
+    Clicker m_clicker;
+    ScoreBoard m_scoreBoard;
 
   public:
     explicit ObserverPatternDemo(const Context &context);

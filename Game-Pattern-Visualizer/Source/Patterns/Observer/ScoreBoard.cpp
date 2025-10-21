@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: ScoreBoard.cpp
- * @ Modified time: 2025-10-20 10:16:21
+ * @ Modified time: 2025-10-21 10:28:51
  * @ Description:
  */
 
@@ -10,11 +10,22 @@
 namespace GPV
 {
 
-ScoreBoard::ScoreBoard() {}
+ScoreBoard::ScoreBoard(const Context &context)
+    : m_textBox("Score : ", context.textureManager.get(TextureID::wideButtonBackground), context.fontManager.get(FontID::Arial))
+{
+    // Set position
+    m_textBox.setPosition({200.f, 200.f});
+}
 
 void ScoreBoard::onNotify()
 {
     std::cout << "Coucou" << std::endl;
+    m_totalScore += 1;
+    m_textBox.updateString(std::to_string(m_totalScore));
 }
 
+void ScoreBoard::draw(sf::RenderTarget &target, sf::RenderStates states) const
+{
+    target.draw(m_textBox, states);
+}
 } // namespace GPV

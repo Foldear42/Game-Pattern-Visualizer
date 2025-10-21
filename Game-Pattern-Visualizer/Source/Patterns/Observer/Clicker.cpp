@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Clicker.cpp
- * @ Modified time: 2025-10-20 11:20:52
+ * @ Modified time: 2025-10-21 09:29:44
  * @ Description:
  */
 
@@ -18,8 +18,11 @@ Clicker::Clicker(const Context &context)
 {
 }
 
-void Clicker::update(sf::Time delta)
+void Clicker::update(sf::Time delta) {}
+
+void Clicker::handleEvent(const sf::RenderWindow &window, const std::optional<sf::Event> &event)
 {
+    m_button.getButtonStatus(window, event);
     if (m_button.isPressed)
     {
         m_clickSubject.notify();
