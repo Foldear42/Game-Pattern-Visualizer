@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.cpp
- * @ Modified time: 2025-10-20 09:13:04
+ * @ Modified time: 2025-10-22 09:14:03
  * @ Description: Implementation for the main menu
  */
 
@@ -47,6 +47,10 @@ void MenuState::handleEvent(Application &application, const std::optional<sf::Ev
                 break;
             case State::OBSERVER_P_STATE:
                 application.changeState(std::make_unique<ObserverPatternDemo>(m_context));
+                break;
+            case State::PROTOTYPE_P_STATE:
+                application.changeState(std::make_unique<PrototypePatternDemo>(m_context));
+                break;
             default:
                 break;
             }

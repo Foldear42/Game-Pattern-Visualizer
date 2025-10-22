@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: MenuState.hpp
- * @ Modified time: 2025-10-16 11:05:11
+ * @ Modified time: 2025-10-22 09:13:37
  * @ Description: Main menu for navigation
  */
 
@@ -14,6 +14,7 @@
 #include "Patterns/Command/CommandPatternDemo.hpp"
 #include "Patterns/Flyweight/FlyweightPatternDemo.hpp"
 #include "Patterns/Observer/ObserverPatternDemo.hpp"
+#include "Patterns/Prototype/PrototypePatternDemo.hpp"
 #include <SFML/Graphics.hpp>
 #include <array>
 #include <iostream>
