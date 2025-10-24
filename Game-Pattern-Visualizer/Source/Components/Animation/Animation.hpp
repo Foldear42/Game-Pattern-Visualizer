@@ -24,7 +24,6 @@ class Animation : public sf::Drawable, public sf::Transformable
     std::optional<sf::Sprite> m_sprite;
     sf::Time m_elaspedTime;
     int m_currentFrameIndex;
-    bool m_active;
     sf::Vector2f m_zoomFactorVector;
     std::vector<sf::IntRect> m_sourceRectangles;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
@@ -38,6 +37,7 @@ class Animation : public sf::Drawable, public sf::Transformable
     void stop();
     void reset();
     bool isFinished = false;
+    bool m_active;
 };
 
 } // namespace GPV::Components

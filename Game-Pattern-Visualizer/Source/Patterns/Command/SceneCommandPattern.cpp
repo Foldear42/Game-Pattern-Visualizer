@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.cpp
- * @ Modified time: 2025-09-14 14:08:15
+ * @ Modified time: 2025-10-24 14:50:55
  * @ Description: Implementation of the Scene class
  */
 
@@ -9,14 +9,6 @@
 
 namespace GPV
 {
-
-SceneCommandPattern::SceneCommandPattern()
-    : textureManager(textureManager)
-    , m_sceneAnimation(m_sceneAnimationSprite, 9, 7, sf::seconds(0.1f), 4.f)
-    , font(font)
-    , m_dialogBox(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState), font)
-{
-}
 
 SceneCommandPattern::SceneCommandPattern(const TextureManager &textureManager, const sf::Font &font, DialogTree &dialogTree)
     : textureManager(textureManager)
@@ -27,9 +19,9 @@ SceneCommandPattern::SceneCommandPattern(const TextureManager &textureManager, c
     , m_dialogTree(dialogTree)
     , m_currentStep(1)
     , m_currentChoiceState(ChoiceState::None)
-    , m_dialogBox(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState), font)
+    , m_dialogBox(dialogTree.getListDialogByState(m_currentStep, m_currentChoiceState), font)
 {
-    m_dialogBox.setListText(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState));
+    m_dialogBox.setListText(dialogTree.getListDialogByState(m_currentStep, m_currentChoiceState));
     sf::FloatRect bounds = m_stickmanSprite->getLocalBounds();
     m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
     m_dialogBox.setOrigin({m_dialogBox.getSizeRectangle().x / 2.f, m_dialogBox.getSizeRectangle().y / 2.f});
@@ -44,7 +36,7 @@ void SceneCommandPattern::update(Application &application, sf::Time delta)
     m_dialogBox.setPosition({application.getWindow().getSize().x / 2.f, 600.f});
 
     m_dialogBox.update(delta);
-    m_dialogBox.setListText(getListDialogByState(m_dialogTree, m_currentStep, m_currentChoiceState));
+    m_dialogBox.setListText(m_dialogTree.getListDialogByState(m_currentStep, m_currentChoiceState));
 
     m_sceneAnimation.update(delta);
     if (m_sceneAnimation.isFinished)
@@ -94,7 +86,7 @@ void SceneCommandPattern::draw(sf::RenderTarget &target, sf::RenderStates states
 
 void SceneCommandPattern::changeSpriteAnimation(ChoiceState choiceState)
 {
-    TextureID currentTextureID = getAnimationSpriteIDByState(m_dialogTree, m_currentStep, choiceState);
+    TextureID currentTextureID = m_dialogTree.getAnimationSpriteIDByState(m_currentStep, choiceState);
     m_sceneAnimationSprite->setTexture(textureManager.get(currentTextureID));
     // Set new animation
     m_sceneAnimation.setAnimationSprite(m_sceneAnimationSprite);

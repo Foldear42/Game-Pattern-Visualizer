@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo
- * @ Modified time: 2025-08-12 14:10:28
+ * @ Modified time: 2025-10-24 14:21:44
  * @ Description: State of the application for the command pattern demo
  */
 
@@ -10,7 +10,7 @@
 
 #include "Application/Application.hpp"
 #include "Components/Button/Button.hpp"
-#include "DialogTypes.hpp"
+#include "DialogTree/DialogTree.hpp"
 #include "Interfaces/ApplicationState.hpp"
 #include "MakeChoiceCommand.hpp"
 #include "Manager/ResourceManager.hpp"
@@ -31,7 +31,6 @@ class CommandPatternDemo : public ApplicationState
     Components::Button m_nextStepButton;
     std::unique_ptr<SceneCommandPattern> m_scene;
     std::stack<std::unique_ptr<MakeChoiceCommand>> m_commandHistory;
-    std::map<std::pair<int, ChoiceState>, std::vector<sf::String>> m_dialogMap;
     DialogTree m_dialogTree;
 
   public:

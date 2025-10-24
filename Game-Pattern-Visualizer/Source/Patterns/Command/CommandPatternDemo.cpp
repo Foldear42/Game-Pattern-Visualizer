@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: CommandPatternDemo.cpp
- * @ Modified time: 2025-10-20 09:20:44
+ * @ Modified time: 2025-10-24 14:43:24
  * @ Description: Implementation of the command pattern demo
  */
 
@@ -20,23 +20,9 @@ CommandPatternDemo::CommandPatternDemo(const Context &context)
                                       context.fontManager.get(FontID::Arial), sf::Color::Blue, State::STATE_UNDO))
     , m_nextStepButton(Components::Button({0.5f, 0.5f}, "NEXT STEP", context.textureManager.get(TextureID::wideButtonBackground),
                                           context.fontManager.get(FontID::Arial), sf ::Color::Cyan, State::STATE_NEXTSTEP))
-
+    , m_dialogTree("Resources/dialogTree.json")
 {
-    // Create the dialog tree object
-    std::ifstream file("Resources/dialogTree.json");
-    if (!file)
-    {
-        throw std::runtime_error("error file not found");
-    }
-    nlohmann::json j;
-    file >> j;
-    for (auto &[key, value] : j.items())
-    {
-        int step = std::stoi(key);
-        m_dialogTree[step] = value.get<std::vector<Choice>>();
-    }
-    sf::Font &arialFont = context.fontManager.get(FontID::Arial);
-    m_scene = std::make_unique<SceneCommandPattern>(context.textureManager, arialFont, m_dialogTree);
+    m_scene = std::make_unique<SceneCommandPattern>(context.textureManager, context.fontManager.get(FontID::Arial), m_dialogTree);
     // Yes button
     sf::Vector2f buttonSize = {100.f, 50.f};
 

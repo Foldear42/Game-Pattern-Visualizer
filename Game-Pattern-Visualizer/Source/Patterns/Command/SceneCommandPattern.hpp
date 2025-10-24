@@ -1,7 +1,7 @@
 /**
  * @ Author: Foldear
  * @ Filename: Scene.hpp
- * @ Modified time: 2025-09-09 10:35:30
+ * @ Modified time: 2025-10-24 14:50:50
  * @ Description: This file handles the scene in which the consequences of the player's actions will be seen
  */
 
@@ -11,7 +11,7 @@
 #include "Application/Application.hpp"
 #include "Components/Animation/Animation.hpp"
 #include "Components/DialogBox/DialogBox.hpp"
-#include "DialogTypes.hpp"
+#include "DialogTree/DialogTree.hpp"
 #include "Interfaces/Scene.hpp"
 #include "Manager/ResourceManager.hpp"
 #include <SFML/Graphics.hpp>
@@ -34,7 +34,6 @@ class SceneCommandPattern : public Scene
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
   public:
-    SceneCommandPattern();
     SceneCommandPattern(const TextureManager &textureManager, const sf::Font &font, DialogTree &dialogTree);
     void update(Application &application, sf::Time delta) override;
     void selectChoice(ChoiceState choiceState);
