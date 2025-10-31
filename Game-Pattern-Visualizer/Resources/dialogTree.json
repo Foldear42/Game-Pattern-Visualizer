@@ -1,0 +1,36 @@
+{
+  "1": [
+    {
+      "choiceState": "None",
+      "spritePath": "url_to_sprite_none_1",
+      "dialog": ["Welcome to step 1 (none).", "test"]
+    },
+    {
+      "choiceState": "Yes",
+      "spritePath": "Animation_Yes_1.png",
+      "dialog": ["You chose yes at step 1."]
+    },
+    {
+      "choiceState": "No",
+      "spritePath": "Animation_No_1.png",
+      "dialog": ["You chose no at step 1."]
+    }
+  ],
+  "2": [
+    {
+      "choiceState": "None",
+      "spritePath": "url_to_sprite_none_2",
+      "dialog": ["Welcome to step 2 (none)."]
+    },
+    {
+      "choiceState": "Yes",
+      "spritePath": "url_to_sprite_yes_2",
+      "dialog": ["You chose yes at step 2."]
+    },
+    {
+      "choiceState": "No",
+      "spritePath": "url_to_sprite_no_2",
+      "dialog": ["You chose no at step 2."]
+    }
+  ]
+}
