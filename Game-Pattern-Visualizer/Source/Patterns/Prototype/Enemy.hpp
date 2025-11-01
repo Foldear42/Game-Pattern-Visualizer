@@ -9,11 +9,11 @@ namespace GPV
 
 class Enemy : public sf::Drawable
 {
-  public:
+   public:
     ~Enemy();
     virtual void followPlayer() = 0;
 };
 
-} // namespace GPV
+}  // namespace GPV
 
 #endif

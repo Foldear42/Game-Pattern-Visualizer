@@ -5,7 +5,9 @@
 
 namespace GPV
 {
-CommandHistory::CommandHistory() {}
+CommandHistory::CommandHistory()
+{
+}
 
 void CommandHistory::pushCommand(std::unique_ptr<Command> command)
 {
@@ -15,7 +17,9 @@ void CommandHistory::pushCommand(std::unique_ptr<Command> command)
     newVisualShape.setPosition({100.f, 100.f});
     m_commandHistory.emplace_back(CommandData{newVisualShape, std::move(command)});
 }
-void CommandHistory::popCommand() {}
+void CommandHistory::popCommand()
+{
+}
 
 void CommandHistory::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
@@ -24,6 +28,6 @@ void CommandHistory::draw(sf::RenderTarget &target, sf::RenderStates states) con
         target.draw(it.shape);
     }
 }
-} // namespace GPV
+}  // namespace GPV
 
 #endif

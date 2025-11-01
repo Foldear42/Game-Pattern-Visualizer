@@ -7,7 +7,8 @@ ObserverPatternDemo::ObserverPatternDemo(const Context &context)
 {
     m_clicker.clickSubject().addObserver(&m_scoreBoard);
 }
-void ObserverPatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event)
+void ObserverPatternDemo::handleEvent(Application &application,
+                                      const std::optional<sf::Event> &event)
 {
     m_clicker.handleEvent(application.getWindow(), event);
 }
@@ -20,4 +21,4 @@ void ObserverPatternDemo::render(sf::RenderWindow &window)
     window.draw(m_clicker);
     window.draw(m_scoreBoard);
 }
-} // namespace GPV
+}  // namespace GPV

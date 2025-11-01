@@ -8,11 +8,11 @@ namespace GPV
 
 class Zombie : public Enemy
 {
-  public:
+   public:
     Zombie();
     void followPlayer();
 };
 
-} // namespace GPV
+}  // namespace GPV
 
 #endif

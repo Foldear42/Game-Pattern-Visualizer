@@ -12,7 +12,7 @@ class NextStepCommand : public Command
     SceneCommandPattern &scene;
     int currentStep, previousStep;
 
-  public:
+   public:
     NextStepCommand(SceneCommandPattern &scene) : scene(scene)
     {
         currentStep = scene.m_currentStep;
@@ -33,5 +33,5 @@ class NextStepCommand : public Command
     }
 };
 
-} // namespace GPV
+}  // namespace GPV
 #endif

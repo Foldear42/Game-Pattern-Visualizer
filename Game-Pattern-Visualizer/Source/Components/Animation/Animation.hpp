@@ -22,8 +22,9 @@ class Animation : public sf::Drawable, public sf::Transformable
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     void init();
 
-  public:
-    Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, float zoomFactor);
+   public:
+    Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime,
+              float zoomFactor);
     void update(sf::Time delta);
     void setAnimationSprite(std::optional<sf::Sprite> &sprite);
     void start();
@@ -33,6 +34,6 @@ class Animation : public sf::Drawable, public sf::Transformable
     bool m_active;
 };
 
-} // namespace GPV::Components
+}  // namespace GPV::Components
 
 #endif

@@ -1,10 +1,11 @@
 #ifndef SCENE_FLYWEIGHT_PATTERN_HPP
 #define SCENE_FLYWEIGHT_PATTERN_HPP
 
+#include <iostream>
+
 #include "Application/Application.hpp"
 #include "Interfaces/Scene.hpp"
 #include "Terrain.hpp"
-#include <iostream>
 
 namespace GPV
 {
@@ -21,10 +22,10 @@ class SceneFlyweightPattern : public Scene
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     void generateMap();
 
-  public:
+   public:
     SceneFlyweightPattern(const TextureManager &textureManager);
     void update(Application &application, sf::Time delta) override;
 };
-} // namespace GPV
+}  // namespace GPV
 
 #endif

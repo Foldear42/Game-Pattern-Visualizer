@@ -10,10 +10,10 @@ class Terrain : public sf::Drawable
     sf::Sprite m_sprite;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-  public:
+   public:
     Terrain(const sf::Texture &texture);
     void SetPosition(sf::Vector2f position);
 };
-} // namespace GPV
+}  // namespace GPV
 
 #endif

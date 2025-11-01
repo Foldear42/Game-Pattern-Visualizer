@@ -11,7 +11,9 @@ TextBox::TextBox(sf::String textContent, sf::Texture &texture, const sf::Font &f
     m_graphicalText.setFillColor(sf::Color::White);
 }
 
-void TextBox::update(sf::Time delta) {}
+void TextBox::update(sf::Time delta)
+{
+}
 
 void TextBox::updateString(sf::String newString)
 {
@@ -30,4 +32,4 @@ sf::FloatRect TextBox::getSizeSprite() const
     return m_sprite.getGlobalBounds();
 }
 
-} // namespace GPV::Components
+}  // namespace GPV::Components

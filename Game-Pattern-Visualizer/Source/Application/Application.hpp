@@ -1,11 +1,12 @@
 #ifndef APPLICATION_HPP
 #define APPLICATION_HPP
 
+#include <memory>
+
 #include "Enums/FontID.hpp"
 #include "Enums/TextureID.hpp"
 #include "Interfaces/ApplicationState.hpp"
 #include "Manager/ResourceManager.hpp"
-#include <memory>
 
 namespace GPV
 {
@@ -18,7 +19,7 @@ class Application
     FontManager m_fontManager;
     Context m_context;
 
-  public:
+   public:
     Application(sf::RenderWindow &window);
     void run();
     void handleEvent(const std::optional<sf::Event> &event);
@@ -29,6 +30,6 @@ class Application
     const sf::RenderWindow &getWindow() const;
 };
 
-} // namespace GPV
+}  // namespace GPV
 
 #endif

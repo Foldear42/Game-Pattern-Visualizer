@@ -8,10 +8,10 @@ namespace GPV
 
 class Scene : public sf::Drawable
 {
-  public:
+   public:
     virtual ~Scene() = default;
     virtual void update(Application &application, sf::Time delta) = 0;
 };
-} // namespace GPV
+}  // namespace GPV
 
 #endif

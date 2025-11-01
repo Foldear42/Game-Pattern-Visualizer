@@ -11,7 +11,9 @@ Clicker::Clicker(const Context &context)
 {
 }
 
-void Clicker::update(sf::Time delta) {}
+void Clicker::update(sf::Time delta)
+{
+}
 
 void Clicker::handleEvent(const sf::RenderWindow &window, const std::optional<sf::Event> &event)
 {
@@ -27,6 +29,6 @@ void Clicker::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(m_button, states);
 }
 
-} // namespace GPV
+}  // namespace GPV
 
 #endif

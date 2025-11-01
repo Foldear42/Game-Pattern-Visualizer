@@ -4,19 +4,25 @@ namespace GPV
 {
 
 MenuState::MenuState(const Context &context)
-    : ApplicationState(context)
-    , m_buttons{{
-          Components::Button({1.f, 1.f}, "Pattern Command", context.textureManager.get(TextureID::wideButtonBackground),
+    : ApplicationState(context),
+      m_buttons{{
+          Components::Button({1.f, 1.f}, "Pattern Command",
+                             context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red),
-          Components::Button({1.f, 1.f}, "Pattern Flyweight", context.textureManager.get(TextureID::wideButtonBackground),
+          Components::Button({1.f, 1.f}, "Pattern Flyweight",
+                             context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red),
-          Components::Button({1.f, 1.f}, "Pattern Observer", context.textureManager.get(TextureID::wideButtonBackground),
+          Components::Button({1.f, 1.f}, "Pattern Observer",
+                             context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red),
-          Components::Button({1.f, 1.f}, "Pattern Prototype", context.textureManager.get(TextureID::wideButtonBackground),
+          Components::Button({1.f, 1.f}, "Pattern Prototype",
+                             context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red),
-          Components::Button({1.f, 1.f}, "Pattern Singleton", context.textureManager.get(TextureID::wideButtonBackground),
+          Components::Button({1.f, 1.f}, "Pattern Singleton",
+                             context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red),
-          Components::Button({1.f, 1.f}, "Pattern State", context.textureManager.get(TextureID::wideButtonBackground),
+          Components::Button({1.f, 1.f}, "Pattern State",
+                             context.textureManager.get(TextureID::wideButtonBackground),
                              context.fontManager.get(FontID::Arial), sf::Color::Red),
       }}
 {
@@ -24,7 +30,6 @@ MenuState::MenuState(const Context &context)
 
 void MenuState::handleEvent(Application &application, const std::optional<sf::Event> &event)
 {
-
     for (Components::Button &b : m_buttons)
     {
         b.getButtonStatus(application.getWindow(), event);
@@ -81,4 +86,4 @@ void MenuState::render(sf::RenderWindow &window)
     }
 }
 
-} // namespace GPV
+}  // namespace GPV

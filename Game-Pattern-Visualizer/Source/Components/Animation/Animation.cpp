@@ -3,18 +3,19 @@
 namespace GPV::Components
 {
 
-Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, float zoomFactor)
-    : m_sprite(sprite)
-    , m_frameX(framesX)
-    , m_frameY(framesY)
-    , m_numFrames(framesX * framesY)
-    , m_frameTime(frameTime)
-    , m_frameTimeLeft(frameTime)
-    , m_elaspedTime(sf::Time::Zero)
-    , m_currentFrameIndex(0)
-    , m_active(true)
-    , m_zoomFactorVector(zoomFactor, zoomFactor)
-    , isFinished(false)
+Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime,
+                     float zoomFactor)
+    : m_sprite(sprite),
+      m_frameX(framesX),
+      m_frameY(framesY),
+      m_numFrames(framesX * framesY),
+      m_frameTime(frameTime),
+      m_frameTimeLeft(frameTime),
+      m_elaspedTime(sf::Time::Zero),
+      m_currentFrameIndex(0),
+      m_active(true),
+      m_zoomFactorVector(zoomFactor, zoomFactor),
+      isFinished(false)
 {
     init();
 }
@@ -32,7 +33,8 @@ void Animation::init()
     {
         for (int x = 0; x < m_frameX; x++)
         {
-            sf::IntRect frameDimension = sf::IntRect({x * frameWidth, y * frameHeight}, {frameWidth, frameHeight});
+            sf::IntRect frameDimension =
+                sf::IntRect({x * frameWidth, y * frameHeight}, {frameWidth, frameHeight});
             m_sourceRectangles.emplace_back(frameDimension);
         }
     }
@@ -96,4 +98,4 @@ void Animation::reset()
     isFinished = false;
 }
 
-} // namespace GPV::Components
+}  // namespace GPV::Components

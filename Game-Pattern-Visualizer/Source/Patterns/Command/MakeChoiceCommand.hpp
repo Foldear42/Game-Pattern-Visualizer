@@ -12,8 +12,11 @@ class MakeChoiceCommand : public Command
     SceneCommandPattern &scene;
     ChoiceState currentChoice = ChoiceState::None, previousChoice = ChoiceState::None;
 
-  public:
-    MakeChoiceCommand(SceneCommandPattern &scene, ChoiceState Choice) : scene(scene), currentChoice(Choice) {}
+   public:
+    MakeChoiceCommand(SceneCommandPattern &scene, ChoiceState Choice)
+        : scene(scene), currentChoice(Choice)
+    {
+    }
     virtual void execute()
     {
         previousChoice = currentChoice;
@@ -29,5 +32,5 @@ class MakeChoiceCommand : public Command
     }
 };
 
-} // namespace GPV
+}  // namespace GPV
 #endif

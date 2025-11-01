@@ -1,9 +1,10 @@
 #ifndef SUBJECT_HPP
 #define SUBJECT_HPP
 
-#include "Observer.hpp"
 #include <algorithm>
 #include <vector>
+
+#include "Observer.hpp"
 
 namespace GPV
 {
@@ -12,7 +13,7 @@ class Subject
 {
     std::vector<Observer *> m_observers;
 
-  public:
+   public:
     Subject();
     void addObserver(Observer *observer);
     void removeObserver(Observer *observer);
@@ -22,6 +23,6 @@ class Subject
     void notify();
 };
 
-} // namespace GPV
+}  // namespace GPV
 
 #endif

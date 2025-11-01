@@ -23,7 +23,7 @@ class DialogBox : public sf::Drawable, public sf::Transformable
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     bool typewriterAnimation(std::string s, sf::Time delta);
 
-  public:
+   public:
     DialogBox(std::vector<std::string> listText, const sf::Font &font);
     void update(sf::Time delta);
     sf::Vector2f getSizeRectangle() const;
@@ -33,6 +33,6 @@ class DialogBox : public sf::Drawable, public sf::Transformable
     void stopTypewriterAnimation();
 };
 
-} // namespace GPV::Components
+}  // namespace GPV::Components
 
 #endif

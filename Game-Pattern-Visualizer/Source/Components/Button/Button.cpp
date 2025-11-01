@@ -3,8 +3,14 @@
 namespace GPV::Components
 {
 
-Button::Button(sf::Vector2f spriteScale, sf::String textContent, sf::Texture &texture, const sf::Font &font, sf::Color color)
-    : m_sprite(texture), m_spriteScale(spriteScale), m_textContent(textContent), m_color(color), m_text(font), m_activated(true)
+Button::Button(sf::Vector2f spriteScale, sf::String textContent, sf::Texture &texture,
+               const sf::Font &font, sf::Color color)
+    : m_sprite(texture),
+      m_spriteScale(spriteScale),
+      m_textContent(textContent),
+      m_color(color),
+      m_text(font),
+      m_activated(true)
 {
     m_sprite.setScale(m_spriteScale);
     m_rectangle.setFillColor(m_color);
@@ -93,4 +99,4 @@ void Button::deactivate()
     m_activated = false;
 }
 
-} // namespace GPV::Components
+}  // namespace GPV::Components

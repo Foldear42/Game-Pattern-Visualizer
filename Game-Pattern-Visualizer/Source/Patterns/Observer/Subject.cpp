@@ -3,7 +3,9 @@
 namespace GPV
 {
 
-Subject::Subject() {}
+Subject::Subject()
+{
+}
 
 void Subject::addObserver(Observer *observer)
 {
@@ -27,4 +29,4 @@ void Subject::notify()
     }
 }
 
-} // namespace GPV
+}  // namespace GPV

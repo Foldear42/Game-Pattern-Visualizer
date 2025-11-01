@@ -5,11 +5,12 @@
 
 namespace GPV
 {
-Terrain::Terrain(const sf::Texture &texture) : m_sprite(texture) {}
+Terrain::Terrain(const sf::Texture &texture) : m_sprite(texture)
+{
+}
 
 void Terrain::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-
     target.draw(m_sprite, states);
 }
 
@@ -18,6 +19,6 @@ void Terrain::SetPosition(sf::Vector2f position)
     m_sprite.setPosition(position);
 }
 
-} // namespace GPV
+}  // namespace GPV
 
 #endif

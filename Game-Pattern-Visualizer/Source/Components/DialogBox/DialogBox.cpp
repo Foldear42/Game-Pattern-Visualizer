@@ -4,7 +4,10 @@ namespace GPV::Components
 {
 
 DialogBox::DialogBox(std::vector<std::string> listText, const sf::Font &font)
-    : m_listText(listText), font(font), m_currentText(font), m_elapsedTime(std::chrono::milliseconds(0))
+    : m_listText(listText),
+      font(font),
+      m_currentText(font),
+      m_elapsedTime(std::chrono::milliseconds(0))
 {
     m_box.setSize({1000.f, 150.f});
     m_box.setFillColor(sf::Color::Blue);
@@ -41,7 +44,6 @@ void DialogBox::update(sf::Time delta)
 
     if (!m_listText[m_currentTextIndex].empty())
     {
-
         bool isFinished = typewriterAnimation(m_listText[m_currentTextIndex], delta);
         m_lengthListText = m_listText.size();
         // We continue until there are no strings left to animate
@@ -91,4 +93,4 @@ void DialogBox::stopTypewriterAnimation()
     m_typewriterActive = false;
 }
 
-} // namespace GPV::Components
+}  // namespace GPV::Components

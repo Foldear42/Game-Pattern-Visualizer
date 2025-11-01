@@ -1,11 +1,12 @@
 #ifndef BUTTON_HPP
 #define BUTTON_HPP
 
+#include <SFML/Graphics.hpp>
+#include <iostream>
+
 #include "Application/Application.hpp"
 #include "Enums/State.hpp"
 #include "Patterns/Command/Command.hpp"
-#include <SFML/Graphics.hpp>
-#include <iostream>
 
 namespace GPV::Components
 {
@@ -24,8 +25,9 @@ class Button : public sf::Drawable, public sf::Transformable
     bool m_activated;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-  public:
-    Button(sf::Vector2f spriteScale, sf::String textContent, sf::Texture &texture, const sf::Font &font, sf::Color color);
+   public:
+    Button(sf::Vector2f spriteScale, sf::String textContent, sf::Texture &texture,
+           const sf::Font &font, sf::Color color);
     void getButtonStatus(const sf::RenderWindow &window, const std::optional<sf::Event> &e);
     void update(sf::Time delta);
     void setColor(sf::Color color);
@@ -39,5 +41,5 @@ class Button : public sf::Drawable, public sf::Transformable
     bool isPressed = false;
 };
 
-} // namespace GPV::Components
+}  // namespace GPV::Components
 #endif

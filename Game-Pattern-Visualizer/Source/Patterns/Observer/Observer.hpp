@@ -6,12 +6,13 @@ namespace GPV
 
 class Observer
 {
-
-  public:
-    virtual ~Observer() {}
+   public:
+    virtual ~Observer()
+    {
+    }
     virtual void onNotify() = 0;
 };
 
-} // namespace GPV
+}  // namespace GPV
 
 #endif

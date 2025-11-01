@@ -1,9 +1,10 @@
 #ifndef CLICKER_HPP
 #define CLICKER_HPP
 
+#include <SFML/Graphics.hpp>
+
 #include "Components/Button/Button.hpp"
 #include "Subject.hpp"
-#include <SFML/Graphics.hpp>
 
 namespace GPV
 {
@@ -14,7 +15,7 @@ class Clicker : public sf::Drawable, public sf::Transformable
     Components::Button m_button;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-  public:
+   public:
     Clicker(const Context &context);
     // This object should not outlive the parent
     Subject &clickSubject()
@@ -25,6 +26,6 @@ class Clicker : public sf::Drawable, public sf::Transformable
     void handleEvent(const sf::RenderWindow &window, const std::optional<sf::Event> &event);
 };
 
-} // namespace GPV
+}  // namespace GPV
 
 #endif

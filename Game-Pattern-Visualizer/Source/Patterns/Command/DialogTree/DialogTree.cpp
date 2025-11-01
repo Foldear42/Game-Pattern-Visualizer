@@ -47,8 +47,8 @@ const std::vector<std::string> DialogTree::getListDialogByState(int step, Choice
 
     if (it != m_map.end())
     {
-        auto choiceIt =
-            std::find_if(it->second.begin(), it->second.end(), [state](const Choice &c) { return c.choiceState == state; });
+        auto choiceIt = std::find_if(it->second.begin(), it->second.end(),
+                                     [state](const Choice &c) { return c.choiceState == state; });
 
         if (choiceIt != it->second.end())
         {
@@ -65,8 +65,8 @@ const TextureID DialogTree::getAnimationSpriteIDByState(int step, ChoiceState st
 
     if (it != m_map.end())
     {
-        auto choiceIt =
-            std::find_if(it->second.begin(), it->second.end(), [state](const Choice &c) { return c.choiceState == state; });
+        auto choiceIt = std::find_if(it->second.begin(), it->second.end(),
+                                     [state](const Choice &c) { return c.choiceState == state; });
 
         if (choiceIt != it->second.end())
         {
@@ -77,6 +77,6 @@ const TextureID DialogTree::getAnimationSpriteIDByState(int step, ChoiceState st
     return animationSpriteID;
 }
 
-} // namespace GPV
+}  // namespace GPV
 
 #endif

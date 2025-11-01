@@ -17,7 +17,7 @@ class ResourceManager
 {
     std::map<Identifier, std::unique_ptr<Resource>> m_resourceMap;
 
-  public:
+   public:
     void load(Identifier id, const std::string &filename);
     Resource &get(Identifier id);
     const Resource &get(Identifier id) const;
@@ -26,6 +26,6 @@ class ResourceManager
 using TextureManager = ResourceManager<sf::Texture, TextureID>;
 using FontManager = ResourceManager<sf::Font, FontID>;
 
-} // namespace GPV
+}  // namespace GPV
 #include "ResourceManager.inl"
 #endif

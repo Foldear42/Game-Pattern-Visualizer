@@ -1,10 +1,14 @@
 #include "Application.hpp"
+
 #include "States/MenuState.hpp"
 
 namespace GPV
 {
 
-Application::Application(sf::RenderWindow &window) : renderWindow(window), m_context(m_textureManager, m_fontManager) {}
+Application::Application(sf::RenderWindow &window)
+    : renderWindow(window), m_context(m_textureManager, m_fontManager)
+{
+}
 
 void Application::run()
 {
@@ -60,7 +64,6 @@ void Application::render(sf::RenderWindow &window)
 
 void Application::loadAllResources()
 {
-
     m_fontManager.load(FontID::Arial, "Fonts/ARIAL.TTF");
     // Command demo
     m_textureManager.load(TextureID::stickman, "Images/Stickman.png");
@@ -81,4 +84,4 @@ const sf::RenderWindow &Application::getWindow() const
     return renderWindow;
 }
 
-} // namespace GPV
+}  // namespace GPV

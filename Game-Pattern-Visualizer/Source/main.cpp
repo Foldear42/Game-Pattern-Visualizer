@@ -10,8 +10,8 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({SCREEN_RESOLUTION_WIDTH, SCREEN_RESOLUTION_HEIGHT}), APPLICATION_NAME,
-                            sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode({SCREEN_RESOLUTION_WIDTH, SCREEN_RESOLUTION_HEIGHT}),
+                            APPLICATION_NAME, sf::Style::Default);
     GPV::Application application(window);
 
     application.run();
