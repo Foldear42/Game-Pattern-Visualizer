@@ -29,8 +29,7 @@ class SceneCommandPattern : public Scene
     SceneCommandPattern();  // make the defaut constructor inascessible
 
    public:
-    SceneCommandPattern(const TextureManager &textureManager, const sf::Font &font,
-                        const DialogTree &dialogTree);
+    SceneCommandPattern(const TextureManager &textureManager, const sf::Font &font, const DialogTree &dialogTree);
     void update(Application &application, sf::Time delta) override;
     void selectChoice(ChoiceState choiceState);
     void selectStep(int step);

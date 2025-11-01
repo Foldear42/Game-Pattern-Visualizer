@@ -6,8 +6,7 @@ PrototypePatternDemo::PrototypePatternDemo(const Context &context) : Application
 {
     std::cout << "Prototype" << std::endl;
 }
-void PrototypePatternDemo::handleEvent(Application &application,
-                                       const std::optional<sf::Event> &event)
+void PrototypePatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event)
 {
 }
 void PrototypePatternDemo::update(Application &application, sf::Time delta)

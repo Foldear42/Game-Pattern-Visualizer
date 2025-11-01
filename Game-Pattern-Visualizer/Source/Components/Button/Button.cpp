@@ -3,14 +3,8 @@
 namespace GPV::Components
 {
 
-Button::Button(sf::Vector2f spriteScale, sf::String textContent, sf::Texture &texture,
-               const sf::Font &font, sf::Color color)
-    : m_sprite(texture),
-      m_spriteScale(spriteScale),
-      m_textContent(textContent),
-      m_color(color),
-      m_text(font),
-      m_activated(true)
+Button::Button(sf::Vector2f spriteScale, sf::String textContent, sf::Texture &texture, const sf::Font &font, sf::Color color)
+    : m_sprite(texture), m_spriteScale(spriteScale), m_textContent(textContent), m_color(color), m_text(font), m_activated(true)
 {
     m_sprite.setScale(m_spriteScale);
     m_rectangle.setFillColor(m_color);
@@ -24,22 +18,27 @@ void Button::setCommand(std::unique_ptr<Command> command)
     p_command = std::move(command);
 }
 
+void Button::executeCommand()
+{
+    p_command->execute();
+}
+
 void Button::update(sf::Time delta)
 {
     if (m_activated)
     {
         if (isHover == true)
         {
-            m_rectangle.setFillColor(sf::Color::Green);
+            m_sprite.setColor(sf::Color(0, 255, 0));
         }
         else
         {
-            m_rectangle.setFillColor(this->m_color);
+            m_sprite.setColor(sf::Color(255, 255, 255, 255));
         }
     }
     else
     {
-        m_rectangle.setFillColor(sf::Color(255, 255, 255, 128));
+        m_sprite.setColor(sf::Color(255, 255, 255, 128));  // semi-transparent
     }
 }
 
@@ -70,7 +69,6 @@ void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
     target.draw(m_sprite, states);
-    // target.draw(m_rectangle, states);
     target.draw(m_text, states);
 }
 

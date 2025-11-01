@@ -3,8 +3,7 @@
 namespace GPV
 {
 
-SceneCommandPattern::SceneCommandPattern(const TextureManager &textureManager, const sf::Font &font,
-                                         const DialogTree &dialogTree)
+SceneCommandPattern::SceneCommandPattern(const TextureManager &textureManager, const sf::Font &font, const DialogTree &dialogTree)
     : textureManager(textureManager),
       m_stickmanSprite(textureManager.get(TextureID::stickman)),
       m_sceneAnimationSprite(textureManager.get(TextureID::sceneAnimationNo1)),
@@ -18,8 +17,7 @@ SceneCommandPattern::SceneCommandPattern(const TextureManager &textureManager, c
     m_dialogBox.setListText(m_dialogTree.getListDialogByState(m_currentStep, m_currentChoiceState));
     sf::FloatRect bounds = m_stickmanSprite->getLocalBounds();
     m_stickmanSprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
-    m_dialogBox.setOrigin(
-        {m_dialogBox.getSizeRectangle().x / 2.f, m_dialogBox.getSizeRectangle().y / 2.f});
+    m_dialogBox.setOrigin({m_dialogBox.getSizeRectangle().x / 2.f, m_dialogBox.getSizeRectangle().y / 2.f});
     m_dialogBox.startTypewriterAnimation();
     stopAnimation();
 }
@@ -81,8 +79,7 @@ void SceneCommandPattern::draw(sf::RenderTarget &target, sf::RenderStates states
 
 void SceneCommandPattern::changeSpriteAnimation(ChoiceState choiceState)
 {
-    TextureID currentTextureID =
-        m_dialogTree.getAnimationSpriteIDByState(m_currentStep, choiceState);
+    TextureID currentTextureID = m_dialogTree.getAnimationSpriteIDByState(m_currentStep, choiceState);
     m_sceneAnimationSprite->setTexture(textureManager.get(currentTextureID));
     // Set new animation
     m_sceneAnimation.setAnimationSprite(m_sceneAnimationSprite);

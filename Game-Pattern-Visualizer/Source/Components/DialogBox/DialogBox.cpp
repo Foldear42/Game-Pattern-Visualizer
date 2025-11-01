@@ -4,10 +4,7 @@ namespace GPV::Components
 {
 
 DialogBox::DialogBox(std::vector<std::string> listText, const sf::Font &font)
-    : m_listText(listText),
-      font(font),
-      m_currentText(font),
-      m_elapsedTime(std::chrono::milliseconds(0))
+    : m_listText(listText), font(font), m_currentText(font), m_elapsedTime(std::chrono::milliseconds(0))
 {
     m_box.setSize({1000.f, 150.f});
     m_box.setFillColor(sf::Color::Blue);

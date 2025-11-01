@@ -15,8 +15,7 @@ class PrototypePatternDemo : public ApplicationState
 {
    public:
     explicit PrototypePatternDemo(const Context &context);
-    virtual void handleEvent(Application &application,
-                             const std::optional<sf::Event> &event) override;
+    virtual void handleEvent(Application &application, const std::optional<sf::Event> &event) override;
     virtual void update(Application &application, sf::Time delta) override;
     virtual void render(sf::RenderWindow &window) override;
 };

@@ -13,8 +13,7 @@ class MakeChoiceCommand : public Command
     ChoiceState currentChoice = ChoiceState::None, previousChoice = ChoiceState::None;
 
    public:
-    MakeChoiceCommand(SceneCommandPattern &scene, ChoiceState Choice)
-        : scene(scene), currentChoice(Choice)
+    MakeChoiceCommand(SceneCommandPattern &scene, ChoiceState Choice) : scene(scene), currentChoice(Choice)
     {
     }
     virtual void execute()

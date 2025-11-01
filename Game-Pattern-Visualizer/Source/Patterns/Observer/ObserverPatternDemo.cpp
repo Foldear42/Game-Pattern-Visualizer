@@ -2,13 +2,11 @@
 
 namespace GPV
 {
-ObserverPatternDemo::ObserverPatternDemo(const Context &context)
-    : ApplicationState(context), m_clicker(context), m_scoreBoard(context)
+ObserverPatternDemo::ObserverPatternDemo(const Context &context) : ApplicationState(context), m_clicker(context), m_scoreBoard(context)
 {
     m_clicker.clickSubject().addObserver(&m_scoreBoard);
 }
-void ObserverPatternDemo::handleEvent(Application &application,
-                                      const std::optional<sf::Event> &event)
+void ObserverPatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event)
 {
     m_clicker.handleEvent(application.getWindow(), event);
 }

@@ -6,8 +6,8 @@
 namespace GPV
 {
 Clicker::Clicker(const Context &context)
-    : m_button(Components::Button({2.f, 2.f}, "", context.textureManager.get(TextureID::cookie),
-                                  context.fontManager.get(FontID::Arial), sf::Color::Red))
+    : m_button(
+          Components::Button({2.f, 2.f}, "", context.textureManager.get(TextureID::cookie), context.fontManager.get(FontID::Arial), sf::Color::Red))
 {
 }
 

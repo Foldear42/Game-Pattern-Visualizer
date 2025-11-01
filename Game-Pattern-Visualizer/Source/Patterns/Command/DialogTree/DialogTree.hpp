@@ -14,9 +14,7 @@
 namespace GPV
 {
 
-NLOHMANN_JSON_SERIALIZE_ENUM(ChoiceState, {{ChoiceState::None, "None"},
-                                           {ChoiceState::Yes, "Yes"},
-                                           {ChoiceState::No, "No"}});
+NLOHMANN_JSON_SERIALIZE_ENUM(ChoiceState, {{ChoiceState::None, "None"}, {ChoiceState::Yes, "Yes"}, {ChoiceState::No, "No"}});
 
 struct Choice
 {

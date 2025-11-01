@@ -23,8 +23,7 @@ class Animation : public sf::Drawable, public sf::Transformable
     void init();
 
    public:
-    Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime,
-              float zoomFactor);
+    Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, float zoomFactor);
     void update(sf::Time delta);
     void setAnimationSprite(std::optional<sf::Sprite> &sprite);
     void start();

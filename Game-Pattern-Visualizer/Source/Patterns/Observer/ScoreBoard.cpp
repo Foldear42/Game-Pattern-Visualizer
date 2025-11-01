@@ -4,8 +4,7 @@ namespace GPV
 {
 
 ScoreBoard::ScoreBoard(const Context &context)
-    : m_textBox("Score : ", context.textureManager.get(TextureID::wideButtonBackground),
-                context.fontManager.get(FontID::Arial))
+    : m_textBox("Score : ", context.textureManager.get(TextureID::wideButtonBackground), context.fontManager.get(FontID::Arial))
 {
     // Set position
     m_textBox.setPosition({200.f, 200.f});

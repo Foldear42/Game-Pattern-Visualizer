@@ -3,8 +3,7 @@
 namespace GPV::Components
 {
 
-Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime,
-                     float zoomFactor)
+Animation::Animation(std::optional<sf::Sprite> sprite, int framesX, int framesY, sf::Time frameTime, float zoomFactor)
     : m_sprite(sprite),
       m_frameX(framesX),
       m_frameY(framesY),
@@ -33,8 +32,7 @@ void Animation::init()
     {
         for (int x = 0; x < m_frameX; x++)
         {
-            sf::IntRect frameDimension =
-                sf::IntRect({x * frameWidth, y * frameHeight}, {frameWidth, frameHeight});
+            sf::IntRect frameDimension = sf::IntRect({x * frameWidth, y * frameHeight}, {frameWidth, frameHeight});
             m_sourceRectangles.emplace_back(frameDimension);
         }
     }
