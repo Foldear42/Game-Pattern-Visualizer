@@ -13,14 +13,14 @@ Button::Button(sf::Vector2f spriteScale, sf::String textContent, sf::Texture &te
     m_text.setFillColor(sf::Color::White);
 }
 
-void Button::setCommand(std::unique_ptr<Command> command)
+void Button::registerCallback(const std::function<void()> &callback)
 {
-    p_command = std::move(command);
+    m_callback = callback;
 }
 
-void Button::executeCommand()
+void Button::invokeCallback()
 {
-    p_command->execute();
+    m_callback();
 }
 
 void Button::update(sf::Time delta)

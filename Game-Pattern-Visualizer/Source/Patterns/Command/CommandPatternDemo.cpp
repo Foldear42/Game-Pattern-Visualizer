@@ -15,19 +15,17 @@ CommandPatternDemo::CommandPatternDemo(const Context &context)
                                     context.fontManager.get(FontID::Arial), sf ::Color::Cyan)}},
 
       m_dialogTree("dialogTree.json"),
-      m_scene(context.textureManager, context.fontManager.get(FontID::Arial), m_dialogTree)
+      m_scene(context.textureManager, context.fontManager.get(FontID::Arial), m_dialogTree),
+      m_commandHistory(context)
 {
     m_buttons[0].setOrigin(m_buttons[0].getSizeSprite().getCenter());
-    m_buttons[0].setCommand(std::make_unique<MakeChoiceCommand>(m_scene, ChoiceState::Yes));
+    m_buttons[0].registerCallback([this]() { executeCommand(new MakeChoiceCommand(m_scene, ChoiceState::Yes)); });
     m_buttons[1].setOrigin(m_buttons[1].getSizeSprite().getCenter());
-    m_buttons[1].setCommand(std::make_unique<MakeChoiceCommand>(m_scene, ChoiceState::No));
+    m_buttons[1].registerCallback([this]() { executeCommand(new MakeChoiceCommand(m_scene, ChoiceState::No)); });
     m_buttons[2].setOrigin(m_buttons[2].getSizeSprite().getCenter());
-    m_buttons[2].setCommand(std::make_unique<MakeChoiceCommand>(m_scene, ChoiceState::None));
+    m_buttons[2].registerCallback([this]() { undoCommand(); });
     m_buttons[3].setOrigin(m_buttons[3].getSizeSprite().getCenter());
-    m_buttons[3].setCommand(std::make_unique<NextStepCommand>(m_scene));
-    // Create the first MakeChoiceCommand and push it onto the stack
-    std::unique_ptr<MakeChoiceCommand> command = std::make_unique<MakeChoiceCommand>(m_scene, ChoiceState::None);
-    m_commandHistory.pushCommand(std::move(command));
+    // m_buttons[3].setCommand(new NextStepCommand(m_scene));
 }
 
 void CommandPatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event)
@@ -37,9 +35,22 @@ void CommandPatternDemo::handleEvent(Application &application, const std::option
         button.getButtonStatus(application.getWindow(), event);
         if (button.isPressed)
         {
-            button.executeCommand();
+            button.invokeCallback();
         }
     }
+}
+
+void CommandPatternDemo::executeCommand(Command *command)
+{
+    command->execute();
+    m_commandHistory.pushCommand(command);
+}
+
+void CommandPatternDemo::undoCommand()
+{
+    Command *command = m_commandHistory.popCommand();
+    command->undo();
+    delete command;
 }
 
 void CommandPatternDemo::update(Application &application, sf::Time delta)

@@ -8,6 +8,8 @@
 #include <vector>
 
 #include "Command.hpp"
+#include "Enums/FontID.hpp"
+#include "Interfaces/ApplicationState.hpp"
 
 namespace GPV
 {
@@ -17,16 +19,18 @@ class CommandHistory : public sf::Drawable
     struct CommandData
     {
         sf::RectangleShape shape;
-        std::unique_ptr<Command> p_command;
+        sf::Text text;
+        Command* p_command;
     };
-
-    std::vector<CommandData> m_commandHistory;
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    const sf::Font& m_font;
+    sf::Vector2f m_initialPosition{0.f, 100.f};
+    std::vector<CommandData> m_commandVector;
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
    public:
-    CommandHistory();
-    void pushCommand(std::unique_ptr<Command> command);
-    void popCommand();
+    CommandHistory(Context context);
+    void pushCommand(Command* command);
+    Command* popCommand();
 };
 
 }  // namespace GPV

@@ -2,6 +2,7 @@
 #define BUTTON_HPP
 
 #include <SFML/Graphics.hpp>
+#include <functional>
 #include <iostream>
 
 #include "Application/Application.hpp"
@@ -21,7 +22,7 @@ class Button : public sf::Drawable, public sf::Transformable
     sf::Text m_text;
     sf::Vector2f m_position;
     sf::Font m_font;
-    std::unique_ptr<Command> p_command;
+    std::function<void()> m_callback;
     bool m_activated;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
@@ -30,8 +31,8 @@ class Button : public sf::Drawable, public sf::Transformable
     void getButtonStatus(const sf::RenderWindow &window, const std::optional<sf::Event> &e);
     void update(sf::Time delta);
     void setColor(sf::Color color);
-    void setCommand(std::unique_ptr<Command> command);
-    void executeCommand();
+    void registerCallback(const std::function<void()> &callback);
+    void invokeCallback();
     sf::Vector2f getPosition();
     sf::FloatRect getSizeSprite() const;
     const sf::String &getTextContent() const;

@@ -5,27 +5,47 @@
 
 namespace GPV
 {
-CommandHistory::CommandHistory()
+CommandHistory::CommandHistory(Context context) : m_font(context.fontManager.get(FontID::Arial))
 {
 }
 
-void CommandHistory::pushCommand(std::unique_ptr<Command> command)
+void CommandHistory::pushCommand(Command *command)
 {
     sf::RectangleShape newVisualShape({200.f, 100.f});
+    sf::String commandInfoStr;
+    sf::Text visualText(m_font);
+    commandInfoStr = command->getInfo();
+    // Set visual text
+    visualText.setString(commandInfoStr);
+    visualText.setCharacterSize(15);
+    visualText.setPosition({m_initialPosition.x, m_initialPosition.y});
+    // Set visual shape
     newVisualShape.setOutlineColor(sf::Color::White);
+    newVisualShape.setOutlineThickness(2);
     newVisualShape.setFillColor(sf::Color::Black);
-    newVisualShape.setPosition({100.f, 100.f});
-    m_commandHistory.emplace_back(CommandData{newVisualShape, std::move(command)});
+    newVisualShape.setPosition({m_initialPosition.x, m_initialPosition.y});
+    m_initialPosition.y += newVisualShape.getGlobalBounds().size.y + 70.f;
+    m_commandVector.emplace_back(CommandData{newVisualShape, visualText, command});
 }
-void CommandHistory::popCommand()
+
+Command *CommandHistory::popCommand()
 {
+    Command *p_lastCommand = nullptr;
+    if (!m_commandVector.empty())
+    {
+        p_lastCommand = m_commandVector.back().p_command;
+        // Delete from the vector
+        m_commandVector.pop_back();
+    }
+    return p_lastCommand;
 }
 
 void CommandHistory::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    for (auto &it : m_commandHistory)
+    for (auto &it : m_commandVector)
     {
         target.draw(it.shape);
+        target.draw(it.text);
     }
 }
 }  // namespace GPV

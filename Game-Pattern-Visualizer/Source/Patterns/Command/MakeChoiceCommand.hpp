@@ -28,6 +28,12 @@ class MakeChoiceCommand : public Command
     virtual void undo()
     {
         scene.selectChoice(previousChoice);
+        scene.changeSpriteAnimation(previousChoice);
+    }
+
+    virtual std::string getInfo() const
+    {
+        return "MakeChoiceCommand";
     }
 };
 

@@ -8,6 +8,8 @@
 #include <memory>
 #include <string>
 
+#include "Enums/TextureID.hpp"
+
 namespace GPV
 {
 
