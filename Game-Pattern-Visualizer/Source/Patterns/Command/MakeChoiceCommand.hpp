@@ -18,7 +18,6 @@ class MakeChoiceCommand : public Command
     }
     virtual void execute()
     {
-        previousChoice = currentChoice;
         // Select choice (this will trigger the animation and following text)
         scene.selectChoice(currentChoice);
         scene.changeSpriteAnimation(currentChoice);
@@ -27,6 +26,7 @@ class MakeChoiceCommand : public Command
 
     virtual void undo()
     {
+        // The previous choice will always be None
         scene.selectChoice(previousChoice);
         scene.changeSpriteAnimation(previousChoice);
     }

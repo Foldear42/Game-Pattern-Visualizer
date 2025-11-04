@@ -45,6 +45,7 @@ void SceneCommandPattern::selectStep(int step)
 
 void SceneCommandPattern::selectChoice(ChoiceState choiceState)
 {
+    m_dialogBox.resetIndexes();
     m_currentChoiceState = choiceState;
 }
 

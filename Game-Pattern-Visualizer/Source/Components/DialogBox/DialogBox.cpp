@@ -39,6 +39,8 @@ void DialogBox::update(sf::Time delta)
         return;
     }
 
+    std::cout << m_currentTextIndex << std::endl;
+
     if (!m_listText[m_currentTextIndex].empty())
     {
         bool isFinished = typewriterAnimation(m_listText[m_currentTextIndex], delta);
