@@ -25,7 +25,6 @@ class CommandPatternDemo : public ApplicationState
     DialogTree m_dialogTree;
     SceneCommandPattern m_scene;
     CommandHistory m_commandHistory;
-    sf::Vector2f m_visualCmdPosition;
 
    public:
     explicit CommandPatternDemo(const Context &context);

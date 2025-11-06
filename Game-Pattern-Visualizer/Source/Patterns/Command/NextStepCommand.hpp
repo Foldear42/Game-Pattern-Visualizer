@@ -20,22 +20,22 @@ class NextStepCommand : public Command
     virtual void execute()
     {
         previousStep = currentStep;
-        currentStep = currentStep + 1;
-        scene.selectChoice(ChoiceState::None);
+        currentStep++;
         // Select step (after the end of the animation the next step should be selected)
         scene.selectStep(currentStep);
+        scene.selectChoice(ChoiceState::None);
         scene.resetScene();
-    }
-
-    virtual std::string getInfo() const
-    {
-        return "NextStepCommand";
     }
 
     virtual void undo()
     {
         scene.selectStep(previousStep);
         scene.resetScene();
+    }
+
+    virtual std::string getInfo() const
+    {
+        return "NextStepCommand";
     }
 };
 

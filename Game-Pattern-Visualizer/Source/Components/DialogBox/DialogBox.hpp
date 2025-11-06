@@ -21,13 +21,13 @@ class DialogBox : public sf::Drawable, public sf::Transformable
     int m_lengthListText = 0;
     const sf::Font &font;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
-    bool typewriterAnimation(std::string s, sf::Time delta);
+    bool typewriterAnimation(std::string &s, sf::Time delta);
 
    public:
     DialogBox(std::vector<std::string> listText, const sf::Font &font);
     void update(sf::Time delta);
     sf::Vector2f getSizeRectangle() const;
-    void setListText(const std::vector<std::string> listText);
+    void setListText(std::vector<std::string> listText);
     void resetIndexes();
     void startTypewriterAnimation();
     void stopTypewriterAnimation();

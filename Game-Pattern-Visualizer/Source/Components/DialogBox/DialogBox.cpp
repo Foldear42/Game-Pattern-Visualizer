@@ -12,7 +12,7 @@ DialogBox::DialogBox(std::vector<std::string> listText, const sf::Font &font)
     m_currentText.setCharacterSize(24);
 }
 
-bool DialogBox::typewriterAnimation(std::string s, sf::Time delta)
+bool DialogBox::typewriterAnimation(std::string &s, sf::Time delta)
 {
     bool isFinished = false;
     if (s.size() >= m_charIndex)
@@ -21,6 +21,11 @@ bool DialogBox::typewriterAnimation(std::string s, sf::Time delta)
         if (m_elapsedTime >= std::chrono::milliseconds(50))
         {
             ++m_charIndex;
+
+            if ((m_charIndex % 90) == 0)
+            {
+                s.insert(m_charIndex, "\n");
+            }
             m_currentText.setString(s.substr(0, m_charIndex));
             m_elapsedTime = sf::Time::Zero;
         }
@@ -38,8 +43,6 @@ void DialogBox::update(sf::Time delta)
     {
         return;
     }
-
-    std::cout << m_currentTextIndex << std::endl;
 
     if (!m_listText[m_currentTextIndex].empty())
     {
@@ -71,7 +74,7 @@ sf::Vector2f DialogBox::getSizeRectangle() const
     return m_box.getSize();
 }
 
-void DialogBox::setListText(const std::vector<std::string> listText)
+void DialogBox::setListText(std::vector<std::string> listText)
 {
     m_listText = listText;
 }

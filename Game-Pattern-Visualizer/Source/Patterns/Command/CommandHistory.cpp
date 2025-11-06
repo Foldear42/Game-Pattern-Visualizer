@@ -11,7 +11,7 @@ CommandHistory::CommandHistory(Context context) : m_font(context.fontManager.get
 
 void CommandHistory::pushCommand(Command *command)
 {
-    sf::RectangleShape newVisualShape({200.f, 100.f});
+    sf::RectangleShape newVisualShape(m_sizeRectangle);
     sf::String commandInfoStr;
     sf::Text visualText(m_font);
     commandInfoStr = command->getInfo();
@@ -24,7 +24,8 @@ void CommandHistory::pushCommand(Command *command)
     newVisualShape.setOutlineThickness(2);
     newVisualShape.setFillColor(sf::Color::Black);
     newVisualShape.setPosition({m_initialPosition.x, m_initialPosition.y});
-    m_initialPosition.y += newVisualShape.getGlobalBounds().size.y + 70.f;
+    // No transformation so we can use the rectangle size directly
+    m_initialPosition.y += m_sizeRectangle.y + m_spacing;
     m_commandVector.emplace_back(CommandData{newVisualShape, visualText, command});
 }
 
@@ -34,6 +35,7 @@ Command *CommandHistory::popCommand()
     if (!m_commandVector.empty())
     {
         p_lastCommand = m_commandVector.back().p_command;
+        m_initialPosition.y -= m_sizeRectangle.y + m_spacing;
         // Delete from the vector
         m_commandVector.pop_back();
     }

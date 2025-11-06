@@ -81,6 +81,7 @@ void Animation::setAnimationSprite(std::optional<sf::Sprite> &sprite)
 
 void Animation::start()
 {
+    std::cout << m_active << std::endl;
     m_active = true;
 }
 
@@ -91,6 +92,7 @@ void Animation::stop()
 
 void Animation::reset()
 {
+    std::cout << "Reset called" << std::endl;
     m_currentFrameIndex = 0;
     m_frameTimeLeft = m_frameTime;
     isFinished = false;

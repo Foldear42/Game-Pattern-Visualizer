@@ -23,7 +23,9 @@ class CommandHistory : public sf::Drawable
         Command* p_command;
     };
     const sf::Font& m_font;
+    const float m_spacing = 70.f;
     sf::Vector2f m_initialPosition{0.f, 100.f};
+    sf::Vector2f m_sizeRectangle{200.f, 100.f};
     std::vector<CommandData> m_commandVector;
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 

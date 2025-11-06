@@ -29,6 +29,7 @@ class MakeChoiceCommand : public Command
         // The previous choice will always be None
         scene.selectChoice(previousChoice);
         scene.changeSpriteAnimation(previousChoice);
+        scene.resetScene();
     }
 
     virtual std::string getInfo() const

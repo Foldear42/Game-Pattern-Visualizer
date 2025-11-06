@@ -18,14 +18,18 @@ CommandPatternDemo::CommandPatternDemo(const Context &context)
       m_scene(context.textureManager, context.fontManager.get(FontID::Arial), m_dialogTree),
       m_commandHistory(context)
 {
+    // Yes button
     m_buttons[0].setOrigin(m_buttons[0].getSizeSprite().getCenter());
     m_buttons[0].registerCallback([this]() { executeCommand(new MakeChoiceCommand(m_scene, ChoiceState::Yes)); });
+    // No button
     m_buttons[1].setOrigin(m_buttons[1].getSizeSprite().getCenter());
     m_buttons[1].registerCallback([this]() { executeCommand(new MakeChoiceCommand(m_scene, ChoiceState::No)); });
+    // Undo Button
     m_buttons[2].setOrigin(m_buttons[2].getSizeSprite().getCenter());
     m_buttons[2].registerCallback([this]() { undoCommand(); });
+    // Next step button
     m_buttons[3].setOrigin(m_buttons[3].getSizeSprite().getCenter());
-    // m_buttons[3].setCommand(new NextStepCommand(m_scene));
+    m_buttons[3].registerCallback([this]() { executeCommand(new NextStepCommand(m_scene)); });
 }
 
 void CommandPatternDemo::handleEvent(Application &application, const std::optional<sf::Event> &event)
@@ -42,6 +46,7 @@ void CommandPatternDemo::handleEvent(Application &application, const std::option
 
 void CommandPatternDemo::executeCommand(Command *command)
 {
+    std::cout << "Execute !" << std::endl;
     command->execute();
     m_commandHistory.pushCommand(command);
 }

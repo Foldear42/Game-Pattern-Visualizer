@@ -29,9 +29,8 @@ void SceneCommandPattern::update(Application &application, sf::Time delta)
     m_dialogBox.setPosition({application.getWindow().getSize().x / 2.f, 600.f});
 
     m_dialogBox.update(delta);
-    m_dialogBox.setListText(m_dialogTree.getListDialogByState(m_currentStep, m_currentChoiceState));
-
     m_sceneAnimation.update(delta);
+
     if (m_sceneAnimation.isFinished)
     {
         stopAnimation();
@@ -45,8 +44,9 @@ void SceneCommandPattern::selectStep(int step)
 
 void SceneCommandPattern::selectChoice(ChoiceState choiceState)
 {
-    m_dialogBox.resetIndexes();
     m_currentChoiceState = choiceState;
+    m_dialogBox.resetIndexes();
+    m_dialogBox.setListText(m_dialogTree.getListDialogByState(m_currentStep, m_currentChoiceState));
 }
 
 void SceneCommandPattern::resetScene()
