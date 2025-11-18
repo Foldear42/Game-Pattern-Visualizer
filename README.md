@@ -1,9 +1,8 @@
-﻿
+
 ![category](https://img.shields.io/badge/Category-Game_Development_--_2D_Graphics_--_Design_Patterns-blue)
-
 ![API](https://img.shields.io/badge/API-SFML-green)
-
 ![Language](https://img.shields.io/badge/Language-C++-purple)
+
 # Game Patterns Visualizer
 
 The goal of this project is to demonstrate mastery of different game patterns through concrete examples, as well as a preview. 
