@@ -11,7 +11,6 @@ namespace GPV::Components
 
 class TextBox : public sf::Drawable, public sf::Transformable
 {
-    const sf::Font &font;
     sf::Sprite m_sprite;
     sf::String m_textContent;
     sf::Text m_graphicalText;

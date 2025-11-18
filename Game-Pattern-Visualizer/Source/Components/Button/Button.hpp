@@ -34,7 +34,7 @@ class Button : public sf::Drawable, public sf::Transformable
     void registerCallback(const std::function<void()> &callback);
     void invokeCallback();
     sf::Vector2f getPosition();
-    sf::FloatRect getSizeSprite() const;
+    const sf::FloatRect getSizeSprite() const;
     const sf::String &getTextContent() const;
     void activate();
     void deactivate();

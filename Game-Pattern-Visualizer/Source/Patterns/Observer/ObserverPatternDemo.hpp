@@ -2,20 +2,21 @@
 #define OBSERVER_PATTERN_DEMO_HPP
 
 #include <SFML/Graphics.hpp>
+#include <chrono>
 #include <iostream>
 #include <memory>
 #include <vector>
 
 #include "Application/Application.hpp"
 #include "Clicker.hpp"
-#include "ScoreBoard.hpp"
+#include "ClickerUI.hpp"
 
 namespace GPV
 {
 class ObserverPatternDemo : public ApplicationState
 {
     Clicker m_clicker;
-    ScoreBoard m_scoreBoard;
+    ClickerUI m_clickerUI;
 
    public:
     explicit ObserverPatternDemo(const Context &context);

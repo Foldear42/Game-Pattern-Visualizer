@@ -4,11 +4,13 @@ namespace GPV::Components
 {
 
 TextBox::TextBox(sf::String textContent, sf::Texture &texture, const sf::Font &font)
-    : m_sprite(texture), font(font), m_textContent(textContent), m_graphicalText(font)
+    : m_sprite(texture), m_textContent(textContent), m_graphicalText(font)
 {
     m_graphicalText.setString(m_textContent);
     m_graphicalText.setCharacterSize(20);
     m_graphicalText.setFillColor(sf::Color::White);
+    m_sprite.setOrigin(m_sprite.getGlobalBounds().getCenter());
+    m_graphicalText.setOrigin(m_sprite.getOrigin());
 }
 
 void TextBox::update(sf::Time delta)

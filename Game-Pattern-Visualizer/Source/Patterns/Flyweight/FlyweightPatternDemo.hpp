@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "Application/Application.hpp"
+#include "Components/TextBox/TextBox.hpp"
 #include "Interfaces/Scene.hpp"
 #include "TerrainExtrinsic.hpp"
 #include "TerrainIntrinsic.hpp"
@@ -15,13 +16,16 @@ namespace GPV
 {
 class FlyweightPatternDemo : public ApplicationState
 {
-    static constexpr std::size_t COLS = 100;
-    static constexpr std::size_t ROWS = 100;
+    int m_cols, m_rows;
     TerrainIntrinsic m_waterTerrain;
     TerrainIntrinsic m_grassTerrain;
     TerrainIntrinsic m_dirtTerrain;
     std::vector<std::vector<TerrainExtrinsic>> m_vecExtrinsicStates;
-    void generateMap();
+    sf::Vector2f m_containerSize{600.f, 1000.f};
+    sf::Vector2f m_containerPosition{200.f, 200.f};
+    Components::TextBox m_textBox;
+
+    void generateMap(int rows, int cols);
 
    public:
     explicit FlyweightPatternDemo(const Context &context);

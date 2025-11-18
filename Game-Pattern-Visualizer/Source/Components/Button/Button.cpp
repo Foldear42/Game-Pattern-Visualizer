@@ -82,7 +82,7 @@ const sf::String &Button::getTextContent() const
     return m_textContent;
 }
 
-sf::FloatRect Button::getSizeSprite() const
+const sf::FloatRect Button::getSizeSprite() const
 {
     return m_sprite.getGlobalBounds();
 }

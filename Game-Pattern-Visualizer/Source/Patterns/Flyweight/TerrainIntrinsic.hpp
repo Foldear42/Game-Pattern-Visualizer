@@ -2,6 +2,7 @@
 #define TERRAIN_INTRINSIC_HPP
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 namespace GPV
 {
@@ -13,6 +14,7 @@ class TerrainIntrinsic : public sf::Drawable
    public:
     TerrainIntrinsic(const sf::Texture &texture);
     void setSpritePosition(sf::Vector2f position);
+    const sf::FloatRect getSpriteGlobalBounds() const;
 };
 }  // namespace GPV
 
