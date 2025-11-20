@@ -23,6 +23,7 @@ Build system : CMake 3.28+
 | [Flyweight](https://gameprogrammingpatterns.com/flyweight.html) | This pattern allows optimizing RAM usage by creating a Flyweight, which is a more or less heavy object that will be used multiple times. <br><br>**Demo**: A 2D map in which each tile has an extrinsic part (unique to the object) and an intrinsic part (shared between multiple objects). By clicking on a tile, we can see both states. | FlyweightPatternDemo | ✔️     |
 | [Observer](https://gameprogrammingpatterns.com/observer.html)   | This pattern is used to notify of a change in the code without having to modify the implementation of the calling class. <br><br>**Demo**: A simple clicker where each click will notify the observer (UI) and we can see the modifications in real time.                                                                                   | ObserverPatternDemo  | ❌      |
 | Prototype                                                       |                                                                                                                                                                                                                                                                                                                                             | PrototypePatternDemo | ❌      |
+
 ## Features
 
 - [x] Graphical components
@@ -31,33 +32,34 @@ Build system : CMake 3.28+
 	- [x] Text Box
 	- [x] Dialog Box
 - [x] Main menu
+	- [x] Return to the menu
 - [x] Resource manager for loading content
 	- [x] Image
 	- [x] Text JSON
 - [ ] Design Patterns visualization
 	- [ ] Command
-		- [ ] The player can make choices and undo them with buttons
-		- [ ] Animation for the trolley
+		- [x] The player can make choices and undo them with buttons
+		- [x] Animation for the trolley
 		- [ ] Animation for the character
-		- [ ] Dialog box (description)
-		- [ ] Each choice can be visualized
+		- [x] Dialog box (description)
+		- [x] Each choice can be visualized
 	- [ ] Flyweight
-		- [ ] Visualization of the 2D Map
-		- [ ] Clickable tiles
+		- [x] Visualization of the 2D Map
+		- [x] Clickable tiles
 		- [ ] Show the Intrinsic state
-		- [ ] Show the Extrinsic state
+		- [x] Show the Extrinsic state
 		- [ ] Dialog Box (description)
 	- [ ] Observer 
-		- [ ] Clickable element 
+		- [x] Clickable element 
 		- [ ] Animation Cookie
-		- [ ] UI (Money, CPC, CPS)
-		- [ ] Upgrades
-			- [ ] Cookie per click
-			- [ ] Cookie per second (Auto click)
-		- [ ] Dialog Box (description)
-		- [ ] Arrow to show observer
+		- [x] UI (Money, CPC, CPS)
+		- [x] Upgrades
+			- [x] Cookie per click
+			- [x] Cookie per second (Auto click)
+			- [x] Locked / Unlocked 
+			- [ ] Show upgrade prices
+		- [ ] Visualization observer
 	- [ ] Prototype
-
 
 
 
