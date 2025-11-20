@@ -10,6 +10,8 @@
 #include "Application/Application.hpp"
 #include "Clicker.hpp"
 #include "ClickerUI.hpp"
+#include "Components/Button/Button.hpp"
+#include "States/MenuState.hpp"
 
 namespace GPV
 {
@@ -17,6 +19,7 @@ class ObserverPatternDemo : public ApplicationState
 {
     Clicker m_clicker;
     ClickerUI m_clickerUI;
+    Components::Button m_backMenuButton;
 
    public:
     explicit ObserverPatternDemo(const Context &context);

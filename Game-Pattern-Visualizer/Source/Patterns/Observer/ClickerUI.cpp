@@ -4,7 +4,7 @@ namespace GPV
 {
 
 ClickerUI::ClickerUI(const Context& context)
-    : m_textBox("", context.textureManager.get(TextureID::wideButtonBackground), context.fontManager.get(FontID::Arial)),
+    : m_infoTextBox("", context.textureManager.get(TextureID::wideButtonBackground), context.fontManager.get(FontID::Arial)),
       m_buttonUpgradeCPC(Components::Button({0.5f, 0.5f}, "Upgrade CPC", context.textureManager.get(TextureID::wideButtonBackground),
                                             context.fontManager.get(FontID::Arial), sf::Color::Red)),
       m_buttonUpgradeCPS(Components::Button({0.5f, 0.5f}, "Upgrade CPS", context.textureManager.get(TextureID::wideButtonBackground),
@@ -12,9 +12,9 @@ ClickerUI::ClickerUI(const Context& context)
       m_elapsedTime(std::chrono::seconds(0))
 {
     // Set position
-    m_textBox.setPosition({200.f, 200.f});
-    m_buttonUpgradeCPS.setPosition({200.f, 400.f});
-    m_buttonUpgradeCPC.setPosition({200.f, 600.f});
+    m_infoTextBox.setPosition({200.f, 200.f});
+    m_buttonUpgradeCPS.setPosition({800.f, 800.f});
+    m_buttonUpgradeCPC.setPosition({1000.f, 800.f});
 }
 
 void ClickerUI::onNotify()
@@ -25,14 +25,34 @@ void ClickerUI::onNotify()
 void ClickerUI::handleEvent(const sf::RenderWindow& window, const std::optional<sf::Event>& event)
 {
     m_buttonUpgradeCPC.getButtonStatus(window, event);
-    if (m_buttonUpgradeCPC.isPressed)
-    {
-        m_cookiePerClick += 1;
-    }
     m_buttonUpgradeCPS.getButtonStatus(window, event);
-    if (m_buttonUpgradeCPS.isPressed)
+    if (m_totalMoney < m_upgradePriceCPC)
     {
-        m_cookiePerSecond += 1;
+        m_buttonUpgradeCPC.deactivate();
+    }
+    else
+    {
+        m_buttonUpgradeCPC.activate();
+        if (m_buttonUpgradeCPC.isPressed)
+        {
+            m_totalMoney -= m_upgradePriceCPC;
+            m_cookiePerClick += 1;
+            m_upgradePriceCPC *= 2;
+        }
+    }
+    if (m_totalMoney < m_upgradePriceCPS)
+    {
+        m_buttonUpgradeCPS.deactivate();
+    }
+    else
+    {
+        m_buttonUpgradeCPS.activate();
+        if (m_buttonUpgradeCPS.isPressed)
+        {
+            m_totalMoney -= m_upgradePriceCPS;
+            m_cookiePerSecond += 1;
+            m_upgradePriceCPS *= 2;
+        }
     }
 }
 
@@ -48,13 +68,13 @@ void ClickerUI::update(sf::Time delta)
         m_elapsedTime = sf::Time::Zero;
     }
 
-    m_textBox.updateString("Money : " + std::to_string(m_totalMoney) + "\n" + "CPS : " + std::to_string(m_cookiePerSecond) + "\n" +
-                           "CPC : " + std::to_string(m_cookiePerClick) + "\n");
+    m_infoTextBox.updateString("Money : " + std::to_string(m_totalMoney) + "\n" + "CPS : " + std::to_string(m_cookiePerSecond) + "\n" +
+                               "CPC : " + std::to_string(m_cookiePerClick) + "\n");
 }
 
 void ClickerUI::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(m_textBox, states);
+    target.draw(m_infoTextBox, states);
     target.draw(m_buttonUpgradeCPC, states);
     target.draw(m_buttonUpgradeCPS, states);
 }

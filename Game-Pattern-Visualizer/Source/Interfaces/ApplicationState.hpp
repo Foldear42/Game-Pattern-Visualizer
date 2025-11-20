@@ -12,11 +12,12 @@ class Application;  // forward declaration : no need to include the file
 
 struct Context
 {
-    Context(TextureManager &tm, FontManager &fm) : textureManager(tm), fontManager(fm)
+    Context(TextureManager &tm, FontManager &fm, sf::RenderWindow &rw) : textureManager(tm), fontManager(fm), window(rw)
     {
     }
     TextureManager &textureManager;
     FontManager &fontManager;
+    sf::RenderWindow &window;
 };
 
 class ApplicationState
@@ -28,7 +29,7 @@ class ApplicationState
     virtual void render(sf::RenderWindow &window) = 0;
 
    protected:
-    explicit ApplicationState(const Context &context) : m_context(context){};
+    explicit ApplicationState(const Context &context) : m_context(context) {};
     const Context &m_context;
 };
 

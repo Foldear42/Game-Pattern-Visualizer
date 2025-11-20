@@ -20,6 +20,7 @@ MenuState::MenuState(const Context &context)
                              context.fontManager.get(FontID::Arial), sf::Color::Red),
       }}
 {
+    this->dispatchButtons(context.window);
 }
 
 void MenuState::handleEvent(Application &application, const std::optional<sf::Event> &event)
@@ -73,7 +74,6 @@ void MenuState::dispatchButtons(const sf::RenderWindow &window)
 
 void MenuState::render(sf::RenderWindow &window)
 {
-    this->dispatchButtons(window);
     for (Components::Button &b : m_buttons)
     {
         window.draw(b);

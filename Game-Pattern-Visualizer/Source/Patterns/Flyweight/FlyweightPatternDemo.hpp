@@ -7,8 +7,10 @@
 #include <vector>
 
 #include "Application/Application.hpp"
+#include "Components/Button/Button.hpp"
 #include "Components/TextBox/TextBox.hpp"
 #include "Interfaces/Scene.hpp"
+#include "States/MenuState.hpp"
 #include "TerrainExtrinsic.hpp"
 #include "TerrainIntrinsic.hpp"
 
@@ -24,6 +26,7 @@ class FlyweightPatternDemo : public ApplicationState
     sf::Vector2f m_containerSize{600.f, 1000.f};
     sf::Vector2f m_containerPosition{200.f, 200.f};
     Components::TextBox m_textBox;
+    Components::Button m_backMenuButton;
 
     void generateMap(int rows, int cols);
 

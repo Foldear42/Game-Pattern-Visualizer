@@ -13,13 +13,14 @@ namespace GPV
 
 class ClickerUI : public sf::Drawable, public Observer
 {
-    Components::TextBox m_textBox;
+    Components::TextBox m_infoTextBox;
     Components::Button m_buttonUpgradeCPC;
     Components::Button m_buttonUpgradeCPS;
     sf::Time m_elapsedTime;
     int m_totalMoney = 0;
     int m_cookiePerClick = 1;
     int m_cookiePerSecond = 0;
+    int m_upgradePriceCPC = 10, m_upgradePriceCPS = 10;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
    public:

@@ -5,7 +5,7 @@
 namespace GPV
 {
 
-Application::Application(sf::RenderWindow &window) : renderWindow(window), m_context(m_textureManager, m_fontManager)
+Application::Application(sf::RenderWindow &window) : renderWindow(window), m_context(m_textureManager, m_fontManager, window)
 {
 }
 

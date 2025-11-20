@@ -7,9 +7,12 @@ FlyweightPatternDemo::FlyweightPatternDemo(const Context &context)
       m_waterTerrain(context.textureManager.get(TextureID::waterterrain)),
       m_grassTerrain(context.textureManager.get(TextureID::grassterrain)),
       m_dirtTerrain(context.textureManager.get(TextureID::dirtterrain)),
-      m_textBox("Start", context.textureManager.get(TextureID::wideButtonBackground), context.fontManager.get(FontID::Arial))
+      m_textBox("Start", context.textureManager.get(TextureID::wideButtonBackground), context.fontManager.get(FontID::Arial)),
+      m_backMenuButton(Components::Button({0.5f, 0.5f}, "Back", context.textureManager.get(TextureID::wideButtonBackground),
+                                          context.fontManager.get(FontID::Arial), sf::Color::Red))
 {
     m_textBox.setPosition({1500.f, 200.f});
+    m_backMenuButton.setPosition({1700.f, 50.f});
     // Get the size of one of the tile to determine the cell size
     sf::Vector2f cellSize = m_waterTerrain.getSpriteGlobalBounds().size;
     // Numbers of cols and rows
@@ -35,10 +38,16 @@ void FlyweightPatternDemo::handleEvent(Application &application, const std::opti
             m_textBox.updateString(m_vecExtrinsicStates[gridX][gridY].getInfos());
         }
     }
+    m_backMenuButton.getButtonStatus(application.getWindow(), event);
+    if (m_backMenuButton.isPressed)
+    {
+        application.changeState(std::make_unique<MenuState>(m_context));
+    }
 }
 
 void FlyweightPatternDemo::update(Application &application, sf::Time delta)
 {
+    m_backMenuButton.update(delta);
 }
 
 void FlyweightPatternDemo::render(sf::RenderWindow &window)
@@ -51,6 +60,7 @@ void FlyweightPatternDemo::render(sf::RenderWindow &window)
         }
     }
     window.draw(m_textBox);
+    window.draw(m_backMenuButton);
 }
 
 void FlyweightPatternDemo::generateMap(int rows, int cols)

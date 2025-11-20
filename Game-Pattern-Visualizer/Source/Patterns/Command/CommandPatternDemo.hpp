@@ -15,6 +15,7 @@
 #include "MakeChoiceCommand.hpp"
 #include "Manager/ResourceManager.hpp"
 #include "NextStepCommand.hpp"
+#include "States/MenuState.hpp"
 
 namespace GPV
 {
@@ -22,6 +23,7 @@ namespace GPV
 class CommandPatternDemo : public ApplicationState
 {
     std::array<Components::Button, 4> m_buttons;
+    Components::Button m_backMenuButton;
     DialogTree m_dialogTree;
     SceneCommandPattern m_scene;
     CommandHistory m_commandHistory;

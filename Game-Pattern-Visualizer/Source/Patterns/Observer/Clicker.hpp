@@ -12,6 +12,7 @@ namespace GPV
 class Clicker : public sf::Drawable, public sf::Transformable
 {
     Subject m_clickSubject;
+    sf::Text m_notifyText;
     Components::Button m_button;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 

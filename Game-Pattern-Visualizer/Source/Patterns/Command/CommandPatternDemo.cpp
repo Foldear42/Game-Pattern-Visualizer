@@ -13,11 +13,17 @@ CommandPatternDemo::CommandPatternDemo(const Context &context)
                                     context.fontManager.get(FontID::Arial), sf::Color::Blue),
                  Components::Button({0.5f, 0.5f}, "NEXT STEP", context.textureManager.get(TextureID::wideButtonBackground),
                                     context.fontManager.get(FontID::Arial), sf ::Color::Cyan)}},
-
+      m_backMenuButton(Components::Button({0.5f, 0.5f}, "Back", context.textureManager.get(TextureID::wideButtonBackground),
+                                          context.fontManager.get(FontID::Arial), sf::Color::Red)),
       m_dialogTree("dialogTree.json"),
       m_scene(context.textureManager, context.fontManager.get(FontID::Arial), m_dialogTree),
       m_commandHistory(context)
 {
+    m_buttons[0].setPosition({(context.window.getSize().x / 2.f), 800.f});
+    m_buttons[1].setPosition({(m_buttons[0].getPosition().x + m_buttons[0].getSizeSprite().size.x + 20.f), 800.f});
+    m_buttons[2].setPosition({(m_buttons[1].getPosition().x + m_buttons[1].getSizeSprite().size.x + 20.f), 800.f});
+    m_buttons[3].setPosition({(m_buttons[2].getPosition().x + m_buttons[2].getSizeSprite().size.x + 20.f), 800.f});
+    m_backMenuButton.setPosition({1700.f, 50.f});
     // Yes button
     m_buttons[0].setOrigin(m_buttons[0].getSizeSprite().getCenter());
     m_buttons[0].registerCallback([this]() { executeCommand(new MakeChoiceCommand(m_scene, ChoiceState::Yes)); });
@@ -42,6 +48,11 @@ void CommandPatternDemo::handleEvent(Application &application, const std::option
             button.invokeCallback();
         }
     }
+    m_backMenuButton.getButtonStatus(application.getWindow(), event);
+    if (m_backMenuButton.isPressed)
+    {
+        application.changeState(std::make_unique<MenuState>(m_context));
+    }
 }
 
 void CommandPatternDemo::executeCommand(Command *command)
@@ -60,15 +71,11 @@ void CommandPatternDemo::undoCommand()
 
 void CommandPatternDemo::update(Application &application, sf::Time delta)
 {
-    m_buttons[0].setPosition({(application.getWindow().getSize().x / 2.f), 800.f});
-    m_buttons[1].setPosition({(m_buttons[0].getPosition().x + m_buttons[0].getSizeSprite().size.x + 20.f), 800.f});
-    m_buttons[2].setPosition({(m_buttons[1].getPosition().x + m_buttons[1].getSizeSprite().size.x + 20.f), 800.f});
-    m_buttons[3].setPosition({(m_buttons[2].getPosition().x + m_buttons[2].getSizeSprite().size.x + 20.f), 800.f});
-
     m_buttons[0].update(delta);
     m_buttons[1].update(delta);
     m_buttons[2].update(delta);
     m_buttons[3].update(delta);
+    m_backMenuButton.update(delta);
 
     m_scene.update(application, delta);
     if (m_scene.isAnimating)
@@ -112,6 +119,7 @@ void CommandPatternDemo::render(sf::RenderWindow &window)
     window.draw(m_buttons[2]);
     window.draw(m_buttons[3]);
     window.draw(m_commandHistory);
+    window.draw(m_backMenuButton);
 }
 
 }  // namespace GPV
